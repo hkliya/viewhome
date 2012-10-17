@@ -1,0 +1,77 @@
+<html>
+    <head>
+		<script src="/view/js/cherry.js"></script>
+		<script src="/view/js/mobileBridge.js"></script>
+		<script src="/cssjs/jquery.js"></script>
+		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+		<script src="/cssjs/jquery.cookie.js"></script>
+		<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			try{
+
+				cherry.bridge.registerEvent("news", "touchUp", function(oper) {
+
+							//var url = '/view/digi/loginvalidate/names.nsf?Login&$PublicAccess=1&%26%26ModDate=0000000100000000&%26%26ModDate=0871326800000070&Password='+password+'&ReasonType=0&RedirectTo=/Produce/Weboaconfig.nsf/Homeform?openform%26login&Username='+username+'&imageField.x=55&imageField.y=13&data-userid=Username&data-password=Password&data-login=true&random='+Math.floor(Math.random()*1000000);
+							var url = '/view/digi/loginvalidate/names.nsf?Login&password='+password+'&username='+username+'&data-userid=username&data-password=password&data-login=true';
+							$.ajax({
+								type: "GET", url: url, dataType: "text", cache:false,
+								success: function(response){
+								
+									
+									var json = $.parseJSON(response);
+									if(json.success){
+										
+										
+										
+										var SERVER_BASE_URL="http://mobile.sugon.com/view";
+										var  targetURL= SERVER_BASE_URL+"/digihome.jsp?itcode="+username;
+										var componentURL = SERVER_BASE_URL+"/Resources/digihome.xml";
+										
+										var pushSence=changePageWithBridge(targetURL,componentURL);
+										
+										
+									}else{
+										//$.mobile.hidePageLoadingMsg();
+										alert("登录失败,用户名或密码错.");
+										
+									}
+									var enableLogin=new cherry.bridge.NativeOperation("loginButton","setProperty",["enabled",1]);
+									enableLogin.dispatch();
+									cherry.bridge.flushOperations();
+								},
+								error:function(response){
+									//$.mobile.hidePageLoadingMsg();
+									alert("错误:"+response.responseText);
+								}
+							});
+
+
+
+					});
+					doLogin.addDependency(getUserName);
+					doLogin.addDependency(getPassword);
+					doLogin.dispatch();
+					
+				});
+				
+		
+					
+				}
+				
+			}catch(e){
+				alert(e.message);
+			}		
+		});
+		
+
+
+
+        </script>
+    </head>
+    <body >
+        
+       
+    </body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <title>MoveIn</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+		<link rel="apple-touch-icon-precomposed" href="mi_icon.png" />
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="mi_1024_748.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" href="mi_768_1004.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="mi_320_480.png"/>
+                <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+                <link rel="stylesheet" href="/ios/ios.css" />
+                <script type="text/javascript">
+                    if (window.navigator.userAgent.match(/iPad/i)
+                        || window.navigator.userAgent.match(/iPad/i)
+                        || window.navigator.userAgent.match(/iPod/i)) {
+                        document
+                        .write('<link href="/bridge/i.css" rel="stylesheet" type="text/css">');
+                    } else if (window.navigator.userAgent.match(/android/i)) {
+                        document
+                        .write('<link href="/bridge/a.css" rel="stylesheet" type="text/css">');
+                        
+                    } else {
+                        document
+                        .write('<link href="/bridge/t.css" rel="stylesheet" type="text/css">');
+                    }
+                    </script>
+                <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+         <script>
+			$(document).bind("mobileinit", function(){
+                 $.mobile.fixedToolbars.setTouchToggleEnabled(false);
+			});
+		</script>
+                <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+                <script type="text/javascript">
+                    $(".ui-dialog button").live("click", function() {
+                                                $("[data-role='dialog']").dialog("close");
+                                                });
+                    </script>
+                <style>
+                    #footerTabs {
+                        background: #FFF -webkit-radial-gradient(circle, #FFF, #dee2e4);
+                    }
+                    </style>
+                </head>
+    <body>
+        <!-- 登录页面 -->
+        <div data-role="page" id="login" class="type-home">
+            <div data-role="header" data-position="fixed">
+                <h1>移动办公</h1>
+            </div><!-- /header -->
+            <div data-role="content" align="center">
+                <ul data-role="listview" data-theme="c" data-inset="true" style="max-width:450px;">
+                    <li data-role="list-divider">登  录</li>
+                    <li data-role="fieldcontain">
+                        <div style="width:100%;" align="center">
+                            <label><strong>帐  号:</strong></label>
+                            <input type="text" name="username" id="username" value=""  />
+                        </div>
+                    </li>
+                    <li data-role="fieldcontain">
+                        <div style="width:100%;" align="center">
+                            <label><strong>密  码:</strong></label>
+                            <input type="password" name="password" id="password" value=""  />
+                        </div>
+                    </li>
+                    
+                    <li data-role="fieldcontain">
+                        <div style="width:100%;" align="center">
+                            <div style="width:240px;" align="center">
+                                <fieldset data-role="controlgroup" data-type="horizontal">
+                                    <input type="checkbox" name="saveusername" id="saveusername" class="custom" />
+                                    <label for="saveusername">记住帐号</label>
+                                    <input type="checkbox" name="savepassword" id="savepassword" class="custom" />
+                                    <label for="savepassword"><em>记住密码</em></label>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="ui-body ui-body-b">
+                        <div style="width:100%;" align="center">
+                            <div style="width:240px;" align="center">
+                                <a href="#home" data-role="button" data-theme="d">登录</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="home" data-role="page">
+            <div data-role="header" data-position="fixed">
+                <h1>MoveIn</h1>
+            </div>
+            <div data-role="content">
+                <p>&nbsp;&nbsp;栏目</p>
+                <ul data-role="listview" data-inset="true">
+                    <li><a href="#headers">栏目1<span class="ui-li-count">1</span></a></li>
+                    <li><a href="#headerButtons">栏目2</a></li>
+                    <li><a href="#footerTabs">栏目3</a></li>
+                    <li><a href="#formElements">栏目4</a></li>
+                    <li><a href="#listViews">栏目5</a></li>
+                    <li><a href="#dialogs">栏目6</a></li>
+                </ul>
+                <p>&nbsp;&nbsp;类别</p>
+                <ul data-role="listview" data-inset="true">
+                    <li><a>文件阅览<span class="ui-li-count">12</span></a></li>
+                    <li><a>公司新闻</a></li>
+                    <li><a>通讯录</a></li>
+                </ul>
+            </div>
+            <!-- /ui-body wrapper -->
+        </div>
+        <!-- /page -->
+        
+        <div data-role="page" id="formElements">
+            <div data-role="header" data-position="fixed">
+                <h1>Form Elements</h1>
+                <a href="#" data-rel="back">返回</a>
+            </div>
+            <!-- /header -->
+            
+            <div data-role="content">
+                
+                <div data-role="fieldcontain">
+                    
+                    <label>Some Fields and Inputs:</label> <br />
+                    <br /> <input type="range" /> <br />
+                    <br /> <input type="search" /> <br />
+                    <br /> <input type="email" /> <br />
+                    
+                </div>
+                
+                <div data-role="fieldcontain">
+                    <label for="slider">Select slider:</label> <select name="slider"
+                        id="slider" data-role="slider">
+                        <option value="off">OFF</option>
+                        <option value="on">ON</option>
+                    </select>
+                </div>
+                
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Choose a pet:</legend>
+                        <input type="radio" name="radio-choice-1" id="radio-choice-1"
+						value="choice-1" checked="checked" /> <label for="radio-choice-1">Cat</label>
+                        
+                        <input type="radio" name="radio-choice-1" id="radio-choice-2"
+						value="choice-2" /> <label for="radio-choice-2">Dog</label> <input
+						type="radio" name="radio-choice-1" id="radio-choice-3"
+						value="choice-3" /> <label for="radio-choice-3">Hampster</label>
+                    </fieldset>
+                </div>
+                
+                <button disabled=>Inactive Button</button>
+                
+                <button>Active Button</button>
+                
+            </div>
+            
+        </div>
+        
+        <div data-role="page" id="listViews">
+            
+            <div data-role="header" data-position="fixed">
+                <h1>List Example</h1>
+                <a href="#" data-rel="back">返回</a>
+            </div>
+            <!-- /header -->
+            
+            <div data-role="content">
+                
+                <ul data-role="listview">
+                    <li data-role="list-divider">Divider</li>
+                    <li><a href="#">Anatomy of a page</a></li>
+                    <li><a href="#">Page transitions</a></li>
+                    <li><a href="#">Dialogs</a></li>
+                    <li><a href="#">Navigation: Ajax, hashes &amp; history</a></li>
+                    <li><a href="#">Link format examples</a></li>
+                    <li><a href="#">Theming pages</a></li>
+                    <li><a href="#">Anatomy of a page</a></li>
+                    <li><a href="#">Page transitions</a></li>
+                    <li><a href="#">Dialogs</a></li>
+                    <li><a href="#">Navigation: Ajax, hashes &amp; history</a></li>
+                    <li><a href="#">Link format examples</a></li>
+                    <li><a href="#">Theming pages</a></li>
+                    <li><a href="#">Anatomy of a page</a></li>
+                    <li><a href="#">Page transitions</a></li>
+                    <li><a href="#">Dialogs</a></li>
+                    <li><a href="#">Navigation: Ajax, hashes &amp; history</a></li>
+                    <li><a href="#">Link format examples</a></li>
+                    <li><a href="#">Theming pages</a></li>
+                    <li><a href="#">Anatomy of a page</a></li>
+                    <li><a href="#">Page transitions</a></li>
+                    <li><a href="#">Dialogs</a></li>
+                    <li><a href="#">Navigation: Ajax, hashes &amp; history</a></li>
+                    <li><a href="#">Link format examples</a></li>
+                    <li><a href="#">Theming pages</a></li>
+                </ul>
+                
+            </div>
+            
+        </div>
+        
+        <div data-role="page" id="headers">
+            
+            <div data-role="header" data-position="fixed">
+                <h1>Headers</h1>
+                <a href="#" data-rel="back" data-theme="b">返回</a> </a>
+            </div>
+            <!-- /header -->
+            
+            <div data-role="content">
+                
+                <p>
+				The default bar is the blue, but you can also use the black by
+				specifying <em>data-theme="b"</em>.
+                </p>
+                
+                <div data-role="header" data-position="inline">
+                    <a href="#" data-rel="back" data-theme="a">Back</a>
+                    <h1>Blue Bar</h1>
+                    <a href="#" data-theme="a">Button</a>
+                </div>
+                <br />
+                <div data-role="header" data-theme="b" data-position="inline">
+                    <a href="#" data-rel="back" data-theme="b">Back</a>
+                    <h1>Black Bar</h1>
+                    <a href="#" data-theme="b">Button</a>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="headerButtons">
+            <div data-role="header" data-position="fixed">
+                <h1>Header Buttons</h1>
+                <a href="#" data-rel="back" data-theme="a">返回</a>
+            </div>
+            <!-- /header -->
+            <div data-role="content">
+                <p>The various styled buttons you can place in a header:</p>
+                <div data-role="header" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-theme="a">Edit</a>
+                </div>
+                <br />
+                <div data-role="header" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-theme="b">Black</a>
+                </div>
+                <br />
+                <div data-role="header" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-theme="c">Delete</a>
+                </div>
+                <br />
+                <div data-role="header" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-theme="d">Done</a>
+                </div>
+                <br />
+                <div data-role="header" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-rel="back" data-icon="arrow-l" data-theme="a">Back</a>
+                </div>
+                <br />
+                <div data-role="header" data-theme="b" data-position="inline">
+                    <h1>Page Title</h1>
+                    <a href="#" data-rel="back" data-icon="arrow-l" data-theme="b">Back</a>
+                </div>
+            </div>
+        </div>
+        
+        <div data-role="page" id="allDialogExample">
+            <div data-role="content">
+                <button data-theme="e">Button Style E</button>
+                <button data-theme="d">Button Style D</button>
+                <button data-theme="c">Button Style C</button>
+                <button data-theme="b">Button Style B</button>
+                <button data-theme="a">Button Style A</button>
+            </div>
+        </div>
+        
+        <div data-role="page" id="deleteDialogExample">
+            <div data-role="content">
+                <button data-theme="e">Delete Draft</button>
+                <button data-theme="a">Save Draft</button>
+                <button data-theme="b">Cancel</button>
+            </div>
+        </div>
+        
+        <div data-role="page" id="postDialogExample">
+            <div data-role="content">
+                <button data-theme="a">Post to Twitter</button>
+                <button data-theme="a">Post to Facebook</button>
+                <button data-theme="a">Post to YouTube</button>
+                <button data-theme="b">Cancel</button>
+            </div>
+        </div>
+        
+        <div data-role="page" id="dialogs">
+            <div data-role="header">
+                <h1>Dialogs</h1>
+                <a href="#" data-rel="back" data-theme="a">返回</a>
+            </div>
+            <!-- /header -->
+            <div data-role="content">
+                <a href="#allDialogExample" data-role="button" data-rel="dialog"
+                    data-transition="slideup">All the options</a> <a
+                        href="#deleteDialogExample" data-role="button" data-rel="dialog"
+                        data-transition="slideup">Delete Example</a> <a
+                            href="#postDialogExample" data-role="button" data-rel="dialog"
+                            data-transition="slideup">Post Something</a>
+            </div>
+        </div>
+        
+        <div data-role="page" id="footerTabs" data-theme="b">
+            <div data-role="header">
+                <h1>Footer Tabs</h1>
+                <a href="#" data-rel="back">返回</a>
+            </div>
+            <!-- /header -->
+            
+            <div data-role="content">内容</div>
+            <div data-role="footer" data-position="fixed">
+                <div data-role="navbar">
+                    <ul>
+                        <li><a href="#" id="tabA" data-icon="custom">One</a></li>
+                        <li><a href="#" id="tabB" data-icon="custom"
+                            class="ui-btn-active">Two</a></li>
+                        <li><a href="#" id="tabC" data-icon="custom">Three</a></li>
+                    </ul>
+                </div>
+                <!-- /navbar -->
+            </div>
+            <!-- /footer -->
+        </div>
+    </body>
+</html>

@@ -1,0 +1,7 @@
+
+body .ui-page{ 
+	/* no use */
+	/* height: 100% !important; */
+	/* all */
+	-webkit-backface-visibility: hidden;
+}

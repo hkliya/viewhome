@@ -1,0 +1,23 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ 
+  <head>
+		<script src="resource://localhost/cherry.js"></script>
+		<script src="resource://localhost/cherry_test.js"></script>
+    </head>
+ <script>
+
+ function popEvent(){
+	
+	var popScene = new cherry.bridge.NativeOperation("application", "popScene");
+	popScene.dispatch();
+	cherry.bridge.flushOperations();
+}
+
+ </script>
+ <p> Test webView Back</p>
+<input type="button" value="popuoEvent" onclick="popEvent()"></input>
+ <body>
+  
+ </body>
+</html>

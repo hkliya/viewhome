@@ -1,0 +1,169 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>MoveIn</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1;"/>
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="apple-touch-icon-precomposed" href="mi_icon.png" />
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="mi_1024_748.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" href="mi_768_1004.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="mi_320_480.png"/>
+		<link rel="stylesheet" href="../cssjs/jquery.mobile-1.0.1.css" />
+		<link rel="stylesheet" href="../cssjs/stanford.css" />
+		<script src="../cssjs/jquery.js"></script>
+		<script src="../cssjs/jquery.cookie.js"></script>
+		<script>
+			$(document).bind("mobileinit", function(){
+				$.mobile.loadingMessage = "载入中...";
+				$.mobile.page.prototype.options.backBtnText = "后退";
+				//if(window.navigator.userAgent.match(/android/i)){
+				//$.mobile.defaultPageTransition = "none";
+				//$.mobile.page.prototype.options.keepNative = "select, input, textarea";
+				//}
+			});
+			function MJ(){
+				this.path = '';
+			}
+			MJ.prototype.viewfile = function(url){
+				this.path = url;
+				$.mobile.changePage('/bridge/file.html', {
+					reverse: false,
+					changeHash: false
+				});
+			}
+			MJ.prototype.getpath  = function(){
+				return this.path;
+			}
+			var mj = new MJ();
+			$(document).ready(function(){
+				
+			});
+		</script>
+		<script src="../cssjs/jquery.mobile-1.0.1.js"></script>
+		<style>
+		</style>
+	</head>
+	<body>
+        <!-- 登录页面 -->
+		<div data-role="page" id="login" data-theme="d" class="type-home">
+			<div data-role="header">
+				<h1>移动办公</h1>
+			</div><!-- /header -->
+			<div data-role="content" align="center" data-theme="c" >
+				<form action="" method="post">
+					<ul id="viewBody" data-role="listview" data-theme="c" data-inset="true" style="max-width:450px;">
+						<li data-role="list-divider">登  录</li>
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<label><strong>帐  号:</strong></label>
+								<input type="text" name="username" id="username" value=""  />
+							</div>
+						</li>
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<label><strong>密  码:</strong></label>
+								<input type="password" name="password" id="password" value=""  />
+							</div>
+						</li>
+						
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<div style="width:240px;" align="center">
+									<fieldset data-role="controlgroup" data-type="horizontal">
+										<input type="checkbox" name="saveusername" id="saveusername" class="custom" />
+										<label for="saveusername">记住帐号</label>
+										<input type="checkbox" name="savepassword" id="savepassword" class="custom" />
+										<label for="savepassword"><em>记住密码</em></label>
+									</fieldset>
+								</div>
+							</div>
+						</li>
+						<li class="ui-body ui-body-b">
+							<div style="width:100%;" align="center">
+								<div style="width:240px;" align="center">
+									<fieldset class="ui-grid-a">
+										<a href="#home" data-role="button">登录</a>
+									</fieldset>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+        
+		<!-- 首页面 -->
+		<div data-role="page" id="home" >
+			<div data-role="header" style="height:18px;">
+				<h1> </h1>
+			</div>
+			<div data-role="content" align="center">
+                <!--
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <img width="88" height="88" src="/view/dbsy.png" />
+                        <br/>
+                        <strong>待办事宜</strong>
+                    </div>
+                    <div class="ui-block-b">
+                        <img width="88" height="88" src="/view/bjsy.png" />
+                        <br/>
+                        <strong>已办事宜</strong>
+                    </div>
+                    <div class="ui-block-c">
+                        <img width="88" height="88" src="/view/gwyl.png" />
+                        <br/>
+                        <strong>文件阅览</strong>
+                    </div>
+                </div>
+                <br/>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <img width="88" height="88" src="/view/icon1.png" />
+                        <br/>
+                        <strong>交办新建</strong>
+                    </div>
+                    <div class="ui-block-b">
+                        <img width="88" height="88" src="/view/icon2.png" />
+                        <br/>
+                        <strong>交办事项</strong>
+                    </div>
+                    <div class="ui-block-c">
+                        <img width="88" height="88" src="/view/icon6.png" />
+                        <br/>
+                        <strong>请假管理</strong>
+                    </div>
+                </div>
+                <br/>
+                <div class="ui-grid-b">
+                    <div class="ui-block-a">
+                        <img width="88" height="88" src="/view/icon8.png" />
+                        <br/>
+                        <strong>系统设置</strong>
+                    </div>
+                    <div class="ui-block-b">
+                        <img width="88" height="88" src="/view/icon9.png" />
+                        <br/>
+                        <strong>记事本</strong>
+                    </div>
+                    <div class="ui-block-c">
+                        <img width="88" height="88" src="/view/icon11.png" />
+                        <br/>
+                        <strong>文件管理</strong>
+                    </div>
+                </div>
+                -->
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">欢迎您!</li>
+					<li><a><h3>请假管理</h3><p></p></a></li>
+					<li><a><h3>出差管理</h3><p></p></a></li>
+					<li><a><h3>通知公告</h3><p></p></a></li>
+					<li><a><h3>通讯录</h3><p></p></a></li>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

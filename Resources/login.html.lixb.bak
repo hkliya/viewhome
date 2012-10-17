@@ -1,0 +1,177 @@
+<html>
+    <head>
+		<script src="/view/js/cherry.js"></script>
+		<script src="/view/js/mobileBridge.js"></script>
+		<script src="/cssjs/jquery.js"></script>
+		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+		<script src="/cssjs/jquery.cookie.js"></script>
+		<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			try{
+				loadCookie();	
+				cherry.bridge.registerEvent("loginButton", "touchUp", function(oper) {
+						var getUserName = new cherry.bridge.NativeOperation("userName", "getProperty", ["text"]).dispatch();
+						var getPassword = new cherry.bridge.NativeOperation("password", "getProperty", ["text"]).dispatch();
+						var doLogin = new cherry.bridge.ScriptOperation(function() {
+							var username=getUserName.returnValue;
+							
+							var password=getPassword.returnValue;
+							if(username == ""){
+								alert("请输入用户名!");
+								return;
+							}
+							if(password == ""){
+								alert("请输入密码!");
+								return;
+							}
+							
+							var disableLogin=new cherry.bridge.NativeOperation("loginButton","setProperty",["enabled",0]);
+							disableLogin.dispatch();
+							saveCookie();
+							var url = '/view/digi/loginvalidate/names.nsf?Login&$PublicAccess=1&%26%26ModDate=0000000100000000&%26%26ModDate=0871326800000070&Password='+password+'&ReasonType=0&RedirectTo=/Produce/Weboaconfig.nsf/Homeform?openform%26login&Username='+username+'&imageField.x=55&imageField.y=13&data-userid=Username&data-password=Password&data-login=true&random='+Math.floor(Math.random()*1000000);
+							//var url = '/view/digi/loginvalidate/names.nsf?Login&password='+password+'&username='+username+'&data-userid=username&data-password=password&data-login=true';
+							$.ajax({
+								type: "GET", url: url, dataType: "text", cache:false,
+								success: function(response){
+								
+									
+									var json = $.parseJSON(response);
+									if(json.success){
+										
+										
+										
+										var SERVER_BASE_URL="http://mobile.sugon.com/view";
+										var  targetURL= SERVER_BASE_URL+"/digihome.jsp?itcode="+json.itcode;
+										
+										
+										var pushSence=changePageWithBridge(targetURL);
+										
+										
+									}else{
+										//$.mobile.hidePageLoadingMsg();
+										alert("登录失败,用户名或密码错.");
+										
+									}
+									var enableLogin=new cherry.bridge.NativeOperation("loginButton","setProperty",["enabled",1]);
+									enableLogin.dispatch();
+									cherry.bridge.flushOperations();
+								},
+								error:function(response){
+									//$.mobile.hidePageLoadingMsg();
+									alert("错误:"+response.responseText);
+								}
+							});
+
+
+
+					});
+					doLogin.addDependency(getUserName);
+					doLogin.addDependency(getPassword);
+					doLogin.dispatch();
+					
+				});
+				
+				//navagation bar
+			/*
+				cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
+					alert("niubility");
+					var targetURL="http://mobile.sugon.com/view/digilogin.html?tag="+Math.random();
+					changePageWithBridge(targetURL);
+				});
+				
+				var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","js Modify"]);
+				setNavigationTitle.dispatch();
+
+
+				var setNavigationButtonText =new cherry.bridge.NativeOperation("case","setProperty",["navButtonText","clickMe"]);
+				setNavigationButtonText.dispatch();
+				*/
+				// 保存用户信息
+				function saveCookie () {
+					var getCookieSwitch = new cherry.bridge.NativeOperation("cookieSwitch", "getProperty", ["on"]).dispatch();
+					var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
+						if ( getCookieSwitch.returnValue ==='1'){
+							var getUserName = new cherry.bridge.NativeOperation("userName", "getProperty", ["text"]).dispatch();
+							var getPassword = new cherry.bridge.NativeOperation("password", "getProperty", ["text"]).dispatch();
+							var SR_saveCookie = new cherry.bridge.ScriptOperation(function(){
+							
+								$.cookie("userName", $.trim(getUserName.returnValue), {
+									expires : 365
+								}); 
+		
+								$.cookie("passWord", getPassword.returnValue, {
+									expires : 365
+								}); 
+							});
+							SR_saveCookie.addDependency(getUserName);
+							SR_saveCookie.addDependency(getPassword);
+							SR_saveCookie.dispatch();
+								
+						} else {
+							
+							clearCookie();
+						}
+					});
+					saveCookieScript.addDependency(getCookieSwitch);		
+					saveCookieScript.dispatch();			
+					cherry.bridge.flushOperations();
+					
+
+				}
+				function clearCookie(){
+					$.cookie("userName", "", {
+						expires : -1
+					}); 
+
+					$.cookie("passWord", "", {
+						expires : -1
+					}); 
+				}
+				
+				function loadCookie(){
+					//alert($.cookie("userName"));
+					if($.cookie("userName") && $.trim($.cookie("userName"))!="") {
+						var loadCookieScript = new cherry.bridge.ScriptOperation(function(){
+							
+							var userName="";
+							var passWord="";
+						
+							if($.cookie("userName")){
+								userName=$.cookie("userName");
+							}
+							if($.cookie("passWord")){
+								passWord=$.cookie("passWord");
+							}
+						
+							var NR_UserName = new cherry.bridge.NativeOperation("userName", "setProperty", ["text", userName]);
+							NR_UserName.dispatch();
+							var NR_Password = new cherry.bridge.NativeOperation("password", "setProperty", ["text", passWord]);
+							NR_Password.dispatch();
+							var getCookieSwitch = new cherry.bridge.NativeOperation("cookieSwitch", "setProperty", ["on","1"]);
+							getCookieSwitch.dispatch()
+						
+						});
+						loadCookieScript.dispatch();			
+						cherry.bridge.flushOperations();
+					}		
+					
+					
+				}
+				
+			}catch(e){
+				alert(e.message);
+			}		
+		});
+		
+
+
+
+        </script>
+    </head>
+    <body >
+        
+       
+    </body>
+</html>

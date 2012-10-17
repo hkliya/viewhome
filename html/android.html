@@ -1,0 +1,137 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>MoveIn</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=1;"/>
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<link rel="apple-touch-icon-precomposed" href="mi_icon.png" />
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="mi_1024_748.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" href="mi_768_1004.png"/>
+		<link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="mi_320_480.png"/>
+		<link rel="stylesheet" href="../cssjs/jquery.mobile-1.0.1.css" />
+		<link rel="stylesheet" href="../cssjs/stanford.css" />
+		<script src="../cssjs/jquery.js"></script>
+		<script src="../cssjs/jquery.cookie.js"></script>
+		<script>
+			$(document).bind("mobileinit", function(){
+				$.mobile.loadingMessage = "载入中...";
+				$.mobile.page.prototype.options.backBtnText = "后退";
+				//if(window.navigator.userAgent.match(/android/i)){
+				//$.mobile.defaultPageTransition = "none";
+				//$.mobile.page.prototype.options.keepNative = "select, input, textarea";
+				//}
+			});
+			function MJ(){
+				this.path = '';
+			}
+			MJ.prototype.viewfile = function(url){
+				this.path = url;
+				$.mobile.changePage('/bridge/file.html', {
+					reverse: false,
+					changeHash: false
+				});
+			}
+			MJ.prototype.getpath  = function(){
+				return this.path;
+			}
+			var mj = new MJ();
+			$(document).ready(function(){
+				
+			});
+		</script>
+		<script src="../cssjs/jquery.mobile-1.0.1.js"></script>
+		<style>
+		</style>
+	</head>
+	<body>
+        <!-- 登录页面 -->
+		<div data-role="page" id="login">
+			<div data-role="header">
+				<h1>移动办公</h1>
+			</div><!-- /header -->
+			<div data-role="content" align="center" data-theme="c" >
+				<script>
+					function login(){
+						var username = $("#username").val();
+						var password = $("#password").val();
+						if(username == ""){
+							alert("请输入用户名!");
+							return;
+						}
+						if(password == ""){
+							alert("请输入密码!");
+							return;
+						}
+						$.mobile.showPageLoadingMsg();
+						//var url = '/bridge/oa/loginvalidate3/pkmslogin.form';
+						var url = 'http://www.movein.cc/bridge/oa/loginvalidate3/names.nsf?Login';
+						var data = 'username='+username+'&password='+password+'&login-form-type=pwd'+'&data-userid=username&data-password=password&data-login=true'
+						
+						$.mobile.defaultPageTransition = "none";
+						$.ajax({
+							type: "post", url: url, data:data, dataType: "text",
+							success: function(response){
+								var json = $.parseJSON(response);
+								if(json.success){
+									//$.mobile.changePage('home.html');
+									window.location.href="http://www.movein.cc/view/home.html";
+								}else{
+									$.mobile.hidePageLoadingMsg();
+									alert("登录失败,用户名或密码错.");
+								}
+							},
+							error:function(response){
+								$.mobile.hidePageLoadingMsg();
+						        alert("错误:"+response.responseText);
+							}
+						});
+					
+				 	}
+				</script>
+				<form action="" method="post">
+					<ul id="viewBody" data-role="listview" data-theme="c" data-inset="true" style="max-width:450px;">
+						<li data-role="list-divider">登  录</li>
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<label><strong>帐  号:</strong></label>
+								<input type="text" name="username" id="username" value=""  />
+							</div>
+						</li>
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<label><strong>密  码:</strong></label>
+								<input type="password" name="password" id="password" value=""  />
+							</div>
+						</li>
+						
+						<li data-role="fieldcontain">
+							<div style="width:100%;" align="center">
+								<div style="width:240px;" align="center">
+									<fieldset data-role="controlgroup" data-type="horizontal">
+										<input type="checkbox" name="saveusername" id="saveusername" class="custom" />
+										<label for="saveusername">记住帐号</label>
+										<input type="checkbox" name="savepassword" id="savepassword" class="custom" />
+										<label for="savepassword"><em>记住密码</em></label>
+									</fieldset>
+								</div>
+							</div>
+						</li>
+						<li class="ui-body ui-body-b">
+							<div style="width:100%;" align="center">
+								<div style="width:240px;" align="center">
+									<fieldset class="ui-grid-a">
+										<a href="javascript:void(0)" onclick="login()" data-role="button">登录</a>
+									</fieldset>
+								</div>
+							</div>
+						</li>
+					</ul>
+					<iframe src="/view/cache.html" border="0" frameborder="no" framespacing="0" width="0" height="0"></iframe>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
