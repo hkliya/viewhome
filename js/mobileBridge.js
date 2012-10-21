@@ -6,7 +6,7 @@
 */
 function changePageWithBridge(targetUrl,componetXmlUrl){
 	
-	var serverUrl="http://mobile.sugon.com";
+	var serverUrl="http://1.202.226.107:8082";
 	
 	if(typeof(componetXmlUrl)=="undefined"){
 			componetXmlUrl=serverUrl+"/view/Resources/PureWeb.scene.xml";

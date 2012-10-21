@@ -164,9 +164,8 @@
 					getCookieSwitch.dispatch()
 					
 					
-					//test 隐藏 按钮 
-					new cherry.bridge.NativeOperation("loginButton", "setProperty", ["hidden", "1"]).dispatch();
-					alert('123');
+					
+					
 					cherry.bridge.flushOperations();		
 				
 					

@@ -34,7 +34,7 @@
 		<script src="/cssjs/jquery.js"></script>
 		<script src="/cssjs/jquery.cookie.js"></script>
 		<script src="/view/js/cherry.js"></script>
-		<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+		<script src="/view/mobileBridge.js"></script>
 		<script>
 			$(document).bind("mobileinit", function(){
 				//$.mobile.defaultPageTransition="slide"; 
@@ -255,7 +255,7 @@
                         <span style="color:white;"><strong>企业新闻</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="alert('11')mailto:lvjx@sugon.com" id="aOpenMail">
+						<a href="mailto:lvjx@sugon.com" id="aOpenMail">
                         <img width="68" height="68" src="/view/png/digi/mail.png" />
 						</a>
                         <br/>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<html lang="en"><head><title>Server Login</title><script language="JavaScript" type="text/javascript"><![CDATA[
+<!-- 
+function doError(){return true;};window.onerror=doError;
+// -->
+]]></script></head><body text="#000000" onload="document.forms[0].username.focus(); document.forms[0].username.select();" bgcolor="#FFFFFFFF">
+
+
+
+
+
+
+<form method="post" action="/names.nsf?Login">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFCC"><tbody><tr><td width="100">&amp;nbsp;</td><td><h1>Server Login</h1><font color="#FF0000">Invalid username or password was specified.</font><br />
+<br />
+Please type your user name and password<br />
+</td><td width="100">&amp;nbsp;</td></tr><tr><td height="20" colspan="3">&amp;nbsp;</td></tr><tr><td width="100" align="right"><label for="user-id">&amp;nbsp;User name:&amp;nbsp;&amp;nbsp;</label></td><td>
+<input type="text" size="20" maxlength="256" name="username" id="user-id" /></td><td>&amp;nbsp;</td></tr><tr><td width="100" align="right"><label for="pw-id">Password:&amp;nbsp;&amp;nbsp;</label></td><td>
+<input type="password" size="20" maxlength="256" name="password" id="pw-id" />
+<input type="hidden" name="redirectto" value="/Produce/Weboaconfig.nsf/Homeform?openform&amp;login" /></td><td>&amp;nbsp;</td></tr><tr><td height="20" colspan="3">&amp;nbsp;</td></tr><tr><td width="100">&amp;nbsp;</td><td>
+<input type="submit" value="Log In" /></td><td>&amp;nbsp;</td></tr><tr><td height="20" colspan="3">&amp;nbsp;</td></tr></tbody></table>
+</form>
+
+
+<data-params><isfile>false</isfile><issucceed>true</issucceed><statuscode>200</statuscode><headers><param name="Server" value="Lotus-Domino" /><param name="Date" value="Wed, 17 Oct 2012 09:25:53 GMT" /><param name="Expires" value="Tue, 01 Jan 1980 06:00:00 GMT" /><param name="Content-Type" value="text/html; charset=UTF-8" /><param name="Content-Length" value="1499" /><param name="Cache-control" value="no-cache" /></headers><redirects /><usertoken><storeid>null</storeid><userid>admin</userid><username /><createtimemillis>1350466125623</createtimemillis></usertoken><message><protocal>http</protocal><url>http://mobile2.sugon.com/names.nsf?Login&amp;$PublicAccess=1&amp;%26%26ModDate=0000000100000000&amp;%26%26ModDate=0871326800000070&amp;Password=000&amp;ReasonType=0&amp;RedirectTo=/Produce/Weboaconfig.nsf/Homeform?openform%26login&amp;Username=admin&amp;imageField.x=55&amp;imageField.y=13&amp;random=467924&amp;_=1350465969800</url><method>get</method><encoding>utf-8</encoding><type>remote</type><source>http://mobile2.sugon.com</source><template>digi/loginvalidate.xsl</template><params><param key="Login" value="" /><param key="$PublicAccess" value="1" /><param key="ReasonType" value="0" /><param key="RedirectTo" value="/Produce/Weboaconfig.nsf/Homeform?openform&amp;login" /><param key="imageField.x" value="55" /><param key="imageField.y" value="13" /><param key="Username" value="admin" /><param key="Password" value="000" /><param key="random" value="467924" /><param key="&amp;&amp;ModDate" value="0000000100000000" /><param key="_" value="1350465969800" /></params></message></data-params></body></html>
