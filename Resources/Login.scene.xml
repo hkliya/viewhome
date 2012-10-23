@@ -4,7 +4,7 @@
     <component name="root">
 		<properties>
 			<property name="background">
-				<string>http://1.202.226.107:8082/view/png/digi/bg_empty.png</string>
+				<string>http://1.202.226.107/view/png/digi/bg_empty.png</string>
 			</property>
 		</properties>
 		<componentType>
@@ -23,7 +23,7 @@
 				<frame x="45" y="20" width="231" height="82"/>
 				<properties>
 					<property name="background">
-						<string>http://1.202.226.107:8082/view/dflogo.png</string>
+						<string>http://1.202.226.107/view/dflogo.png</string>
 					</property>
 				</properties>
 				<componentType/>
