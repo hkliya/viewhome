@@ -16,7 +16,7 @@
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
 				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+				<script src="/view/js/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 				<script>
 				new cherry.bridge.NativeOperation("case","setProperty",["title","已读消息"]).dispatch();
@@ -30,7 +30,7 @@
 							function goin(user,unid){
 								var url = "/view/digi/messagerouting2/DFMessage/dfmsg_"+user+".nsf/msgByDateDownView/"+unid+"?opendocument?login";
 								$.get(url, function(result){
-									url = "http://mobile.sugon.com" + result;
+									url = "http://1.202.226.107" + result;
 									changePageWithBridge(url);
 								});
 							}

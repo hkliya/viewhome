@@ -14,10 +14,9 @@
 											
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
+				<script src="/cssjs/jquery.js"></script>				
 				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+				<script src="/view/js/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 				<script>
 					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","待办"]);
@@ -31,7 +30,7 @@
 						<script>
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
-								changePageWithBridge("http://mobile.sugon.com" + url);
+								changePageWithBridge("http://1.202.226.107" + url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

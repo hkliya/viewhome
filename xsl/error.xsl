@@ -16,6 +16,7 @@
 							<li data-role="list-divider"></li>
 							<li href="">
 								错误原因：<xsl:value-of select="//body/text()"/>
+
 							</li>
 							<li data-role="list-divider"></li>
 						</ul>

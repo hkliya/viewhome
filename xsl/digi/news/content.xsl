@@ -18,7 +18,7 @@
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
 				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+				<script src="/view/js/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 				<script>
 					var _title=new cherry.bridge.NativeOperation("case","setProperty",["title","内容"]);
@@ -31,7 +31,7 @@
 					<div data-role="content" align="center">
 						<script type="text/javascript">
 							function viewfile(url){
-								changePageWithBridge("http://mobile.sugon.com" + url, "http://mobile.sugon.com/view/Resources/AttachView.xml");
+								changePageWithBridge("http://1.202.226.107" + url, "http://1.202.226.107/view/Resources/AttachView.xml");
 							}
 						</script>
 						<div align="center" style="width:100%"><strong><xsl:value-of select="//title/text()"/></strong></div>

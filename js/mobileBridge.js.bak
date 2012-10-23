@@ -1,19 +1,24 @@
 /*
   页面 跳转 依赖 cherry.js
-  para:targetUrl 目标url
+  para:targetUrl 目标url,相对于服务器域名后面的路径,mobile.xx.com/view/login.html
   componetXmlUrl:可选 默认组件为  web 容器 路径：view/resources/Resources/PureWeb.scene.xml
  
 */
 function changePageWithBridge(targetUrl,componetXmlUrl){
 	
-	var serverUrl="http://mobile.sugon.com";
+	var serverUrl=document.location.protocol+"//"+document.location.host;
 	
 	if(typeof(componetXmlUrl)=="undefined"){
 			componetXmlUrl=serverUrl+"/view/Resources/PureWeb.scene.xml";
 			
 	}
+	if(targetUrl==""){
+		alert("targetUrl参数不能为空");
+	}
+	targetUrl=serverUrl+targetUrl
 	//alert("targetUrl="+targetUrl);
 	//alert(componetXmlUrl);
+	showLoading();
 	var pushScene = new cherry.bridge.NativeOperation("application", "pushScene", [componetXmlUrl,targetUrl]);
 	pushScene.dispatch();
 	cherry.bridge.flushOperations();

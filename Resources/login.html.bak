@@ -62,8 +62,8 @@
 										
 										
 										
-										var SERVER_BASE_URL="http://mobile.sugon.com/view";
-										var  targetURL= SERVER_BASE_URL+"/digihome.jsp?itcode="+username;
+										var SERVER_BASE_URL="http://1.202.226.107:8082/view";
+										var  targetURL= "view/digihome.jsp?itcode="+username;
 										var componentURL = SERVER_BASE_URL+"/Resources/digihome.xml";
 										
 										var pushSence=changePageWithBridge(targetURL,componentURL);

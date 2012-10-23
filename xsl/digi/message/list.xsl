@@ -13,10 +13,9 @@
 			<head>							
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
+				<script src="/cssjs/jquery.js"></script>				
 				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+				<script src="/view/js/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 				<script>
 
@@ -41,13 +40,13 @@
 							function goin(user,unid){
 								var url = "/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_"+user+".nsf&amp;appdocunid="+unid;
 								
-								changePageWithBridge("http://mobile.sugon.com"+url);
+								changePageWithBridge("http://1.202.226.107"+url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">
 							<xsl:apply-templates select="//viewentry" />
 							<li>
-								<a href="javascript:void(0);" onclick="window.location.reload(); changePage('http://mobile.sugon.com/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_admin.nsf&amp;appdocunid=51762209557FC1FA48257A7E005334BC')" data-icon="arrow-r" data-iconpos="right">
+								<a href="javascript:void(0);" onclick="window.location.reload(); changePage('http://1.202.226.107/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_admin.nsf&amp;appdocunid=51762209557FC1FA48257A7E005334BC')" data-icon="arrow-r" data-iconpos="right">
 									<h3>名片申请</h3>
 									<p>
 										时间:<font color="#0080FF">2012-7-19</font>
