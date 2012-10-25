@@ -18,7 +18,7 @@ function changePageWithBridge(targetUrl,componetXmlUrl){
 	targetUrl=serverUrl+targetUrl
 	//alert("targetUrl="+targetUrl);
 	//alert(componetXmlUrl);
-	showLoading();
+	
 	var pushScene = new cherry.bridge.NativeOperation("application", "pushScene", [componetXmlUrl,targetUrl]);
 	pushScene.dispatch();
 	cherry.bridge.flushOperations();

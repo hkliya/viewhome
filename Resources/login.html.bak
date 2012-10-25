@@ -59,10 +59,7 @@
 									
 									var json = $.parseJSON(response);
 									if(json.success){
-										
-										
-										
-										var SERVER_BASE_URL="http://1.202.226.107:8082/view";
+																				
 										var  targetURL= "view/digihome.jsp?itcode="+username;
 										var componentURL = SERVER_BASE_URL+"/Resources/digihome.xml";
 										

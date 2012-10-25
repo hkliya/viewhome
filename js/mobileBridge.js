@@ -11,6 +11,8 @@ function changePageWithBridge(targetUrl,componetXmlUrl){
 	if(typeof(componetXmlUrl)=="undefined"){
 			componetXmlUrl=serverUrl+"/view/Resources/PureWeb.scene.xml";
 			
+	}else{
+		componetXmlUrl=serverUrl+componetXmlUrl
 	}
 	if(targetUrl==""){
 		alert("targetUrl参数不能为空");
