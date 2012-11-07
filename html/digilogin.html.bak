@@ -184,7 +184,7 @@
 					<a href="javascript:void(0)" onClick="jsBack()">back</a>
 				</div>
 				<div style="width:100%;" align="center">
-					<a href="javascript:void(0)" onClick="login()"><img src="resource://localhost/login.png" width="220px" height="45px"/></a>
+					<a href="javascript:void(0)" onClick="login()">Login</a>
 				</div>
 				<br/>
 				<iframe src="/view/cache.html" border="0" frameborder="no" framespacing="0" width="0" height="0"></iframe>

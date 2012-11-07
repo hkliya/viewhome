@@ -18,7 +18,7 @@
 				var no_getuuid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
 				var getUuid = new cherry.bridge.ScriptOperation(
 									function(){
-										alert("uuid="+no_getuuid.returnValue);
+										//alert("uuid="+no_getuuid.returnValue);
 									}).addDependency(no_getuuid);
 				getUuid.dispatch();
 				
@@ -59,8 +59,8 @@
 									
 									var json = $.parseJSON(response);
 									if(json.success){
-																				
-										var  targetURL= "view/digihome.jsp?itcode="+username;
+																							
+										var  targetURL= "/view/digihome.jsp?itcode="+username;
 										var componentURL = "/view/Resources/digihome.xml";
 										
 										var pushSence=changePageWithBridge(targetURL,componentURL);

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scene xmlns="http://www.horizonpower.com.cn/hpclient/scene-xml/" xmlns:builtin="http://www.horizonpower.com.cn/hpclient/scene-xml/built-in/">
+<size width="320" height="480"/>
+    <component name="root">
+		<properties>
+			<property name="background">
+				<string>http://1.202.226.107/view/png/digi/bg_empty.png</string>
+			</property>
+		</properties>
+		<componentType>
+			<component name="application" type="builtin:appController"/>
+			<component name="case" type="builtin:caseController">
+				<properties>
+					
+					
+					<property name="navBarHidden">
+						<string>1</string>
+					</property>
+				</properties>
+			</component>
+			<component name="main" type="builtin:webView"/>
+			<component name="digibrand">
+				<frame x="45" y="20" width="231" height="82"/>
+				<properties>
+					<property name="background">
+						<string>http://1.202.226.107/view/dflogo.png</string>
+					</property>
+				</properties>
+				<componentType/>
+			</component>
+			<component type="builtin:label">
+				<frame x="30" y="170" width="60" height="30"/>
+				<properties>
+					<property name="text">
+						<string>用户名</string>
+					</property>
+				</properties>
+			</component>
+			<component name="userName" type="builtin:textField">
+				<frame x="100" y="170" width="190" height="40"/>
+			</component>
+			<component type="builtin:label">
+				<frame x="30" y="220" width="60" height="30"/>
+				<properties>
+					<property name="text">
+						<string>密码</string>
+					</property>
+				</properties>
+			</component>
+			<component name="password" type="builtin:textField">
+				<frame x="100" y="220" width="190" height="40"/>
+				<properties>
+					<property name="secure">
+						<string>1</string>
+					</property>
+				</properties>
+			</component>
+			<component name="cookieSwitch" type="builtin:switch">
+                <frame x="100" y="280" width = "60" height="30"/>
+                <properties>
+                    <property name="on">
+                        <string>0</string>
+                    </property>
+                </properties>
+            </component>
+			<component type="builtin:label">
+				<frame x="190" y="290" width="120" height="30"/>
+				<properties>
+					<property name="text">
+						<string>记住密码</string>
+					</property>
+				</properties>
+			</component>
+			
+			<component name="loginButton" type="builtin:button">
+				<frame x="98" y="360" width="150" height="40"/>
+				<properties>
+					<property name="text">
+						<string>登录</string>
+					</property>
+				</properties>
+			</component>
+			
+			
+			
+        </componentType>
+    </component>
+</scene>

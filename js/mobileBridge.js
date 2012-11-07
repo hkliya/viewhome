@@ -4,6 +4,14 @@
   componetXmlUrl:可选 默认组件为  web 容器 路径：view/resources/Resources/PureWeb.scene.xml
  
 */
+var debug=false;
+if(window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
+				
+			}else if(window.navigator.userAgent.match(/android/i)) {
+				
+			}else{
+				debug=true;
+			}
 function changePageWithBridge(targetUrl,componetXmlUrl){
 	
 	var serverUrl=document.location.protocol+"//"+document.location.host;
@@ -20,7 +28,10 @@ function changePageWithBridge(targetUrl,componetXmlUrl){
 	targetUrl=serverUrl+targetUrl
 	//alert("targetUrl="+targetUrl);
 	//alert(componetXmlUrl);
-	
+	if(debug){
+		window.location.href=targetUrl;
+		return false;
+	}
 	var pushScene = new cherry.bridge.NativeOperation("application", "pushScene", [componetXmlUrl,targetUrl]);
 	pushScene.dispatch();
 	cherry.bridge.flushOperations();
@@ -54,6 +65,9 @@ function changePageBackWithBridge(forceRefresh){
 //调用native的 loading页面
 
 function showLoading(){
+	if(debug){
+		return 
+	}
 	var loading=new cherry.bridge.NativeOperation("application","showLoadingSheet",[]);
 	loading.dispatch();
 	cherry.bridge.flushOperations();
@@ -62,6 +76,9 @@ function showLoading(){
 //隐藏native的 loading页面
 
 function hiddenLoading(){
+	if(debug){
+		return 
+	}
 	var hiddenLoading=new cherry.bridge.NativeOperation("application","hideLoadingSheet",[]);
 	hiddenLoading.dispatch();
 	cherry.bridge.flushOperations();

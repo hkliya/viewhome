@@ -30,7 +30,7 @@
 						<script>
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
-								changePageWithBridge("http://1.202.226.107" + url);
+								changePageWithBridge( url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

@@ -117,6 +117,8 @@
 			<rule mode="remove" regex="拆分"/>
 			<rule mode="remove" regex="yes"/>
 			<rule mode="remove" regex="no"/>
+			
+			<rule mode="remove" regex="否"/>
 			<rule mode="remove" regex="&amp;nbsp;"/>
 			<rule mode="remove" regex="&amp;amp;nbsp;"/>
 		</view>

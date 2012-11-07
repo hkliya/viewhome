@@ -40,13 +40,13 @@
 							function goin(user,unid){
 								var url = "/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_"+user+".nsf&amp;appdocunid="+unid;
 								
-								changePageWithBridge("http://1.202.226.107"+url);
+								changePageWithBridge(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">
 							<xsl:apply-templates select="//viewentry" />
 							<li>
-								<a href="javascript:void(0);" onclick="window.location.reload(); changePage('http://1.202.226.107/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_admin.nsf&amp;appdocunid=51762209557FC1FA48257A7E005334BC')" data-icon="arrow-r" data-iconpos="right">
+								<a href="javascript:void(0);" onclick="window.location.reload(); changePage('/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_admin.nsf&amp;appdocunid=51762209557FC1FA48257A7E005334BC')" data-icon="arrow-r" data-iconpos="right">
 									<h3>名片申请</h3>
 									<p>
 										时间:<font color="#0080FF">2012-7-19</font>

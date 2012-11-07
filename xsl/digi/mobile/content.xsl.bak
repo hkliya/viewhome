@@ -9,16 +9,17 @@
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
 				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
+				<script src="/view/js/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 				<script>
 					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","<xsl:value-of select='//title/text()'/>"]);
 					setNavigationTitle.dispatch();
 				</script>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 			</head>
 			<body>
 				<div id="notice" data-role="page">
-					<div data-role="content" align="center">
+					<div data-role="content" data-themes="c" align="center" style="margin-top:-20px">
 						<script>
 							<![CDATA[
 							function submit(value){
@@ -41,7 +42,7 @@
 										success: function(response){
 											$.mobile.hidePageLoadingMsg();
 											alert(response);
-											changePageBackWithBridge();
+											changePageBackWithBridge(1);
 										},
 										error:function(response){
 											$.mobile.hidePageLoadingMsg();
@@ -53,20 +54,19 @@
 						]]>
 						</script>
 						<ul data-role="listview">
-							<li data-role="list-divider">
-								<div data-role="controlgroup" data-type="horizontal" align="right">
-									<xsl:if test="//a[contains(., '下一步')]">
-										<button type="button" style="padding:0 30 0 30;" onclick="submit(this.value);" value="submit" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>下一步<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button>
-									</xsl:if>
-									<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
-									<xsl:if test="//a[contains(., '退回')]">
-										<button type="button" data-theme="b" onclick="submit(this.value);" value="reject" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>退回<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button>
-									</xsl:if>
-								</div>
+							<li data-role="null" class="ui-listview" >
+								
+								<fieldset class="ui-grid-a" style="position:fixed;top:10px;left:20px;z-index:100;width:90%">
+									<div class="ui-block-a"><xsl:if test="//a[contains(., '下一步')]">
+										<button onclick="submit(this.value);" value="submit" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>下一步<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button></xsl:if></div>
+									<div class="ui-block-b"><xsl:if test="//a[contains(., '退回')]">
+										<button   onclick="submit(this.value);" value="reject" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>退回<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button>
+									</xsl:if></div>	   
+								</fieldset>
 							</li>
 						</ul>
 						<br/>
-						<ul data-role="listview" data-inset="true" data-theme="d">
+						<ul data-role="listview" data-inset="true" data-theme="d" style="margin-top:60px">
 							<li data-role="list-divider">基本信息</li>
 							<li><xsl:apply-templates select="//div[@id='applycontent']//table[@id='tblapplycontent']" mode="c1"/></li>
 							<li data-role="list-divider">审批意见</li>
