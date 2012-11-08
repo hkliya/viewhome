@@ -12,6 +12,28 @@
 	</xsl:template>
 
 	<xsl:template match="tr">
-		<li>用户名:<xsl:value-of select="td[2]/."/><br/>ITCode:<xsl:value-of select="td[1]/."/><br/>员工编号:<xsl:value-of select="td[3]/."/><br/>移动电话:<xsl:value-of select="td[4]/."/><br/>办公电话:<xsl:value-of select="td[5]/."/></li>
+		<li>
+			<font>
+				<xsl:text>ITCode:</xsl:text><xsl:value-of select="td[1]/."/>
+			</font><br/>
+			<font>
+				<xsl:text>用户名:</xsl:text><xsl:value-of select="td[2]/."/>
+			</font><br/>
+			<font>
+				<xsl:text>部门名称:</xsl:text><xsl:value-of select="td[3]/."/>
+			</font><br/>
+			<font>
+				<xsl:text>移动电话:</xsl:text><xsl:value-of select="td[4]/."/>
+			</font><br/>
+			<font>
+				<xsl:text>办公电话:</xsl:text><xsl:value-of select="td[5]/."/>
+			</font><br/>			
+			<font>
+			<xsl:text>邮 箱:</xsl:text>
+				<a href="mailto:{td[6]/.}" target="_blank" data-role="none">
+					<xsl:value-of select="td[6]/."/>
+				</a>
+			</font>
+		</li>
 	</xsl:template>
 </xsl:stylesheet>

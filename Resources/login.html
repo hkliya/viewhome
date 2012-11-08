@@ -1,185 +1,180 @@
+<!DOCTYPE html> 
 <html>
-    <head>
+	<head>
+		<title>移动办公</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1;"/>
+
+		<link rel="stylesheet" href="/cssjs/jquery.mobile-1.0.1.css" />
+		<link rel="stylesheet" href="/ios/ios.css" />
+		
+		<link rel="stylesheet" media="all and (min-width:481px)" href="/view/css/ipad.css">
 		<script src="/cssjs/jquery.js"></script>
-		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
-
-		<script src="/view/js/cherry.js"></script>
-		
-		<script src="/view/js/mobileBridge.js"></script>
-	
 		<script src="/cssjs/jquery.cookie.js"></script>
+		<script>
+			$(document).bind("mobileinit", function(){
+				$.mobile.loadingMessage = "载入中...";
+				$.mobile.page.prototype.options.backBtnText = "后退";
+			});
+		</script>
+		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>		
+		<script src="/view/js/cherry.js"></script>
+		<script src="/view/js/mobileBridge.js"></script>
+		
+		<style>
+			a{text-decoration:none;}
+		</style>
+		
+
 		<script type="text/javascript">
-		
-		$(document).ready(function(){
-			
-			try{
-				//获取 手机设备uuid
-				
-				var no_getuuid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
-				var getUuid = new cherry.bridge.ScriptOperation(
-									function(){
-										alert("uuid="+no_getuuid.returnValue);
-									}).addDependency(no_getuuid);
-				getUuid.dispatch();
-				
-				
-				loadCookie();	
-				cherry.bridge.registerEvent("loginButton", "touchUp", function(oper) {
-						var getUserName = new cherry.bridge.NativeOperation("userName", "getProperty", ["text"]).dispatch();
-						var getPassword = new cherry.bridge.NativeOperation("password", "getProperty", ["text"]).dispatch();
-						var doLogin = new cherry.bridge.ScriptOperation(function() {
-							var username=getUserName.returnValue;
-							
-							var password=getPassword.returnValue;
-							if(username == ""){
-								alert("请输入用户名!");
-								return;
-							}
-							if(password == ""){
-								alert("请输入密码!");
-								return;
-							}
-							
-							
-							// add show loading
-							showLoading();
-							
-							
-						
-							saveCookie();
-							
-							
-
-							//var url = '/view/digi/loginvalidate/names.nsf?Login&$PublicAccess=1&%26%26ModDate=0000000100000000&%26%26ModDate=0871326800000070&Password='+password+'&ReasonType=0&RedirectTo=/Produce/Weboaconfig.nsf/Homeform?openform%26login&Username='+username+'&imageField.x=55&imageField.y=13&data-userid=Username&data-password=Password&data-login=true&random='+Math.floor(Math.random()*1000000);
-							var url = '/view/digi/loginvalidate/names.nsf?Login&password='+password+'&username='+username+'&data-userid=username&data-password=password&data-login=true';
-							$.ajax({
-								type: "GET", url: url, dataType: "text", cache:false,
-								success: function(response){
-								
-									
-									var json = $.parseJSON(response);
-									if(json.success){
-																				
-										var  targetURL= "/view/digihome.jsp?itcode="+username;
-										var componentURL = "/view/Resources/digihome.xml";
-										
-										var pushSence=changePageWithBridge(targetURL,componentURL);
-										
-										
-									}else{
-										//$.mobile.hidePageLoadingMsg();
-										alert("登录失败,用户名或密码错.");
-										// hidden loading
-										hiddenLoading();
-
-									}
-									
-								},
-								error:function(response){
-									//$.mobile.hidePageLoadingMsg();
-									alert("错误:"+response.responseText);
-									// hidden loading
-									new cherry.bridge.NativeOperation("application","hideLoadingSheet",[]).dispatch();
-									cherry.bridge.flushOperations();
-								}
-							});
-
-
-
-					});
-					doLogin.addDependency(getUserName);
-					doLogin.addDependency(getPassword);
-					doLogin.dispatch();
-					
-				});
-				
-			    
-				// 保存用户信息
-				function saveCookie () {
-					var getCookieSwitch = new cherry.bridge.NativeOperation("cookieSwitch", "getProperty", ["on"]).dispatch();
-					var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
-						if ( getCookieSwitch.returnValue ==='1'){
-							var getUserName = new cherry.bridge.NativeOperation("userName", "getProperty", ["text"]).dispatch();
-							var getPassword = new cherry.bridge.NativeOperation("password", "getProperty", ["text"]).dispatch();
-							var SR_saveCookie = new cherry.bridge.ScriptOperation(function(){
-							
-								$.cookie("userName", $.trim(getUserName.returnValue), {
-									expires : 365
-								}); 
-		
-								$.cookie("passWord", getPassword.returnValue, {
-									expires : 365
-								}); 
-							});
-							SR_saveCookie.addDependency(getUserName);
-							SR_saveCookie.addDependency(getPassword);
-							SR_saveCookie.dispatch();
-								
-						} else {
-							
-							clearCookie();
-						}
-					});
-					saveCookieScript.addDependency(getCookieSwitch);		
-					saveCookieScript.dispatch();			
-					cherry.bridge.flushOperations();
-					
-
+			$(document).ready(function(){
+				if($.cookie("data-saveusername")=="true"){
+					$("#username").attr("value", $.cookie("username"));
+					$('#saveusername').attr("checked", true).checkboxradio("refresh");
+				}else{
+					$("#username").attr("value", "");
+					$('#saveusername').removeAttr("checked").checkboxradio("refresh");
 				}
-				function clearCookie(){
-					$.cookie("userName", "", {
-						expires : -1
-					}); 
-
-					$.cookie("passWord", "", {
-						expires : -1
-					}); 
+				if($.cookie("data-savepassword")=="true"){
+					$("#password").attr("value", $.cookie("password"));
+					$('#savepassword').attr("checked", true).checkboxradio("refresh");
+				}else{
+					$("#password").attr("value", "");
+					$('#savepassword').removeAttr("checked").checkboxradio("refresh");
 				}
 				
-				function loadCookie(){
-					 
-					var userName="";
-					var passWord="";
-					var cookieOn="0";
-					
-					if($.cookie("userName") && $.trim($.cookie("userName"))!="") {
-						
-						if($.cookie("userName")){
-							userName=$.cookie("userName");
-						}
-						if($.cookie("passWord")){
-							passWord=$.cookie("passWord");
-						}
-						cookieOn="1";
+				new cherry.bridge.NativeOperation("case","setProperty",["title","登录"]).dispatch();
+				var setNavigationBack=new cherry.bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
+				setNavigationBack.dispatch();
+				cherry.bridge.flushOperations();
+
+			});
+	
+			function login(){
+				var username = $("#username").val();
+				var password = $("#password").val();
+				if(username == ""){
+					alert("请输入用户名!");
+					return;
+				}
+				if(password == ""){
+					alert("请输入密码!");
+					return;
+				}
+				//$.mobile.showPageLoadingMsg();
+				showLoading();
+				try{
+					if(document.getElementById("saveusername").checked){
+						$.cookie("data-saveusername", "true", { expires: 360000 });
+						$.cookie("username", username, { expires: 360000 });
+					}else{
+						$.cookie("data-saveusername", "false", { expires: -1 });
+						$.cookie("username", "", { expires: -1 });
 					}
-					
-					var NR_UserName = new cherry.bridge.NativeOperation("userName", "setProperty", ["text", userName]);
-					NR_UserName.dispatch();
-					var NR_Password = new cherry.bridge.NativeOperation("password", "setProperty", ["text", passWord]);
-					NR_Password.dispatch();
-					var getCookieSwitch = new cherry.bridge.NativeOperation("cookieSwitch", "setProperty", ["on", cookieOn]);
-					getCookieSwitch.dispatch()
-					
-					
-					
-					
-					cherry.bridge.flushOperations();		
+					if(document.getElementById("savepassword").checked){
+						$.cookie("data-savepassword", "true", { expires: 360000 });
+						$.cookie("password", password, { expires: 360000 });
+					}else{
+						$.cookie("data-savepassword", "false", { expires: -1 });
+						$.cookie("password", "", { expires: -1 });
+					}
+				}catch(e){}
+				var url = "/view/oa/loginvalidate/names.nsf?Login";
+				try{
+					var random = new Date().getTime();
+					url = url + "&data-random=" + random;
+				}catch(e){}
+				var data = 'Username='+username+'&Password='+password+'&$PublicAccess=1&%%ModDate=0000000000000000&ReasonType=0&data-userid=Username&data-password=Password&data-login=true';
+				$.ajax({
+					type: "post", url: url, data:data, dataType: "text",
+					success: function(response){
+						$.mobile.hidePageLoadingMsg();
+						var json = $.parseJSON(response);
+						if(json.success){
+							var targetURL= "/view/jsp/digihome.jsp?itcode="+username;
+							var componentURL = "/view/Resources/digihome.xml";
+							var pushSence=changePageWithBridge(targetURL, componentURL);
+
+						}else{
+							//$.mobile.hidePageLoadingMsg();
+							hiddenLoading();
+							alert("登录失败,用户名或密码错.");
+						}
+					},
+					error:function(response){
+						$.mobile.hidePageLoadingMsg();
+						hiddenLoading();
+						alert("登录失败," + response.responseText);
+					}
+				});
+			}
+			function showDeviceId(){
+				var getdeviceid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
+				var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
+					var result = getdeviceid.returnValue;
+					if(result == ""){
+						alert("无法获取设备");
+					}else{
+						alert("设备:"+result);
+					}
+				});
+				saveCookieScript.addDependency(getdeviceid);		
+				saveCookieScript.dispatch();			
+				cherry.bridge.flushOperations();
+			}
+			function cancel(){
+				$("#username").val("");
+				$("#password").val("");
+			}
+		</script>
+	</head>
+	<body>
+        <!-- 登录页面 -->
+		<div data-role="page" id="login" class="login">
+			<div data-role="content" align="center">
+				<div style="width:100%" align="left" class="padlogo">
+					<img src="" class="leftlogo"/>
+					<div style="width:100%;font-size:60px;font-type:bold;" align="center" >
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAABACAMAAADWFsdtAAAAA3NCSVQICAjb4U/gAAAC/VBMVEX////8/Pz3/f/x+//0+vz1+fzv+v/x9vjy9vnv9vnn9fnt8/bs8PHt8PLt8PXi8/jn8PXr7vLo7vDq7e/e8Pfr6+vq7O3m6+3n6uze7PLj6/Dm6e3i6e3n5+fj6Ozd6u/e5+7h5urk5OTh5efe5Oja5uri5Obi4+Tc4+rd4ubg4uXY4+rd4eXX4uvf4eLc4uXa4ufg4ODb4OPf4OHc4OHZ3+XW4Obd3d3Y3uPc3d7a3d7a3eDY3N/V3OPa2tva2trX2+DU3OPY2tvX2tzW2t7Z2tzT2d/V2NzS2NzX19jT2N3U2NvV19jW1tbS19rT1tfO1+DN1+HR1trV1tfU1dXN1uDN1t3T09PT1NXQ1NbR1NbS1NXN1dvN1NrR09bR09XQ09bH1d/N09nP0tXN0tXR0tLN0tfI09rH1N7N0dXQ0dHM0dbPz8/M0NPF0dzJ0dfK0NTJ0dbOz8/Iz9bOzs/Kz9LKztLLztHIzdHKzdHHzNDEzdXAztq/ztvGzdPHy9DIy87Hys3Dy9PCytO9y9jDytDBytPFyczAytTGycvCyM68yde9yNLDx8q/yNHCxcm+xsy/xcu7xc+2xtXAxMe/w8e9xMq7w8q+wsW3w822ws26wsquxNO0wc21wMu3v8ezv8u3v8a1vsizvsetvs2tvs6wvcuxvMa1vMK0u8OzusGovM2tu8ivucOqusixuL6tuMOot8aqtsKktcWqtL+ps72ls8Chs8SescKgr72br8SjrbiZrb+WrcKWqr+YqrqbqLWWqbuVqr6aqLaWp7iSp7uTpLWWo7GSpLaNo7mPobKJnbGEnbaHnbGAm7SFmq+Imap/mbGCl6t6la9+lax8lKt1k654kqx4kal5kah6j6N1j6hxjql0jKRzi6NuiqVwiKBrhqFthZxphaFng59lgZxef55hf51cfZthfZhfepZXdpVVdJJRc5ZTcpFNcJNScI9Ja45HaYtCZ41EZog7Y4k+Y4g7YIY3XoM2XIEvWIErVH0pUnobR3TMzMxD8iCjAAAA/3RSTlP//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////wBm/IpZAAAACXBIWXMAAArrAAAK6wGCiw1aAAAAHHRFWHRTb2Z0d2FyZQBBZG9iZSBGaXJld29ya3MgQ1M1cbXjNgAACjhJREFUeJztmguUE1cZx6dZQk2QDYW1SHelW6UFHyiWUrVCrXaraFGXWiw+qJQAVqq7VSo+gFaR+lrqa1FGrW/AB9UBqwUZlmrd7bA2xqxbKMZV7EDZGIqkS1TChhy//3dnJjObiR56ysw5cf4n5+a79373Tu7v3rlz751IpUB+SPL7B/yfKuDujwLu/ijg7o8C7v4o4O6PAu7+KODujwLu/ijg7o8C7v4o4O6PAu7+KODujwLu/ijg7o8C7v7IE+6XTWxquk1mc2aIpMq2zHnvjLvrIzavqy9sbGr6mlxy1cL3CG/+/kTZqWrNVtUL8WtC1yhVKj6H8oT7xLq6uh0pGSAuJ7PuDz+wUQ3VuSs0Q5Mtdi9Bym9++GGO3OOs/Y5R8P62Kl9LVYUu0CyI1WquC20wen5s3ejRo8c9kapJ7ldNHENtnd465Xs2EIIqFBpdRW1ZxZVdaLviqH8qEpvzKVm+CNZOzcyoWvO4fwjSM4F9dH+hNrm/WrALLdDtEJkqhMRQhShxfU51537QwWkFVzCQJ9zfhznub2a3OGqzX6W/wJ2+kNOnn9GtfrxsYmNToyezjgfcWwzumaxkILCoQpgcDpwpFhzqDRkeUhmcaYQyaTuZFyCtswh48ixkP2TeSZv2Zwwl4NN13IwOCdJjudbjeesGKc3Gj9mnnnsmXnB/y5XjCNj03cW0li2sIbOrj4Iyd1Iyl9Ic2mB6qFnuBzglqHMOw8hQZ0ibDLjLuDuOi9o2wa43B/xHH+ju/mMaehDpfXmdzIcf7O5+mKd3fsSHthVtvfg+pPR4Me14wF1OteLeLuqqrGqTAaAHVBdIAh4j3drUaNcN7SZ3KkL6tdk5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" class="centerlogo"/>
+					</div>
+				</div>
+				<ul id="viewBody" data-role="listview" data-theme="c" data-inset="true" style="max-width:400px;" >
+					<li data-role="list-divider" ><a href="javascript:void(0);" onclick="showDeviceId();">终端设备</a></li>
+					<li data-role="fieldcontain" data-type="horizontal" >
+						<table style="width:100%" cellspaceing="0" cellpadding="0" border="0">
+							<tr><td>
+							<strong>帐&#160;&#160;号:</strong>
+							</td><td>
+							<input type="text" name="username" style="outline:none;width:100%;border:0;background:transparent;" id="username" value=""/>
+							</td></tr>
+						</table>
+					</li>
+					<li data-role="fieldcontain">
+						<table style="width:100%" cellspaceing="0" cellpadding="0" border="0">
+							<tr><td>
+							<strong>密&#160;&#160;码:</strong>
+							</td><td>
+							<input type="password" name="password" style="outline:none;width:100%;border:0;background:transparent;" id="password" value=""/>
+							</td></tr>
+						</table>
+					</li>
+					<li data-role="fieldcontain">
+						<fieldset id="rememberme" data-role="controlgroup" data-type="horizontal" data-mini="true" style="width:100%;" align="center">
+							<input type="checkbox" name="saveusername" id="saveusername" class="custom" data-mini="true"/>
+							<label for="saveusername" data-mini="true">记住帐号</label>
+							<input type="checkbox" name="savepassword" id="savepassword" class="custom" data-mini="true"/>
+							<label for="savepassword" data-mini="true">记住密码</label>
+						</fieldset>
+					</li>
+				</ul>
 				
-					
-				}
-				
-			}catch(e){
-				alert(e.message);
-			}		
-		});
-		
-
-
-
-        </script>
-    </head>
-    <body >
-        
-       
-    </body>
+				<div style="width:100%;" align="center">
+					<div style="width:240px;" align="center">
+						<a href="javascript:void(0)" onclick="login()" data-theme="a" data-role="button" data-inline="true">&nbsp;登&nbsp;录&nbsp;</a>
+						<a href="javascript:void(0)" onclick="cancel()" data-theme="b" data-role="button" data-inline="true" class="cancel">&nbsp;取&nbsp;消&nbsp;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
 </html>

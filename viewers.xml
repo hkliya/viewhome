@@ -1,52 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <viewers>
 
-	<viewer id="oa2" type="remote" source="http://mobile2.sugon.com" encoding="utf-8">
-		<view id="validate" template="oa2/validate.xsl"/>
-	</viewer>
+	<viewer id="digi2" type="remote" source="http://*.com.cn" encoding="utf-8">
 
-	<viewer id="ia" type="remote" source="http://dlmail:8080" encoding="gb18030">
-		<view id="login" />
-	</viewer>
-	
-	<viewer id="baidu" type="remote" source="http://news.baidu.com" encoding="gb2312">
-		<!-- 百度NEWS -->
-		<view id="news" template="baidu/news/news.xsl"/>
-		<view id="title" template="baidu/title.xsl"/>
-	</viewer>
-	<viewer id="baiduT" type="remote" source="http://www.baidu.com/" encoding="gb2312">
-		<!-- 百度 -->
-		<view id="title" template="baidu/title.xsl"/>
-	</viewer>
-	
-	<viewer id="test" type="remote" source="http://mobile.sugon.com" encoding="utf-8">
-		<!-- 首页 -->
-		<view id="first" template="test/first.xsl"/>
-	</viewer>
-
-	<viewer id="hpi" type="remote" source="http://dloa.hpi.com.cn" encoding="gb18030">
-		<view id="login" />
-	</viewer>
-	<!-- http://182.50.2.171:8000 -->
-	<viewer id="digi" type="remote" source="http://mobile2.sugon.com" encoding="utf-8" sso="http://mobile2.sugon.com/Produce/Weboaconfig.nsf/Homeform?openform&amp;login">
-		<!-- 登陆验证 -->
-		<view id="loginvalidate" template="digi/loginvalidate.xsl"/>
-        
-		<!-- 待办事宜 -->
-		<view id="todos" template="digi/todoslist.xsl" encoding="utf-8"/>
-		<view id="todosnum" template="digi/todosnum.xsl"/>
 		<!-- 手机待办 -->
-		<view id="todosmobile" template="digi/todosmobilelist.xsl" />
+		<view id="todosmobile" template="digi/todosmobilelist.xsl" encoding="utf-8">
+		</view>
+		<view id="todosmobilesub" template="digi/todosmobilesublist.xsl" encoding="utf-8">
+		</view>
+		
 		<view id="contentmobile" template="digi/mobile/content.xsl">
+			<!-- 源数据是符合标签形式的字符串，转换成真正的字符串（把'<','>' 替换成真正的标签） -->
+			
+			<rule mode="replace" regex="0 " value="0&#160;"/>
+			<rule mode="replace" regex="1 " value="1&#160;"/>
+			<rule mode="replace" regex="2 " value="2&#160;"/>
+			<rule mode="replace" regex="3 " value="3&#160;"/>
+			<rule mode="replace" regex="4 " value="4&#160;"/>
+			<rule mode="replace" regex="5 " value="5&#160;"/>
+			<rule mode="replace" regex="6 " value="6&#160;"/>
+			<rule mode="replace" regex="7 " value="7&#160;"/>
+			<rule mode="replace" regex="8 " value="8&#160;"/>
+			<rule mode="replace" regex="9 " value="9&#160;"/>
+
+			<rule mode="replace" regex="approver=" value="approver='"/>
+			<rule mode="replace" regex="approver=''" value="approver='"/>
+			<rule mode="replace" regex=" approveren=" value="' approveren='"/>
+			<rule mode="replace" regex=" approvetime=" value="' approvetime="/>
+
 			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
 			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			
 			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
 			<rule mode="replace" regex="&amp;amp;nbsp;" value=""/>
 			<rule mode="replace" regex="&amp;amp;middot;" value=""/>
 			<rule mode="replace" regex="&amp;amp;ldquo;" value=""/>
 			<rule mode="replace" regex="&amp;amp;rdquo;" value=""/>
 			<rule mode="replace" regex="&lt;textarea name=&quot;Fck_HTML&quot;" value="&lt;div name=&quot;Fck_HTML&quot;"/>
-		</view>
+
+			<rule mode="replace" regex="&lt;\!\[CDATA\[" value=""/>
+			<rule mode="replace" regex="\]\]&gt;" value=""/>
+
+			
+		</view>>
 		<view id="request" template="digi/mobile/request.xsl" encoding="utf-8">
 			<rule mode="replace" regex="soap:" value=""/>
 			<rule mode="replace" regex="ns1:" value=""/>
@@ -58,143 +54,186 @@
 		<view id="dones" template="digi/doneslist.xsl" encoding="utf-8"/>
 
         <view id="forms" template="digi/forms/routing.xsl"/>
+
+		
+
+		<!-- 个人消息 -->
+		<!-- 未读 -->
+		<view id="messagelist" template="digi/message/list.xsl" encoding="utf-8"/>
+		<!-- 已读 -->
+		<view id="messagereadlist" template="digi/message/readlist.xsl" encoding="utf-8"/>
+		
+		
+		<view id="messagesublist" template="digi/message/sublist.xsl" encoding="utf-8"/>
+		
+		<view id="messagesubreadlist" template="digi/message/subreadlist.xsl" encoding="utf-8"/>
+		<view id="messagecontent" template="digi/message/content.xsl">
+		 
+			<rule mode="replace" regex="0 " value="0&#160;"/>
+			<rule mode="replace" regex="1 " value="1&#160;"/>
+			<rule mode="replace" regex="2 " value="2&#160;"/>
+			<rule mode="replace" regex="3 " value="3&#160;"/>
+			<rule mode="replace" regex="4 " value="4&#160;"/>
+			<rule mode="replace" regex="5 " value="5&#160;"/>
+			<rule mode="replace" regex="6 " value="6&#160;"/>
+			<rule mode="replace" regex="7 " value="7&#160;"/>
+			<rule mode="replace" regex="8 " value="8&#160;"/>
+			<rule mode="replace" regex="9 " value="9&#160;"/>
+			
+			<rule mode="replace" regex="approver=" value="approver='"/>
+			<rule mode="replace" regex=" approveren=" value="' approveren='"/>
+			<rule mode="replace" regex=" approvetime=" value="' approvetime="/>
+
+			<rule mode="replace" regex="&amp;amp;nbsp;" value=" "/>
+		    <rule mode="replace" regex="&amp;nbsp;" value=" "/>
+			<rule mode="replace" regex="&amp;nbsp" value=" "/>
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+		    <rule mode="replace" regex="&amp;gt;" value="&gt;"/>	
+			<rule mode="replace" regex="&lt;\!\[CDATA\[" value=""/>
+			<rule mode="replace" regex="\]\]&gt;" value=""/>
+			<!-- 在转换的时候双引号 被保留了 替换掉 -->			
+		    <rule mode="replace" regex="&amp;quot;" value=""/>
+			
+			<rule mode="replace" regex="&amp;amp;#49;" value="1"/>
+			<rule mode="replace" regex="&amp;amp;#55;" value="7"/>
+ 			<rule mode="replace" regex="&amp;amp;#8226;" value="*"/>
+        </view>
+		<view id="messagerouting" template="digi/message/routing.xsl"/>
+
+
+	<!-- 通知公告 
+		
+		<view id="noticelist" template="digi/notice/noticelist.xsl" encoding="utf-8"/>
+	    <view id="noticecontent" template="digi/notice/noticecontext.xsl">
+		  <rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+		  <rule mode="replace" regex="&amp;gt;" value="&gt;"/>    
+		  <rule mode="replace" regex="textarea" value="div"/>    
+		</view>
+	-->
+		
+	-->
+		<!-- 公文管理 -->
+		<view id="documentlist" template="digi/document/list.xsl" encoding="utf-8"/>
+		<view id="documentsublist" template="digi/document/sublist.xsl" encoding="utf-8"/>
+	    <view id="documentcontent" template="digi/document/content.xsl">
+		
+			<rule mode="replace" regex="0 " value="0&#160;"/>
+			<rule mode="replace" regex="1 " value="1&#160;"/>
+			<rule mode="replace" regex="2 " value="2&#160;"/>
+			<rule mode="replace" regex="3 " value="3&#160;"/>
+			<rule mode="replace" regex="4 " value="4&#160;"/>
+			<rule mode="replace" regex="5 " value="5&#160;"/>
+			<rule mode="replace" regex="6 " value="6&#160;"/>
+			<rule mode="replace" regex="7 " value="7&#160;"/>
+			<rule mode="replace" regex="8 " value="8&#160;"/>
+			<rule mode="replace" regex="9 " value="9&#160;"/>
+
+			<rule mode="replace" regex="approver=" value="approver='"/>
+			<rule mode="replace" regex=" approveren=" value="' approveren="/>
+
+
+			<rule mode="replace" regex="&amp;amp;nbsp;" value=" "/>
+		    <rule mode="replace" regex="&amp;nbsp;" value=" "/>
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+		    <rule mode="replace" regex="&amp;gt;" value="&gt;"/>	
+			<rule mode="replace" regex="&lt;\!\[CDATA\[" value=""/>
+			<rule mode="replace" regex="\]\]&gt;" value=""/>
+			<!-- 在转换的时候双引号 被保留了 替换掉 -->			
+		    <rule mode="replace" regex="&amp;quot;" value=""/>    
+		</view>
+
+
+		<!-- 图片新闻 == 企业新闻 -->
+		<view id="imageNewsList" template="digi/imageNews/list.xsl" encoding="utf-8"/>
+		<view id="imageNewsSubList" template="digi/imageNews/sublist.xsl" encoding="utf-8"/>
+		<view id="imageNewsContent" template="digi/imageNews/content.xsl">	
+			<rule mode="replace" regex="&amp;amp;#49;" value="1"/>
+			<rule mode="replace" regex="&amp;amp;#55;" value="7"/>
+ 			<rule mode="replace" regex="&amp;amp;#8226;" value="*"/>
+			<rule mode="remove" regex="&amp;amp;#65279;"/>	
+			<rule mode="replace" regex="&amp;nbsp;" value=" "/>
+			<rule mode="replace" regex="&amp;nbsp" value=" "/>
+			<rule mode="replace" regex="&amp;amp;nbsp;" value=""/>
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="textarea" value="div"/>
+			<rule mode="replace" regex="width" value="width2"/>
+			
+		</view>
+
+		<view id="file" template="file.jsp"/>
+
+	</viewer>
+
+	
+	<viewer id="digi3" type="remote" source="*.com.cn" encoding="gb2312">
+		
+		<!-- 日程guanli -->
+        <view id="richenglist" template="digi/richeng/list.xsl" encoding="utf-8"/>
+        <view id="richengcontent" template="digi/richeng/content.xsl">
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+			<rule mode="replace" regex="TEXTAREA" value="div"/>
+			<rule mode="remove" regex="&amp;nbsp;"/>
+		</view>
+
+	</viewer>
+
+	<!-- http://182.50.2.171:8000 -->
+	<viewer id="digi" type="remote" source="*.com.cn" encoding="gb2312">
+		<!-- 登陆验证 -->
+		<view id="loginvalidate" template="digi/loginvalidate.xsl"/>
+        
+
 		
 		<!-- 会议室管理 -->
         <view id="meettingroom" template="digi/meettingroom/content.xsl"/>
 		<!-- 车辆管理 -->
         <view id="carmanager" template="digi/carmanager/content.xsl"/>
 
-		<!-- 电话查询 -->
-        <view id="phonenumber" template="digi/phonenumber/index.xsl"/>
-        <view id="phonenumberrequest" template="digi/phonenumber/request.xsl">
+		<!-- 领导日程 -->
+        <view id="lingdaorichenglist" template="digi/lingdaoricheng/list.xsl" encoding="utf-8"/>
+        <view id="lingdaorichengcontent" template="digi/lingdaoricheng/content.xsl">
 			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
 			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
 			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
-		</view>
-        
-		<!-- 企业新闻 -->
-		<view id="newslist" template="digi/news/list.xsl" encoding="utf-8"/>
-		<view id="newscontent" template="digi/news/content.xsl">
-			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
-			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
-			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
-			<rule mode="replace" regex="&amp;amp;nbsp;" value=""/>
-			<rule mode="replace" regex="&amp;amp;middot;" value=""/>
-			<rule mode="replace" regex="&amp;amp;ldquo;" value=""/>
-			<rule mode="replace" regex="&amp;amp;rdquo;" value=""/>
-			<rule mode="replace" regex="&amp;amp;apos;" value=""/>
-			<rule mode="replace" regex="&amp;apos;" value=""/>
-			<rule mode="replace" regex="&apos;" value=""/>
-			<rule mode="replace" regex="width=&quot;386&quot;" value="width=&quot;240px&quot;"/>
-			<rule mode="replace" regex="width=&amp;quot;386&amp;quot;" value="width=&quot;300px&quot;"/>
-			<rule mode="remove" regex="height=&quot;179&quot;"/>
-			<rule mode="remove" regex="height=&amp;quot;179&amp;quot;"/>
-			<rule mode="replace" regex="http://www.digiwin.com.cn/" value="/view/diwin/file/"/>
-		</view>
-		
-
-		
-		<!-- 个人消息 -->
-		<!-- 未读 -->
-		<view id="messagelist" template="digi/message/list.xsl" encoding="utf-8">
-			<rule mode="replace" regex="textarea" value="div"/>
-			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
-			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
-		</view>
-
-
-		<!-- 已读 -->
-		<view id="messagereadlist" template="digi/message/readlist.xsl" encoding="utf-8"/>
-		
-		<view id="messagecontent" template="digi/message/content.xsl">
-			<rule mode="replace" regex="textarea" value="div"/>
-			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
-			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
-		</view>
-		<view id="messagecontent2" template="digi/message/content2.xsl">
-			<rule mode="remove" regex="选择"/>
-			<rule mode="remove" regex="清除"/>
-			<rule mode="remove" regex="拆分"/>
-			<rule mode="remove" regex="yes"/>
-			<rule mode="remove" regex="no"/>
-			
-			<rule mode="remove" regex="否"/>
+			<rule mode="replace" regex="TEXTAREA" value="div"/>
 			<rule mode="remove" regex="&amp;nbsp;"/>
-			<rule mode="remove" regex="&amp;amp;nbsp;"/>
 		</view>
-		<view id="messagerouting" template="digi/message/routing.xsl"/>
-		<view id="messagerouting2" template="digi/message/routing2.xsl"/>
 		
+		<!-- AddressBook -->
+        <view id="addressorg" template="digi/address/list.xsl" encoding="utf-8"/>
+        <view id="addresssuborg" template="digi/address/sublist.xsl" encoding="utf-8"/>
+        <view id="addressperson" template="digi/address/content.xsl" encoding="utf-8">
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+			<rule mode="replace" regex="TEXTAREA" value="div"/>
+			<rule mode="remove" regex="&amp;nbsp;"/>
+			<rule mode="replace" regex="~" value="&lt;/div&gt;&lt;div name='person'&gt;"/>
+		</view>
+        <view id="addressdetail" template="digi/address/detail.xsl">
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+			<rule mode="replace" regex="TEXTAREA" value="div"/>
+			<rule mode="remove" regex="&amp;nbsp;"/>
+			<rule mode="replace" regex="~" value="&lt;/div&gt;&lt;div name='person'&gt;"/>
+		</view>
+
+		<!-- 电话查询 -->
+        <view id="phonenumber" template="digi/phonenumber/index.xsl">
+			<rule mode="replace" regex="height:100" value=""/>
+		</view>
+        <view id="phonenumberrequest" template="digi/phonenumber/request.xsl">
+			<rule mode="replace" regex="height:100" value=""/>
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+		</view>
+
 		<view id="file" template="file.jsp"/>
 	</viewer>
 
-	<viewer id="diwin" type="remote" source="http://www.digiwin.com.cn" encoding="gb18030">
-		<view id="file" template=""/>
-	</viewer>
-
-	<viewer id="oa" type="remote" source="http://oa.smartdot.com.cn" encoding="gb18030" sso="http://oa.smartdot.com.cn/" timeout="20"><!-- timeout no use! -->
-		<!--
-		<view id="login" template="login.xsl"></view>
-		<view id="loginvalidate" template="validate.xsl"></view>
-		<view id="loginvalidate2" template="validate2.xsl"></view>
-		<view id="notice" template="notice/list.xsl"></view>
-		<view id="file" template="notice/list.xsl"></view>
-		-->
-		<!-- 登录验证 -->
-		<view id="loginvalidate3" template="validate3.xsl"></view>
-		<!-- 请假管理 -->
-		<view id="qjgllist" template="qjgl/list.xsl"></view>
-		<view id="qjglcontent" template="qjgl/content.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 出差管理 -->
-		<view id="ccgllist" template="ccgl/list.xsl"></view>
-		<view id="ccglcontent" template="ccgl/content.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 通知公告 -->
-		<view id="noticelist" template="notice/list.xsl"></view>
-		<!--<map id="noticelist" template="test.jsp"></map>-->
-		<view id="noticecontent" template="notice/content.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 通讯录 -->
-		<view id="orglist" template="addressbook/listorg.xsl" encoding="utf-8"></view>
-		<view id="userlist" template="addressbook/listuser.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 流程处理 -->
-		<view id="submit" template="flow/submit.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<view id="responsesubmit" template="flow/result_submit.xsl">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 流程人员选择 -->
-		<view id="userselectorg" template="userselect/listorg.xsl" encoding="utf-8">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<view id="userselectuser" template="userselect/listuser.xsl" encoding="utf-8">
-			<rule mode="remove" regex="&amp;nbsp;"/>
-		</view>
-		<!-- 附件 -->
-		<view id="file" template="jsp/file.jsp"/>
-	</viewer>
-
-	<viewer id="mail2" type="remote" source="http://mail2.smartdot.com.cn" encoding="gb18030">
-		<view id="inbox" template="mail/inbox.xsl"></view>
-	</viewer>
-
-	<viewer id="local" type="remote" source="http://localhost:8080" encoding="utf8">
-		<view id="file" template="jsp/file.jsp"/>
-		<view id="cxstl" template="local/content.xsl"></view>
-		<view id="cjsp" template="content.jsp"></view>
-	</viewer>
-	
-	<viewer id="test2" type="remote" source="http://mobile.sugon.com"  encoding="utf-8">
-	      
-		<view id="second" template="test2/second.xsl"></view>
-		
-	</viewer>
-		
 </viewers>

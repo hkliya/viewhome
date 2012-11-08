@@ -3,10 +3,10 @@
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<xsl:if test="contains(//envelope/., '/')">
-			<xsl:value-of select="substring-after(//envelope/., '/')"/>
+			<xsl:value-of select="translate(substring-after(//envelope/., '/'), '/', '-')"/>
 		</xsl:if>
 		<xsl:if test="not(contains(//envelope/., '/'))">
-			<xsl:value-of select="//envelope/."/>
+			<xsl:value-of select="translate(//envelope/., '/', '-')"/>
 		</xsl:if>
 	</xsl:template>
 </xsl:stylesheet>

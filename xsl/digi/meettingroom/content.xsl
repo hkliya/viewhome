@@ -8,9 +8,9 @@
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
-				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
 			</head>
 			<body>
 				<div id="notice" data-role="page">

@@ -1,0 +1,39 @@
+<html>
+    <head>
+		<script src="/cssjs/jquery.js"></script>
+		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+
+		<script src="/view/js/cherry.js"></script>
+		
+		<script src="/view/js/mobileBridge.js"></script>
+	
+		<script src="/cssjs/jquery.cookie.js"></script>
+		<script type="text/javascript">
+		
+		$(document).ready(function(){
+			
+			try{
+				
+
+
+				cherry.bridge.registerEvent("loginButton", "touchUp", function(oper) {
+						alert("1");
+						var setFrame = new cherry.bridge.NativeOperation("loginButton", "setProperty", ["frame","{x:50,y:50, width:50, height:30}"]);
+						setFrame.dispatch();
+				});
+				
+			}catch(e){
+				alert(e.message);
+			}		
+		});
+		
+
+
+
+        </script>
+    </head>
+    <body >
+        
+       
+    </body>
+</html>

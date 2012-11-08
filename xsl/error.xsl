@@ -3,23 +3,19 @@
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
-			<head></head>
+			<head>							
+				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
+				<link rel="stylesheet" href="/ios/ios.css" />
+				<script src="/cssjs/jquery.js"></script>
+				<script src="/cssjs/jquery.cookie.js"></script>
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/view/js/cherry.js"></script>
+			</head>
 			<body>
-				<div data-role="page" class="type-home">
-					<div data-role="header">
-						<a data-icon="home" data-role="button" href="/bridge/home.html">返回</a>
-						<h1>系统错误</h1>
-					</div><!-- /header -->
-				
+				<div id="notice" data-role="page">
 					<div data-role="content" align="center">
-						<ul data-role="listview" data-inset="true">
-							<li data-role="list-divider"></li>
-							<li href="">
-								错误原因：<xsl:value-of select="//body/text()"/>
-
-							</li>
-							<li data-role="list-divider"></li>
-						</ul>
+						模板错误，请查看日志
 					</div><!-- /content -->
 				</div>
 			</body>

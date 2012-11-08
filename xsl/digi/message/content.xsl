@@ -8,145 +8,210 @@
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
-				<script src="/view/js/cherry.js"></script>
-				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
 				<script>
-					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","<xsl:value-of select='//title/text()'/>"]);
+					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","单据"]);
 					setNavigationTitle.dispatch();
+					cherry.bridge.flushOperations();
+											
+					function viewfile(url){
+						changePageWithBridge(url, "/view/Resources/AttachView.xml");
+					}
 				</script>
 			</head>
 			<body>
 				<div id="notice" data-role="page">
 					<div data-role="content" align="center">
+		
+						<strong><xsl:value-of select="//title/text()"/></strong>
 						<ul data-role="listview" data-inset="true" data-theme="d">
-							<li data-role="list-divider">基本信息:</li>
-							<li><xsl:apply-templates select="//fieldentry" mode="f1"/></li>
-							<li data-role="list-divider">附件信息:</li>
-							<xsl:apply-templates select="//td[@id='attachinfo']//a" mode="file"/>
-							<li data-role="list-divider">当前环节信息:</li>
+							<li data-role="list-divider">基本信息</li>
 							<li>
-							<xsl:text>无</xsl:text>
-							</li>
+								<xsl:if test="//textarea[@name='Fck_HTML']/p">
+									<div style="width:100%;word-break:break-all;text-align:center;" align="center">
+										<font size="4"><xsl:value-of select="//input[@id='InfoTitle']/@value"/></font>
+										<hr/>
+										<font size="2"><xsl:value-of select="//input[@id='InfoAuthor']/@value"/></font>
+										
+									</div>
+									<br/>
+									<div style="width:100%;text-align:left" align="left">
+										
+										<xsl:apply-templates select="//textarea[@name='Fck_HTML']/p[1]"/>
+										
+									</div>
 
+								</xsl:if>
+								<xsl:if test="//textarea[@name='RtfFieldConfig']/mobilefieldconfig//fieldentry">
+										
+									<xsl:apply-templates select="//textarea[@name='RtfFieldConfig']/mobilefieldconfig/fieldentries/fieldentry"/>
+								</xsl:if>
+								<xsl:if test="contains(//title/.,'手机办公平台')">										
+									<font color="red">应用单据被删除或未进行移动审批配置，请联系管理员。</font>
+								</xsl:if>									
+							</li>
+							<li data-role="list-divider">附件信息</li>
+							<li>
+								<xsl:if test="//input[@name='AttachInfo']/@value =''">
+									无附件
+								</xsl:if>
+								<xsl:if test="//input[@name='AttachInfo']/@value !=''">
+
+									<xsl:call-template name="files">
+										<xsl:with-param name="names" select="//input[@name='AttachInfo']/@value"/>
+									</xsl:call-template>
+								</xsl:if>
+							</li>				
+							<li data-role="list-divider">当前环节信息</li>
+							<li>
+								环节名称：<xsl:value-of select="//input[@name='TFCurNodeName']/@value" />
+								<hr/>
+								环节处理人：<xsl:value-of select="//input[@name='TFCurNodeAuthors']/@value" />
+											<xsl:if test="//input[@name='TFCurNodeAuthors']/@value !=''">
+												<xsl:value-of select="//input[@id='TFCurNodeOneDo']/@value" />
+											</xsl:if>
+							</li>
+							<li data-role="list-divider">流转意见</li>
+							<li>
+								<xsl:if test="//textarea[@name='ThisFlowMindInfoLog']/flowmindinfo/mindinfo">
+									<xsl:apply-templates select="//textarea[@name='ThisFlowMindInfoLog']/flowmindinfo/mindinfo" />
+								</xsl:if>
+								<xsl:if test="not(//textarea[@name='ThisFlowMindInfoLog']/flowmindinfo/mindinfo)">
+									暂无审批意见
+								</xsl:if>
+							</li>
+							
 						</ul>
+						<xsl:apply-templates select="//input[@type='hidden']" mode="hidden"/>
 					</div><!-- /content -->
 				</div>
 			</body>
 		</html>
 	</xsl:template>
+	     
+	<!-- 处理 基本信息 -->
+	<xsl:template match="fieldentry">	
 	
-	<xsl:template match="fieldentry" mode="f1">
-		<span style="width:38%;display:inline-block;text-align:right"><font color="red"><xsl:value-of select="@title"/>:</font></span>
-		<xsl:value-of select="substring-before(substring-after(text/., 'CDATA['), ']]>')"/>
-		<hr/>
-	</xsl:template>
-
-	
-	<xsl:template match="a" mode="file">
-		<li>
-		<a href="javascript:void(0)" onclick="changePageWithBridge('http://mobile.sugon.com/view/digi/file{@href}')"><xsl:value-of select="."/></a>
-		</li>
-	</xsl:template>
-
-	<!-- 表单批量格式化模版 -->
-	<!-- variable of $mini and $aliasname at mdp.xsl -->
-	<xsl:template match="table" mode="c1">
-		<xsl:apply-templates mode="c2"/>
-	</xsl:template>
-
-	<xsl:template match="tbody" mode="c2">
-		<xsl:apply-templates mode="c2"/>
-	</xsl:template>
-
-	<xsl:template match="tr" mode="c2">
-		<xsl:if test="position()=1 or position()=2">
-			<!--<div style="width:100%" align="center">
-				<xsl:value-of select=".//q/." />
-			</div>-->
-		</xsl:if>
-		<xsl:if test="not(position()=1 or position()=2)">
-			<div style="width:100%" align="left">
-				<xsl:attribute name="align">
-					<xsl:if test="not(position()=2 or position()=4)">left</xsl:if>
-				</xsl:attribute>
-				<xsl:apply-templates mode="c3"/>
-			</div>
-		</xsl:if>
-		<hr/>
-	</xsl:template>
-
-	<xsl:template match="td" mode="c3">
-		<xsl:if test="not(@style) or not(contains(@style, 'display:none'))">
-			<!-- 发文红色字体特殊处理 -->
-			<xsl:choose>
-				<xsl:when test="@class='DF_GTable_LTD_Style'">
-					<span style="width:38%;display:inline-block;text-align:right"><font color="red"><xsl:value-of select="."/></font></span>
-				</xsl:when>
-				<xsl:otherwise>
-					<xsl:apply-templates mode="c4"/>
-				</xsl:otherwise>
-			</xsl:choose>
-			<xsl:if test="@class='DF_GTable_RTD_Style'">
-				<br/>
+		<xsl:if test="not(@id='MTTABLE')">
+			<xsl:if test="contains(@type, 'checkbox')">
+				<xsl:if test="not(value/.='')">			
+					<xsl:value-of select="@title" />
+					<b>：</b>												
+					<xsl:value-of select="value/."/>												
+					<br/><hr/>
+				</xsl:if>
+			</xsl:if>
+			<xsl:if test="not(contains(@type, 'checkbox'))">
+						
+					<xsl:value-of select="@title" />
+					<b>：</b>												
+					<xsl:value-of select="value/."/>												
+					<br/><hr/>
+				
 			</xsl:if>
 		</xsl:if>
+			<xsl:if test="@id='MTTABLE'">
+				<li data-role="list-divider"><xsl:value-of select="@title" /></li>
+				
+				<li><xsl:apply-templates select="//span/textarea//table[@id='tblListC']" mode="t1"/></li>
+			</xsl:if>		
 	</xsl:template>
-	<xsl:template match="text()" mode="c4">
-		<xsl:value-of select="."/>
-	</xsl:template>
-	<xsl:template match="q" mode="c4">
-		<xsl:apply-templates mode="c4"/>
-	</xsl:template>
-	<xsl:template match="b" mode="c4">
-		<xsl:if test="normalize-space(.)!=''">
-			<strong><xsl:apply-templates mode="c4"/></strong>
+
+
+
+
+	<!-- 处理 附件 -->	
+	<xsl:template name="files">
+		<xsl:param name="names"/>
+
+		<xsl:if test="contains($names,';')">	
+			<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{substring-before($names, ';')}');" data-role="button"><xsl:value-of select="substring-before($names, ';')"/></a></li>
+			<xsl:call-template name="files">
+				<xsl:with-param name="names" select="translate(substring-after($names, ';'), ' ', '')"/>
+			</xsl:call-template>
 		</xsl:if>
+		<xsl:if test="not(contains($names, ';'))">
+			<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{$names}');" data-role="button"><xsl:value-of select="$names"/></a></li>
+		</xsl:if>		
 	</xsl:template>
-	<xsl:template match="center" mode="c4">
-		<span width="100%" align="center" mode="c4">
-			<xsl:apply-templates mode="c4"/>
-		</span>
+
+     <!-- 处理 流转意见 -->
+	<xsl:template match="mindinfo">
+		
+
+					处理人<b>:</b><xsl:value-of select="@approver"/>
+					<br/>
+					审批时间<b>:</b><xsl:value-of select="@approvetime"/>
+					<br/>
+
+					审批环节<b>:</b>
+					<xsl:value-of select="@flownodename"/>
+						<xsl:if test="@optnameinfo !=''">
+							(<xsl:value-of select="@optnameinfo"/>)
+						</xsl:if>
+					
+					<br/>
+					审批意见<b>:</b><xsl:value-of select="text()"/>
+					<br/>
+
+		<hr/>
+		
 	</xsl:template>
-	<xsl:template match="font" mode="c4">
-		<font>
-			<xsl:apply-templates mode="c4"/>
-		</font>
+
+	<xsl:template match="pre">
+		<xsl:apply-templates />
 	</xsl:template>
-	<xsl:template match="input" mode="c4">
-		<xsl:value-of select="@value"/>
+	<xsl:template match="br">
+		<br/><xsl:text>&#160;&#160;&#160;&#160;&#160;&#160;</xsl:text>
 	</xsl:template>
-	<xsl:template match="select" mode="c4">
-		<xsl:if test="starts-with(@name, 'fld')">
-			<xsl:value-of select="option[@selected='selected']/text()"/>
-		</xsl:if>
+
+	<xsl:template match="p">
+		<br/><xsl:text>&#160;&#160;&#160;&#160;&#160;&#160;</xsl:text><xsl:apply-templates />
+		<br/>
 	</xsl:template>
-	<xsl:template match="textarea" mode="c4">
+
+	<!-- 处理 基本信息table -->
+	<xsl:template match="table" mode="t1" >	
+		<xsl:apply-templates  mode="t1"/>	
+	</xsl:template>	
+	
+	<xsl:template match="tbody" mode="t1" >	
+		<xsl:apply-templates  mode="t1"/>	
+	</xsl:template>
+
+	 <xsl:template match="tr" mode="t1" >
+		<xsl:variable name="num" select="position()"/>
+
+		  <xsl:if test="$num!=1">
+			<li><xsl:apply-templates  mode="t1"/></li>
+		 </xsl:if>
+		
+
+	</xsl:template>
+
+	 <xsl:template match="td" mode="t1" >	
+		<xsl:variable name="n" select="position()"/>
+		<xsl:value-of select="../../tr[1]/td[$n]"/>:
 		<xsl:value-of select="text()"/>
+		<br/>
 	</xsl:template>
-	<xsl:template match="hr" mode="c4">
-		<hr size="{@size}">
-			<xsl:attribute name="color">
-				<xsl:call-template name="color">
-					<xsl:with-param name="name"><xsl:value-of select="@color" /></xsl:with-param>
-				</xsl:call-template>
-			</xsl:attribute>
-		</hr>
+
+
+	 <xsl:template match="textarea" mode="c1" >	
+		<xsl:apply-templates mode="c1"/>
 	</xsl:template>
-	<xsl:template match="div" mode="c4">
-		<xsl:apply-templates mode="c4" />
+	 <xsl:template match="p" mode="c1" >	
+		<xsl:apply-templates mode="c1"/>
 	</xsl:template>
-	<xsl:template match="img" mode="c4">
+	 <xsl:template match="span" mode="c1" >	
+		<xsl:apply-templates mode="c1"/>
 	</xsl:template>
-	<xsl:template name="color">
-		<xsl:param name="name" />
-		<xsl:choose>
-			<xsl:when test="@color='red'">
-				<xsl:text>#FF0000</xsl:text>
-			</xsl:when>
-			<xsl:otherwise>
-				<xsl:text>#FF0000</xsl:text>
-			</xsl:otherwise>
-		</xsl:choose>
+	<xsl:template match="br" mode="c1" >	
+		<br/>
+	</xsl:template>
+	<xsl:template match="text()" mode="c1">
+		<xsl:value-of select="."/>
 	</xsl:template>
 </xsl:stylesheet>

@@ -13,50 +13,75 @@
 			<head>							
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>				
-				<script src="/view/js/cherry.js"></script>
-				<script src="/view/js/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/cssjs/jquery.js"></script>
+				<script src="/cssjs/jquery.cookie.js"></script>
+				
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
 				<script>
+					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","未读消息"]);
+					setNavigationTitle.dispatch();
+					cherry.bridge.flushOperations();
 
+				</script>
 				
-				new cherry.bridge.NativeOperation("case","setProperty",["title","未读消息"]).dispatch();
-
-				
-				cherry.bridge.flushOperations();
-				
-				function changePage(url){
-					
-					window.location.reload();
-					changePageWithBridge(url);
-				}
-				
+				<script>
+					var npage = 1;
+					var ncount = 20;
+					function fetch(){
+						showLoading();
+						
+						npage = npage+1;
+						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
+						var url = "/view/digi2/messagesublist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974296&amp;server=OA01/LOVOL=&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						
+						$.ajax({
+							type: "get", url: url,
+							success: function(response){
+								//$.mobile.hidePageLoadingMsg();
+								$("#more").remove();
+								$("ul").append(response);
+								$("ul").listview('refresh');
+								hiddenLoading();
+							},
+							error:function(response){
+								//$.mobile.hidePageLoadingMsg();
+								hiddenLoading();
+								alert("错误:"+response.responseText);
+							}
+						});
+					}
 				</script>
 			</head>
 			<body>
 				<div id="list" data-role="page" class="type-home">
 					<div data-role="content" align="center">
 						<script>
-							function goin(user,unid){
-								var url = "/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_"+user+".nsf&amp;appdocunid="+unid;
-								
+							function changepage(url){
+								//$.mobile.changePage(url, {changeHash:true, type: "post"});
+								window.location.reload();
 								changePageWithBridge(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">
-							<xsl:apply-templates select="//viewentry" />
-							<li>
-								<a href="javascript:void(0);" onclick="window.location.reload(); changePage('/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_admin.nsf&amp;appdocunid=51762209557FC1FA48257A7E005334BC')" data-icon="arrow-r" data-iconpos="right">
-									<h3>名片申请</h3>
-									<p>
-										时间:<font color="#0080FF">2012-7-19</font>
-									</p>
-
-								</a>
-							</li>
-
+					
 							
+							
+							<xsl:apply-templates select="//viewentry" />
+							<xsl:if test="count(//viewentry)=0">
+								<li><a>无内容</a></li>
+							</xsl:if>
+							<xsl:if test="count(//viewentry)!=0">
+								<li id="more">
+									<a href="javascript:void(0);" onclick="fetch();" data-icon="none" data-iconpos="none">
+										<div style="width:100%;" align="center"><h3>载入更多</h3></div>
+									</a>
+								</li>
+							</xsl:if>
 						</ul>
+						<br/>
+						<br/>
+						<br/>
 					</div><!-- /content -->
 				</div>
 			</body>
@@ -65,7 +90,7 @@
 	
 	<xsl:template match="viewentry">
 		<li>
-			<a href="javascript:void(0);" onclick="goin('{//userid/text()}','{@unid}');" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA01/LOVOL&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[2]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[2]/.,'CDATA['), ']]')"/></h3>
 					<p>
@@ -78,8 +103,6 @@
 						时间:<font color="#0080FF"><xsl:value-of select="entrydata[1]/."/></font>
 					</p>
 				</xsl:if>
-
-
 			</a>
 		</li>
 	</xsl:template>

@@ -2,116 +2,95 @@
     pageEncoding="utf-8"%>
 <html lang="zh_cn">
 	<head>  
-        <title>DigiFlow</title>
+        <title>移动办公</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<meta name="format-detection" content="telephone=no" />
-		<meta name="apple-mobile-web-app-capable" content="yes" /> 
-		<meta name="apple-mobile-web-app-status-bar-style" content="black" /> 
-		<link rel="apple-touch-icon-precomposed" href="icon.png" /> 
-		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" href="loading_1024_748.png"/>
-		<link rel="apple-touch-startup-image" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" href="loading_768_1004.png"/>
-		<link rel="apple-touch-startup-image" media="screen and (max-device-width: 320px)" href="loading_320_480.png"/>
 		<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 		<link rel="stylesheet" href="/ios/ios.css" />
-		<style>
-			body .ui-page{
-				-webkit-backface-visibility: hidden;
-				-webkit-Perspective:1000;
-			}
-			a{ TEXT-DECORATION:none }
-			.bubble-count { font-size: 11px; font-weight: bold; padding: .2em .5em; margin-left:-.5em;}
-		</style>
-		<script type="text/javascript">
-			if(window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
-				document.write('<link href="/view/i.css" rel="stylesheet" type="text/css">');
-			}else if(window.navigator.userAgent.match(/android/i)) {
-				document.write('<link href="/view/a.css" rel="stylesheet" type="text/css">');
-			}else{
-				document.write('<link href="/view/t.css" rel="stylesheet" type="text/css">');
-			}
-		</script>
 		<script src="/cssjs/jquery.js"></script>
-		<script src="/cssjs/jquery.cookie.js"></script>
+		
+		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
 		<script src="/view/js/cherry.js"></script>
-		<script src="/view/mobileBridge.js"></script>
-		<script>
-			$(document).bind("mobileinit", function(){
-				//$.mobile.defaultPageTransition="slide"; 
-				$.mobile.defaultPageTransition = "none";
-				
-				$.mobile.pushStateEnabled = false;
-				$.support.cors = true;
-				$.mobile.allowCrossDomainPages = true;
-				
-				$.mobile.page.prototype.options.addBackBtn = false;
-				$.mobile.useFastClick  = false;
-				$.mobile.loadingMessage = "载入中...";
-				$.mobile.page.prototype.options.backBtnText = "后退";
-　　			$.mobile.pageLoadErrorMessage = "连接服务器出错,请重试!";
+		<script src="/view/js/mobileBridge.js"></script>
+		<script type="text/javascript">
+		  function openmail(){
+			if (window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
+				window.location.href="mailto:";
 
-				inittodos();
-				
-			});
-			function MoveIn(){
-				this.path = '';
-			}
-			MoveIn.prototype.viewfile = function(url){
-				this.path = url;
-				$.mobile.changePage('/view/file.html', {
-					reverse: false,
-					changeHash: false
-				});
-			}
-			MoveIn.prototype.getpath  = function(){
-				return this.path;
-			}
-			var action = new MoveIn();
-			//设置首页标题
-			var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","首页"]);
-			cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
-					//alert("niubility");
-					changePageBackWithBridge( 1);
-				});
-			setNavigationTitle.dispatch();
-			//隐藏返回按钮
-			var setNavigationBack=new cherry.bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
-			setNavigationBack.dispatch();
-//场景显示消息
-			cherry.bridge.registerEvent("case", "casePresented", function(oper) {
-					//alert("niubility");
-					inittodos();
-				});
-
-			//设置titleBar颜色
-
-			/*
-			var setTitleBarColor=new cherry.bridge.NativeOperation("case","setProperty",["navBarColor","#ff0000ff"]);
-			setTitleBarColor.dispatch();
-			cherry.bridge.flushOperations();
-			*/
-
-			function inittodos(){
-				var url = "/view/digi/todosnum/Produce/GeneralMessage.nsf/GetAllMsgInfoAgent?openagent";
-				$.ajax({
-					type: "POST", url: url, data:'data-xml=yes^~^app|8|taskByDateDownUnDoneView|taskByDateDownDoneView^~^msg|5|msgByDateDownUnRdView|msgByDateDownRdView^~^flowinfo|5|FlowUndoView|FlowDoneView', dataType: "text", cache:false,
-					success: function(response){
-						$("#spanTodo").html(response);
-					},
-					error:function(response){
-						alert("错误:"+response.responseText);
+			} else if (window.navigator.userAgent.match(/android/i)) {
+				var runMail=new cherry.bridge.NativeOperation("application", "runTraveler", []).dispatch();
+				var travelerScript = new cherry.bridge.ScriptOperation(function(){
+					var result = runMail.returnValue;
+					if(!result || result==false || result=='false'){
+						alert('请先安装 traveler客户端!');
 					}
 				});
+				travelerScript.addDependency(runMail);
+				travelerScript.dispatch();
+				cherry.bridge.flushOperations();
 			}
-		</script>
-	<script src="../cssjs/jquery.mobile-1.0.1.js"></script>
-    <style>
-		.ui-header{
-			position:fixed;
+		 }
+		 function registdevice(){
+			var type = "android";
+			if (window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
+				type = "iphone";
+			}
+			var getdeviceid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
+			var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
+				var result = getdeviceid.returnValue;
+				if(result == ""){
+					//alert("无法获取设备ID");
+					return;
+				}
+				$.ajax({
+					type: "POST", url: "/view/digi?data-action=regisdevice&data-device-type="+type+"&data-device-token="+result,
+					success: function(response){
+					},
+					error:function(response){
+					}
+				});
+			});
+			saveCookieScript.addDependency(getdeviceid);		
+			saveCookieScript.dispatch();
+			cherry.bridge.flushOperations();
 		}
-	</style>
+		
+		$(document).ready(function(){
+			registdevice();
+			var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","首页"]);
+			cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
+					changePageBackWithBridge(1);
+				});
+			setNavigationTitle.dispatch();
+			var setNavigationBack=new cherry.bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
+			setNavigationBack.dispatch();
+			cherry.bridge.flushOperations();
+
+		});
+		function test(){
+			var soap = '<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:DefaultNamespace"><soapenv:Header/><soapenv:Body><urn:GETUSERSTR soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SERNAME xsi:type="xsd:string">oa.lovol.com.cn</SERNAME><DBPATH xsi:type="xsd:string">lovol/ApplicationFDC/IssuedADocBlackFileOperateFTLW.nsf</DBPATH><UNID xsi:type="xsd:string">09917E14AF15796648257A960025E173</UNID></urn:GETUSERSTR></soapenv:Body></soapenv:Envelope>';
+
+			$.mobile.showPageLoadingMsg();
+			var url = "/view/digi4/wb/Produce/DigiFlowMobileHome.nsf/WebMsg?wsdl";
+			var data = "data-xml="+soap;
+			$.ajax({
+				type: "post", url: url, data:data,
+				success: function(response){
+					$.mobile.hidePageLoadingMsg();
+					alert(response);
+				},
+				error:function(response){
+					$.mobile.hidePageLoadingMsg();
+					alert("错误:"+response.responseText);
+				}
+			});
+		}
+		</script>
+		<style>
+			a{text-decoration:none;}
+		</style>
     </head>
-	<body>
+	<body >
 		<div data-role="page" id="home" style="background:url(/view/png/digi/bg_empty.png);background-size:cover;-moz-background-size:cover;" class="mi-bg">
 		<!--
 			<div data-role="header">
@@ -121,171 +100,89 @@
 			</div>
 		-->
 			<div data-role="content" align="center">
-				<script>
-					function openmail(){
-						
-						var runMail=new cherry.bridge.NativeOperation("application", "runTraveler", []).dispatch();
-						var travelerScript = new cherry.bridge.ScriptOperation(function(){
-								var result = runMail.returnValue;
-								alert(result);
-								
-						});
-						travelerScript.addDependency(runMail);
-						travelerScript.dispatch();
-						cherry.bridge.flushOperations();
-						
-					}
-					function registdevice(){
-						var getdeviceid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
-						var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
-							var result = getdeviceid.returnValue;
-							if(result == ""){
-								alert("无法获取设备ID");
-								return;
-							}
-							$.ajax({
-								type: "POST", url: "/view/digi?data-action=regisdevice&data-device-type=android&data-device-token="+result,
-								success: function(response){
-									alert("绑定成功，DeviceId为"+result);
-								},
-								error:function(response){
-									alert("绑定失败!");
-								}
-							});
-						});
-						saveCookieScript.addDependency(getdeviceid);		
-						saveCookieScript.dispatch();			
-						cherry.bridge.flushOperations();
-					}
-					function pushtest(){
-						try{
-							window.plugins.propertiesPlugin.getDeviceId(
-								{}, 
-								function(result){
-									var message = prompt("请输入发给自己的内容?");
-									if(message==null){
-										return;
-									}
-									if(message==""){
-										alert("消息为空");
-									}
-									
-									var url = document.location.protocol+"//"+document.location.host+"/server/push/message";
-									$.ajax({
-										type: "get",
-										url: url,
-										data: "deviceType=android&deviceToken="+result+"&message="+message,
-										success: function(response){
-											alert("发送成功!");
-										}
-									});
-								},
-								function(){}
-							);
-						}catch(e){}
-						
-					}
-					function changepage(url){
-						$.mobile.changePage(url, {changeHash:true, type: "post"});
-					}
-					//设置气泡的位置
-					$(document).ready(function(){
-							var imgOffset=$("#imgToDo").offset();
-							var divOneOffset=$("#divOne").offset();
-							var spanTodo=$("#spanTodo").get(0);
-							spanTodo.style.position="fixed";
-							//68为图片宽度
-							if(window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
-								spanTodo.style.top=divOneOffset.top-25;
-								spanTodo.style.left=imgOffset.left+65;
-								$("#aOpenMail").href="mailto:lvjx@sugon.com";
-								$("#aOpenMail").removeAttr("onclick");
-					
-								
-								
-
-							}else if(window.navigator.userAgent.match(/android/i)) {
-								
-								spanTodo.style.top=divOneOffset.top;
-								spanTodo.style.left=imgOffset.left+68+10;
-							}else{
-								alert('other')
-								spanTodo.style.top=divOneOffset.top;
-								spanTodo.style.left=imgOffset.left+68+10;
-							
-							}	
-						}
-					);
-					
-				</script>
-				
-				<div class="ui-grid-b" id="divOne" style="padding-top:1em">
-                    <div class="ui-block-a" >
-						
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi/todosmobile/Produce/DigiFlowMobileJC.nsf/dataformserver?openform&thserver=&thdir=DFMessage&thdb=dfmsg_<%=request.getParameter("itcode") %>.nsf&thview=vwTaskUnDoneForMobile&bdoptdesname=%E5%BE%85%E5%8A%9E%E4%BB%BB%E5%8A%A1')">
-							<img width="68" height="68" id= "imgToDo" src="/view/png/digi/todos.png" />
+			
+	
+				<div class="ui-grid-b">
+                    <div class="ui-block-a">
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=OA01/LOVOL=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
+							<img width="68" height="68" src="/view/png/dbsy.png" />
 						</a>
-						<span id="spanTodo" class="bubble-count ui-btn-up-c ui-btn-corner-all">...</span>
-					
                         <br/>
-						
                         <span style="color:white;"><strong>待办事宜</strong></span>
-						
                     </div>
                     <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=15&pageFrom=homepage')">
-							<img width="68" height="68" src="/view/png/digi/unread.png" />
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=OA01/LOVOL&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage')">
+							<img width="68" height="68" src="/view/png/gwyl.png" />
 						</a>
                         <br/>
                         <span style="color:white;"><strong>未读消息</strong></span>
                     </div>
 					 <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi/messagereadlist/DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf/msgByDateDownRdView?readviewentries?login&start=1&count=3')">
-							<img width="68" height="68" src="/view/png/digi/unread.png" /> 
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/messagereadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974296&server=OA01/LOVOL=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgRdForMobile&thclass=&page=1&count=20')">
+							<img width="68" height="68" src="/view/png/icon2.png"/> 
 						</a>
                         <br/>
                         <span style="color:white;"><strong>已读消息</strong></span>
                     </div>
                 </div>
                 <br/>
+
                 <div class="ui-grid-b">
+					
+                    
                     <div class="ui-block-a">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi/newslist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.30080900634742125&server=&dbpath=Application/DigiFlowInfoPublish.nsf&view=InfoByDateView_2&thclass=Dir01$&page=1&count=15')">
-							<img width="68" height="68" src="/view/png/digi/news.png" />
+						<a href="javascript:void(0)" onclick="showLoading();changePageWithBridge('/view/digi/phonenumber/Produce/WeboaConfig.nsf/telSearchForm?openform','/view/Resources/searchContact.xml')">
+                        <img width="68" height="68" src="/view/png/digi/addressbook.png">
 						</a>
                         <br/>
-                        <span style="color:white;"><strong>企业新闻</strong></span>
+                        <span style="color:white;"><strong>电话查询</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="mailto:lvjx@sugon.com" id="aOpenMail">
-                        <img width="68" height="68" src="/view/png/digi/mail.png" />
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoPicView1?readviewentries?login&start=1&count=20')">
+							<img width="68" height="68" src="/view/png/kgxw.png">
 						</a>
                         <br/>
-                        <span style="color:white;"><strong>邮件</strong></span>
+                        <span style="color:white;"><strong>图片新闻</strong></span>    
                     </div>
+
+
                     <div class="ui-block-c">
-						<a href="javascript:void(0)" onclick="showLoading();changePageWithBridge('/view/digi/phonenumber/Produce/WeboaConfig.nsf/telSearchForm?openform','/view/Resources/searchContact.xml')">
-                        <img width="68" height="68" src="/view/png/digi/addressbook.png" />
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/hangnei/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_01$');">
+							<img width="68" height="68" src="/view/png/icon3.png">
 						</a>
-                        <br/>
-                        <span style="color:white;"><strong>通讯录</strong></span>
+						<br/>
+						<span style="color:white;"><strong>行内公告</strong></span>
                     </div>
+
+
                 </div>
 				
                 <br/>
                 <div class="ui-grid-b">
-                    <div class="ui-block-a">
-						<a href="javascript:void(0)" onclick="registdevice();">
-                        <img width="68" height="68" src="/view/png/digi/notice.png" />
+
+					<div class="ui-block-a">					
+						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/business_news/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_02$');">
+							<img width="68" height="68" src="/view/png/icon7.png" />
 						</a>
-                        <br/>
-                        <span style="color:white;"><strong>终端注册</strong></span>
+						<br/>
+						<span style="color:white;"><strong>行内新闻</strong></span>
                     </div>
-					
+
+
+					<div class="ui-block-b">					
+						
+                    </div>
+					<div class="ui-block-c">					
+						
+                    </div>
+
+
                 </div>
 				
 			</div>
 		</div>
+
+
 		<iframe src="/view/digi?data-action=createuser" border="0" frameborder="no" framespacing="0" width="0" height="0"></iframe>
 		
 	</body>

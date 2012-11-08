@@ -10,15 +10,14 @@
 
 	<xsl:template match="/">
 		<html>
-			<head>				
-			<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+			<head>							
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
-				<script src="/view/js/cherry.js"></script>
-				<script src="/view/js/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
 				<script>
 					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","新闻列表"]);
 					setNavigationTitle.dispatch();
@@ -30,7 +29,7 @@
 					<div data-role="content" align="center">
 						<script>
 							function changepage(url){
-								changePageWithBridge("http://1.202.226.107" + url);
+								changePageWithBridge(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

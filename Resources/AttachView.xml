@@ -15,20 +15,23 @@
 				</properties>
 			</component>
             <component name="main" type="builtin:webView">
-                <frame x="0" y="0" width="320" height="420"/>
+                <frame x="0" y="0" width="320" height="450"/>
                 <properties>
                 </properties>
             </component>
 			<component name="previousButton" type="builtin:button">
-				<frame x="50" y="380" width="80" height="35"/>
+				<frame x="50" y="360" width="80" height="35"/>
 				<properties>
 					<property name="text">
 						<string>上一页</string>
 					</property>
+					<property name="hidden">
+						<string>1</string>
+					</property>
 				</properties>
 			</component>
 			<component name="nextButton" type="builtin:button">
-				<frame x="200" y="380" width="80" height="35"/>
+				<frame x="200" y="360" width="80" height="35"/>
 				<properties>
 					<property name="text">
 						<string>下一页</string>

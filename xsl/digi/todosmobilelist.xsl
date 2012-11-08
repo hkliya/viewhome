@@ -14,14 +14,41 @@
 											
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>				
-				<script src="/view/js/cherry.js"></script>
-				<script src="/view/js/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/cssjs/jquery.js"></script>
+				<script src="/cssjs/jquery.cookie.js"></script>
+				
+				<script src="/view/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
 				<script>
 					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","待办"]);
 					setNavigationTitle.dispatch();
 					cherry.bridge.flushOperations();
+				</script>
+				<script>
+					var npage = 1;
+					var ncount = 20;
+					function fetch(){
+						showLoading();
+						
+						npage = npage+1;
+						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
+						var url = "/view/digi2/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.47540903102505816&amp;server=OA01/LOVOL=&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						$.ajax({
+							type: "get", url: url,
+							success: function(response){
+								//$.mobile.hidePageLoadingMsg();
+								$("#more").remove();
+								$("ul").append(response);
+								$("ul").listview('refresh');
+								hiddenLoading();
+							},
+							error:function(response){
+								//$.mobile.hidePageLoadingMsg();
+								hiddenLoading();
+								alert("错误:"+response.responseText);
+							}
+						});
+					}
 				</script>
 			</head>
 			<body>
@@ -30,28 +57,38 @@
 						<script>
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
-								changePageWithBridge( url);
+								changePageWithBridge(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">
-							<xsl:apply-templates select="//table[@id='datalist']//tr[position()&gt;1]" />
-							<xsl:if test="count(//table[@id='datalist']//tr[position()&gt;1])=0">
+							<xsl:apply-templates select="//viewentry" />
+							<xsl:if test="count(//viewentry)=0">
 								<li><a>无内容</a></li>
 							</xsl:if>
+							<xsl:if test="count(//viewentry)!=0">
+								<li id="more">
+									<a href="javascript:void(0);" onclick="fetch();" data-icon="none" data-iconpos="none">
+										<div style="width:100%;" align="center"><h3>载入更多</h3></div>
+									</a>
+								</li>
+							</xsl:if>
 						</ul>
+						<br/>
+						<br/>
+						<br/>
 					</div><!-- /content -->
 				</div>
 			</body>
 		</html>
 	</xsl:template>
 	
-	<xsl:template match="tr">
+	<xsl:template match="viewentry">
 		<li>
-			<a  href="javascript:void(0)" onclick="changepage('/view/digi/contentmobile{td[4]/a/@href}')" data-icon="arrow-r" data-iconpos="right">
-				<h3><xsl:value-of select="td[2]/."/></h3>
+			<a  href="javascript:void(0)" onclick="changepage('/view/digi2/contentmobile/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA01/LOVOL&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+				<h3><xsl:value-of select="substring-after(substring-before(entrydata[2]/., ']]'), 'CDATA[')"/></h3>
 				<p>
-					时间:<font color="#0080FF"><xsl:value-of select="td[1]/."/></font>
-					状态:<font color="#0080FF"><xsl:value-of select="td[3]/."/></font>
+					时间:<font color="#0080FF"><xsl:value-of select="substring-after(substring-before(entrydata[1]/., ']]'), 'CDATA[')"/></font>
+					状态:<font color="#0080FF"><xsl:value-of select="substring-after(substring-before(entrydata[3]/., ']]'), 'CDATA[')"/></font>
 				</p>
 			</a>
 		</li>
