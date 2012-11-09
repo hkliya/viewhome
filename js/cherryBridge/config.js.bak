@@ -1,3 +1,3 @@
-define({
-	debug:true;
+define( function(){
+	return {debug:true}
 });

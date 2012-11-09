@@ -1,3 +1,6 @@
 define( function(){
-	return {debug:true}
+	return {
+		browerDebug:true,
+		phoneDebug:false
+	}
 });

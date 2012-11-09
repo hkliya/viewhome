@@ -7,11 +7,12 @@ require({
 	},
 	priority : ['jquery']
 });
-
+//返回全局变量
+var hori={};
 define(["jquery", "cherry/cherry", "./config"], function ($, cherry, config) {
 	var browerDebug = config.browerDebug;
 	var phoneDebug = config.phoneDebug;
-	return {
+	return hori.mobile={
 		//调用native的 loading页面
 		showLoading : function () {
 			if (browerDebug) {
