@@ -6,7 +6,7 @@
 			mobile：如果浏览器为undefined，手机返回 apple|android|webos|nokia
 		}
  */
-define('ua', function() {
+define( function() {
 
     var ua = navigator.userAgent,
         EMPTY = '', MOBILE = 'mobile',
