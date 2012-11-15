@@ -1,5 +1,5 @@
-
-define(function () {
+var cherry = new Object();
+cherry.bridge = (function () {
 	var bridge = new Object();
 
 	var __nativeReadyQueue = new Array();
@@ -218,5 +218,5 @@ define(function () {
 	};
 
 	return bridge;
-});
+})();
 

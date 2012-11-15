@@ -181,7 +181,7 @@
 	</viewer>
 
 	<!-- http://182.50.2.171:8000 -->
-	<viewer id="oa" type="remote" source="http://mobile2.sugon.com" encoding="gb2312">
+	<viewer id="oa" type="remote" source="mobile2.sugon.com" encoding="gb2312">
 		<!-- 登陆验证 -->
 		<view id="loginvalidate" template="digi/loginvalidate.xsl"/>
         

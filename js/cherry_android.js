@@ -1,6 +1,6 @@
+var cherry = new Object();
 
-
-define(function () {
+cherry.bridge = (function () {
 	var bridge = new Object();
 
 	var __runningOperations = new Object();

@@ -1,15 +1,3 @@
-//定义根路径和jquery变量
-require({
-    "baseUrl": "/view/js/",
-    "paths": {
-        "jquery": "jquery/jquery-1.8.2"
-      
-    },
-    priority: ['jquery']
-});
-
-define("",["jquery","cherry"])
-
 /*
   页面 跳转 依赖 cherry.js
   para:targetUrl 目标url
@@ -18,6 +6,7 @@ define("",["jquery","cherry"])
 */
 
 //调用native的 loading页面
+
 var isdebug = true;
 
 function showLoading(){

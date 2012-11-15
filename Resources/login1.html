@@ -5,21 +5,18 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1;"/>
 
-		<link rel="stylesheet" href="/cssjs/jquery.mobile-1.0.1.css" />
-		<link rel="stylesheet" href="/ios/ios.css" />
+		<link rel="stylesheet" href="/cssjs/jquery.mobile/jquery.mobile-1.2.0.css" />
 		
-		<link rel="stylesheet" media="all and (min-width:481px)" href="/view/css/ipad.css">
-		<script src="/cssjs/jquery.js"></script>
+		<script src="/cssjs/jquery-1.8.2.js"></script>
 		<script src="/cssjs/jquery.cookie.js"></script>
+		<script src="/cssjs/jquery.mobile/jquery.mobile-1.2.0.js"></script>	
 		<script>
 			$(document).bind("mobileinit", function(){
 				$.mobile.loadingMessage = "载入中...";
 				$.mobile.page.prototype.options.backBtnText = "后退";
 			});
 		</script>
-		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>		
-		<script src="/view/js/hori.js?tag=213"></script>
-				
+		 <script src="/view/js/hori.js?tag=12344"></script> 	
 		<style>
 			a{text-decoration:none;}
 		</style>
@@ -28,7 +25,6 @@
 		<script type="text/javascript">
 			$(document).ready(function(){
 				if($.cookie("data-saveusername")=="true"){
-
 					$("#username").attr("value", $.cookie("username"));
 					$('#saveusername').attr("checked", true).checkboxradio("refresh");
 				}else{
@@ -42,79 +38,125 @@
 					$("#password").attr("value", "");
 					$('#savepassword').removeAttr("checked").checkboxradio("refresh");
 				}
-				//alert("$.hori.cherry==cherry.bridge"+($.hori.cherry==cherry.bridge));
-				var bridge=$.hori.cherry;
-				new bridge.NativeOperation("case","setProperty",["title","登录11"]).dispatch();
-				var setNavigationBack=new bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
-				setNavigationBack.dispatch();
-				bridge.flushOperations();
 				
+				var cherry=$.hori.cherry;
+				// alert(cherry);
+				new cherry.NativeOperation("case","setProperty",["title","登录12"]).dispatch();
+				var setNavigationBack=new cherry.NativeOperation("case","setProperty",["backButtonHidden","1"]);
+				setNavigationBack.dispatch();
+				cherry.flushOperations();
+
+
 			});
 	
-			function login(){
+			function login() {
+				showDeviceId();
+				return;
 				var username = $("#username").val();
 				var password = $("#password").val();
-				if(username == ""){
+				if (username == "") {
 					alert("请输入用户名!");
 					return;
 				}
-				if(password == ""){
+				if (password == "") {
 					alert("请输入密码!");
 					return;
 				}
-				//$.mobile.showPageLoadingMsg();
-				$.hori.showLoading();
-				try{
-					if(document.getElementById("saveusername").checked){
-						$.cookie("data-saveusername", "true", { expires: 360000 });
-						$.cookie("username", username, { expires: 360000 });
-					}else{
-						$.cookie("data-saveusername", "false", { expires: -1 });
-						$.cookie("username", "", { expires: -1 });
+				$.mobile.showPageLoadingMsg();
+				
+				try {
+					if (document.getElementById("saveusername").checked) {
+						$.cookie("data-saveusername", "true", {
+							expires : 360000
+						});
+						$.cookie("username", username, {
+							expires : 360000
+						});
+					} else {
+						$.cookie("data-saveusername", "false", {
+							expires : -1
+						});
+						$.cookie("username", "", {
+							expires : -1
+						});
 					}
-					if(document.getElementById("savepassword").checked){
-						$.cookie("data-savepassword", "true", { expires: 360000 });
-						$.cookie("password", password, { expires: 360000 });
-					}else{
-						$.cookie("data-savepassword", "false", { expires: -1 });
-						$.cookie("password", "", { expires: -1 });
-					}
-				}catch(e){}
-				var url = "/view/oa/loginvalidate/names.nsf?Login";
-				try{
-					var random = new Date().getTime();
-					url = url + "&data-random=" + random;
-				}catch(e){}
-				var data = 'Username='+username+'&Password='+password+'&$PublicAccess=1&%%ModDate=0000000000000000&ReasonType=0&data-userid=Username&data-password=Password&data-login=true';
-				$.ajax({
-					type: "post", url: url, data:data, dataType: "text",
-					success: function(response){
+					if (document.getElementById("savepassword").checked) {
+						$.cookie("data-savepassword", "true", {
+							expires : 360000
+					});
+					$.cookie("password", password, {
+						expires : 360000
+					});
+				} else {
+					$.cookie("data-savepassword", "false", {
+						expires : -1
+					});
+					$.cookie("password", "", {
+						expires : -1
+					});
+				}
+			} catch (e) {}
+			var url = "/view/oa/loginvalidate/names.nsf?Login";
+			try {
+				var random = new Date().getTime();
+				url = url + "&data-random=" + random;
+			} catch (e) {}
+			var data = 'Username=' + username + '&Password=' + password + '&$PublicAccess=1&%25%25ModDate=0000000000000000&ReasonType=0&data-userid=Username&data-password=Password&data-login=true';
+			$.ajax({
+				type : "post",
+				url : url,
+				data : data,
+				dataType : "text",
+				success : function (response) {
+					$.mobile.hidePageLoadingMsg();
+					var json = $.parseJSON(response);
+					if (json.success) {
+						
+								
+						var targetURL = "/view/jsp/digihome.jsp?itcode=" + username;
+						var componentURL = "/view/Resources/digihome.xml";
+						
+						$.hori.loadPage(targetURL, componentURL);
+						// new cherry.bridge.NativeOperation("case", "setProperty", ["title", "登录"]).dispatch();
+						// var setNavigationBack = new cherry.NativeOperation("case", "setProperty", ["backButtonHidden", "1"]);
+						// setNavigationBack.dispatch();
+						// cherry.lushOperations();	
+						
+					} else {
 						$.mobile.hidePageLoadingMsg();
-						var json = $.parseJSON(response);
-						if(json.success){
-							var targetURL= "/view/jsp/digihome.jsp?itcode="+username;
-							var componentURL = "/view/Resources/digihome.xml";
-							$.hori.loadPage(targetURL, componentURL);
-
-
-						}else{
-							//$.mobile.hidePageLoadingMsg();
-							hiddenLoading();
-							alert("登录失败,用户名或密码错.");
-						}
-					},
-					error:function(response){
-						$.mobile.hidePageLoadingMsg();
-						hiddenLoading();
-						alert("登录失败," + response.responseText);
+						//hiddenLoading();
+						alert("登录失败,用户名或密码错.");
 					}
-				});
-			}
+				},
+				error : function (response) {
+					$.mobile.hidePageLoadingMsg();
+					//hiddenLoading();
+					alert("登录失败," + response.responseText);
+				}
+			});
+		}
+
 			function showDeviceId(){
-				$.hori.getDeviceId(function(deviceId){
+				alert($.hori.getMobileType());
+				var cherry=$.hori.cherry;
+				new cherry.ScriptOperation(function(){
+					alert("i am ScriptOperation");
+				}).dispatch();
+				// var getdeviceid = new cherry.NativeOperation("application", "getDeviceId", []).dispatch();
+				// alert(cherry.ScriptOperation);
+				// var saveCookieScript = new cherry.ScriptOperation(function(){
+				// 	var result = getdeviceid.returnValue;
 
-					alert("deviceId="+deviceId);
-				})
+				// 	if(result == ""){
+				// 		alert("无法获取设备");
+				// 	}else{
+				// 		alert("设备:"+result);
+				// 	}
+				// });
+				// alert("333");
+				// saveCookieScript.addDependency(getdeviceid);		
+				// saveCookieScript.dispatch();			
+				cherry.flushOperations();
 			}
 			function cancel(){
 				$("#username").val("");
