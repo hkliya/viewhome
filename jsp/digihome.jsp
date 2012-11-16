@@ -10,8 +10,8 @@
 		<script src="/cssjs/jquery.js"></script>
 		
 		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
-		<script src="/view/js/cherry.js"></script>
-		<script src="/view/js/mobileBridge.js"></script>
+		<script src="/view/js/hori.js?tag=20121116"></script>
+
 		<script type="text/javascript">
 		  function openmail(){
 			if (window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
@@ -35,36 +35,33 @@
 			if (window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
 				type = "iphone";
 			}
-			var getdeviceid = new cherry.bridge.NativeOperation("application", "getDeviceId", []).dispatch();
-			var saveCookieScript = new cherry.bridge.ScriptOperation(function(){
-				var result = getdeviceid.returnValue;
-				if(result == ""){
-					//alert("无法获取设备ID");
-					return;
-				}
-				$.ajax({
-					type: "POST", url: "/view/digi?data-action=regisdevice&data-device-type="+type+"&data-device-token="+result,
-					success: function(response){
-					},
-					error:function(response){
+				$.hori.getDeviceId(function(result){
+					if(result == ""){
+						//alert("无法获取设备ID");
+						return;
 					}
-				});
-			});
-			saveCookieScript.addDependency(getdeviceid);		
-			saveCookieScript.dispatch();
-			cherry.bridge.flushOperations();
+					$.ajax({
+						type: "POST", url: "/view/digi?data-action=regisdevice&data-device-type="+type+"&data-device-token="+result,
+						success: function(response){
+						},
+						error:function(response){
+						}
+					});
+				}
+			);
 		}
 		
 		$(document).ready(function(){
+			var hori=$.hori;
 			registdevice();
-			var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","首页"]);
+			/*设置标题*/
+			hori.setHeaderTitle("首页");
+			/*隐藏后退按钮*/
+			hori.hideBackBtn();
+			/*注册注销事件*/
 			cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
-					changePageBackWithBridge(1);
+					hori.backPage(1);
 				});
-			setNavigationTitle.dispatch();
-			var setNavigationBack=new cherry.bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
-			setNavigationBack.dispatch();
-			cherry.bridge.flushOperations();
 
 		});
 		function test(){
@@ -104,21 +101,21 @@
 	
 				<div class="ui-grid-b">
                     <div class="ui-block-a">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=OA01/LOVOL=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=V7dev/DigiWin=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
 							<img width="68" height="68" src="/view/png/dbsy.png" />
 						</a>
                         <br/>
                         <span style="color:white;"><strong>待办事宜</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=OA01/LOVOL&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=V7dev/DigiWin&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage')">
 							<img width="68" height="68" src="/view/png/gwyl.png" />
 						</a>
                         <br/>
                         <span style="color:white;"><strong>未读消息</strong></span>
                     </div>
 					 <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/digi2/messagereadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974296&server=OA01/LOVOL=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgRdForMobile&thclass=&page=1&count=20')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/messagereadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974296&server=V7dev/DigiWin=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgRdForMobile&thclass=&page=1&count=20')">
 							<img width="68" height="68" src="/view/png/icon2.png"/> 
 						</a>
                         <br/>
@@ -131,41 +128,32 @@
 					
                     
                     <div class="ui-block-a">
-						<a href="javascript:void(0)" onclick="showLoading();changePageWithBridge('/view/digi/phonenumber/Produce/WeboaConfig.nsf/telSearchForm?openform','/view/Resources/searchContact.xml')">
+						<a href="javascript:void(0)" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/phonenumber/Produce/WeboaConfig.nsf/telSearchForm?openform','/view/Resources/searchContact.xml')">
                         <img width="68" height="68" src="/view/png/digi/addressbook.png">
 						</a>
                         <br/>
                         <span style="color:white;"><strong>电话查询</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoPicView1?readviewentries?login&start=1&count=20')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
 							<img width="68" height="68" src="/view/png/kgxw.png">
 						</a>
                         <br/>
-                        <span style="color:white;"><strong>图片新闻</strong></span>    
+                        <span style="color:white;"><strong>企业新闻</strong></span>    
                     </div>
 
-
-                    <div class="ui-block-c">
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/hangnei/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_01$');">
-							<img width="68" height="68" src="/view/png/icon3.png">
-						</a>
-						<br/>
-						<span style="color:white;"><strong>行内公告</strong></span>
-                    </div>
-
-
+                   
                 </div>
 				
                 <br/>
                 <div class="ui-grid-b">
 
 					<div class="ui-block-a">					
-						<a href="javascript:void(0);" onclick="showLoading();changePageWithBridge('/view/oa/business_news/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_02$');">
+						<a href="javascript:void(0);" onclick="$.hori.$.hori.showLoading();$.hori.loadPage('/view/digi2/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_02$');">
 							<img width="68" height="68" src="/view/png/icon7.png" />
 						</a>
 						<br/>
-						<span style="color:white;"><strong>行内新闻</strong></span>
+						<span style="color:white;"><strong>企业新闻</strong></span>
                     </div>
 
 

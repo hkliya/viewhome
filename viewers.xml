@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <viewers>
 
-	<viewer id="digi2" type="remote" source="http://*.com.cn" encoding="utf-8">
-
+	<viewer id="digi2" type="remote" source="http://mobile2.sugon.com" encoding="utf-8">
 		<!-- 手机待办 -->
 		<view id="todosmobile" template="digi/todosmobilelist.xsl" encoding="utf-8">
 		</view>
@@ -101,17 +100,7 @@
 		<view id="messagerouting" template="digi/message/routing.xsl"/>
 
 
-	<!-- 通知公告 
-		
-		<view id="noticelist" template="digi/notice/noticelist.xsl" encoding="utf-8"/>
-	    <view id="noticecontent" template="digi/notice/noticecontext.xsl">
-		  <rule mode="replace" regex="&amp;lt;" value="&lt;"/>
-		  <rule mode="replace" regex="&amp;gt;" value="&gt;"/>    
-		  <rule mode="replace" regex="textarea" value="div"/>    
-		</view>
-	-->
-		
-	-->
+
 		<!-- 公文管理 -->
 		<view id="documentlist" template="digi/document/list.xsl" encoding="utf-8"/>
 		<view id="documentsublist" template="digi/document/sublist.xsl" encoding="utf-8"/>
@@ -132,7 +121,7 @@
 			<rule mode="replace" regex=" approveren=" value="' approveren="/>
 
 
-			<rule mode="replace" regex="&amp;amp;nbsp;" value=" "/>
+			<mode rule="replace" regex="&amp;amp;nbsp;" value=" "/>
 		    <rule mode="replace" regex="&amp;nbsp;" value=" "/>
 			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
 		    <rule mode="replace" regex="&amp;gt;" value="&gt;"/>	
@@ -160,12 +149,20 @@
 			<rule mode="replace" regex="width" value="width2"/>
 			
 		</view>
-
+		<!-- 电话查询 -->
+        <view id="phonenumber" template="digi/phonenumber/index.xsl">
+			<rule mode="replace" regex="height:100" value=""/>
+		</view>
+        <view id="phonenumberrequest" template="digi/phonenumber/request.xsl">
+			<rule mode="replace" regex="height:100" value=""/>
+			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
+			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+		</view>
 		<view id="file" template="file.jsp"/>
-
+	
 	</viewer>
 
-	
 	<viewer id="digi3" type="remote" source="*.com.cn" encoding="gb2312">
 		
 		<!-- 日程guanli -->

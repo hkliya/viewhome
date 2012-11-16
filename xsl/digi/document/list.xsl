@@ -14,16 +14,14 @@
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/view/js/hori.js"></script>
 				<script>
 				
 					var npage = 1;
 					var ncount = 20;
 					function fetch(){
-						showLoading();
+						$.hori.showLoading();
 						
 						npage = npage+1;
 						var url = "/view/digi2/documentsublist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.9080177032267795&amp;server=oa.lovol.com.cn&amp;dbpath=Application/docindex.nsf&amp;view=vwInfoByDateForMobile&amp;thclass=gwgl$&amp;page="+npage+"&amp;count="+ncount;
@@ -34,11 +32,11 @@
 								$("#more").remove();
 								$("ul").append(response);
 								$("ul").listview('refresh');
-								hiddenLoading();
+								$.hori.hideLoading();
 							},
 							error:function(response){
 								//$.mobile.hidePageLoadingMsg();
-								hiddenLoading();
+								$.hori.hideLoading();
 								alert("错误:"+response.responseText);
 							}
 						});

@@ -6,16 +6,14 @@
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				<script src="/view/js/cherry.js"></script>
-				<script src="/view/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/view/js/hori.js"></script>
 				<script>
 				
 					var npage = 1;
 					var ncount = 20;
 					function fetch(){
-						showLoading();
+						$.hori.showLoading();
 						
 						npage = npage+1;
 						var url = "/view/digi2/imageNewsSubList/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.7714136636026634&amp;server=OA/LOVOL&amp;dbpath=Application/DigiFlowInfoPublish.nsf&amp;view=vwInfoByDateForMobile_new&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
@@ -26,11 +24,11 @@
 								$("#more").remove();
 								$("ul").append(response);
 								$("ul").listview('refresh');
-								hiddenLoading();
+								$.hori.hideLoading();
 							},
 							error:function(response){
 								//$.mobile.hidePageLoadingMsg();
-								hiddenLoading();
+								$.hori.hideLoading();
 								alert("错误:"+response.responseText);
 							}
 						});

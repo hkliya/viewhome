@@ -8,7 +8,7 @@ var cherry = new Object();
 var opts={
 
 	browerDebug:true,
-	mobileDebug:false
+	mobileDebug:true
 }
 //_init()中调用不同平台的function 做相应的初始化_cherryIos和_cherryAndroid
 // var cherry;
@@ -568,21 +568,21 @@ var horiPub={
 		var ua=_getMobileAgent();
 		if(ua["mobile"]){
 
-			var serverUrl = document.location.protocol + "//" + document.location.host;
-			
-			if (typeof(componetXmlUrl) == " undefined ") {
+			var serverUrl = document.location.protocol + "//"+ document.location.host;
+
+			if (typeof(componetXmlUrl) == "undefined") {
 				componetXmlUrl = serverUrl + "/view/Resources/PureWeb.scene.xml ";
 				
 			} else {
 				componetXmlUrl = serverUrl + componetXmlUrl;
 			}
-			if (targetUrl == " ") {
-				alert(" targetUrl参数不能为空 ");
+			if (targetUrl == "") {
+				alert("targetUrl参数不能为空 ");
 			}
 			targetUrl = serverUrl + targetUrl;
 			if (opts.mobileDebug) {
-				alert(" targetUrl = " + targetUrl);
-				alert(" componetXmlUrl = " + componetXmlUrl);
+				alert("targetUrl = "+ targetUrl);
+				alert("componetXmlUrl = "+ componetXmlUrl);
 			}
 			
 			var pushScene = new cherry.NativeOperation("application", "pushScene", [componetXmlUrl, targetUrl]);
@@ -602,11 +602,11 @@ var horiPub={
 	backPage: function(forceRefresh) {
 		var ua=_getMobileAgent();
 		if(ua["mobile"]) {
-			if(typeof(forceRefresh) == " undefined " || parseInt(forceRefresh, 10) == 0) {
+			if(typeof(forceRefresh) == "undefined"|| parseInt(forceRefresh, 10) == 0) {
 
-				var refreshFlag = " 0 ";
+				var refreshFlag = "0";
 			} else {
-				var refreshFlag = " 1 ";
+				var refreshFlag = "1";
 			}
 			var popScene = new cherry.NativeOperation("application", "popScene", [refreshFlag]);
 
@@ -638,7 +638,7 @@ var horiPub={
 	// 隐藏原生loading页面
 	// @return :无
 
-	hiddeLoading:function(){
+	hideLoading:function(){
 		if (opts.browerDebug) {
 			
 		}
@@ -694,7 +694,14 @@ var horiPub={
 	/*
 		返回cherry对象共外部调用
 	*/
-	"cherry":cherry
+	"cherry":cherry,
+	/*隐藏title bar的返回*/
+	hideBackBtn:function(){
+		var setNavigationBack=new cherry.NativeOperation("case","setProperty",["backButtonHidden","1"]);
+		setNavigationBack.dispatch();
+		cherry.flushOperations();
+
+	}
 
 
 }

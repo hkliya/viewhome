@@ -14,26 +14,27 @@
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
 				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
-				<script src="/view/js/cherry.js"></script>
+				<script src="/view/js/hori.js"></script>
+
 				<script>
-					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","已读消息"]);
-					setNavigationTitle.dispatch();
-					cherry.bridge.flushOperations();
-				</script> 
-				
+					$(document).ready(function(){
+						var hori=$.hori;
+						/*设置标题*/
+						hori.setHeaderTitle("已读消息");
+
+					});
+				</script>
+					
 				<script>
 					var npage = 1;
 					var ncount = 20;
 					function fetch(){
-						showLoading();
+						$.hori.$.hori.showLoading();
 						
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
-						var url = "/view/digi2/messagesubreadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974295&amp;server=OA01/LOVOL&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgUnRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount+"&amp;pageFrom=homepage"
+						var url = "/view/digi2/messagesubreadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974295&amp;server=V7dev/DigiWin&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgUnRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount+"&amp;pageFrom=homepage"
 
 
 						
@@ -45,11 +46,11 @@
 								$("#more").remove();
 								$("ul").append(response);
 								$("ul").listview('refresh');
-								hiddenLoading();
+								$.hori.hideLoading();
 							},
 							error:function(response){
 								//$.mobile.hidePageLoadingMsg();
-								hiddenLoading();
+								$.hori.hideLoading();
 								alert("错误:"+response.responseText);
 							}
 						});
@@ -90,7 +91,7 @@
 	
 	<xsl:template match="viewentry">
 		<li>
-			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA01/LOVOL&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=V7dev/DigiWin&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[2]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[2]/.,'CDATA['), ']]')"/></h3>
 					<p>

@@ -7,15 +7,20 @@
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+
+				<script src="/view/js/hori.js"></script>
+
 				<script>
-					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","单据"]);
-					setNavigationTitle.dispatch();
-					cherry.bridge.flushOperations();
+					$(document).ready(function(){
+						var hori=$.hori;
+						/*设置标题*/
+						hori.setHeaderTitle("单据");
+
+					});
 				</script>
+	
+
 			</head>
 			<body>
 				<div id="notice" data-role="page">
@@ -24,7 +29,7 @@
 							<![CDATA[
 												
 							function viewfile(url){
-								changePageWithBridge(url, "/view/Resources/AttachView.xml");
+								$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 							}
 							
 							function submit(value){
@@ -61,12 +66,12 @@
 												success: function(res){
 													$.mobile.hidePageLoadingMsg();
 													alert(result);
-													changePageBackWithBridge(1);
+													$.hori.backPage(1);
 												},
 												error:function(response){
 													$.mobile.hidePageLoadingMsg();
 													alert(result);
-													changePageBackWithBridge(1);
+													$.hori.backPage(1);
 												}
 											});
 											

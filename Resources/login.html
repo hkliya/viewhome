@@ -18,7 +18,7 @@
 			});
 		</script>
 		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>		
-		<script src="/view/js/hori.js?tag=213"></script>
+		<script src="/view/js/hori.js?tag=2163"></script>
 				
 		<style>
 			a{text-decoration:none;}
@@ -44,16 +44,16 @@
 				}
 				//alert("$.hori.cherry==cherry.bridge"+($.hori.cherry==cherry.bridge));
 				var bridge=$.hori.cherry;
+				var hori=$.hori;
 				try{
 
-					$.hori.setHeaderTitle("登录2");
+					hori.setHeaderTitle("登录2");
 				}catch(e){
 					alert(e.message);
 				}
 				
-				var setNavigationBack=new bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
-				setNavigationBack.dispatch();
-				bridge.flushOperations();
+				/*隐藏后退按钮*/
+				 hori.hideBackBtn();
 				
 			});
 	
@@ -95,7 +95,7 @@
 				$.ajax({
 					type: "post", url: url, data:data, dataType: "text",
 					success: function(response){
-						$.mobile.hidePageLoadingMsg();
+						
 						var json = $.parseJSON(response);
 						if(json.success){
 							var targetURL= "/view/jsp/digihome.jsp?itcode="+username;
@@ -104,13 +104,13 @@
 
 
 						}else{
-							$.hori.hiddeLoading();
+							$.hori.hideLoading();
 							alert("登录失败,用户名或密码错.");
 						}
 					},
 					error:function(response){
 						$.mobile.hidePageLoadingMsg();
-						$.hori.hiddeLoading();
+						$.hori.hideLoading();
 						alert("登录失败," + response.responseText);
 
 					}

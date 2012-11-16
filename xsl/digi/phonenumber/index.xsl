@@ -7,8 +7,8 @@
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
 				<link rel="stylesheet" href="/ios/ios.css" />
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/view/js/cherry.js"></script>
-				<script src="/view/js/mobileBridge.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/view/js/hori.js"></script>
 			
 				<script>
 					<![CDATA[
@@ -25,31 +25,32 @@
 						}
 						username = encodeURI(escape(username));
 						//$.mobile.showPageLoadingMsg();
-						showLoading();
-						var url = "/view/digi/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName=CN=OA01/O=LOVOL&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
+						$.hori.showLoading();
+						var url = "/view/digi2/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName=CN=OA01/O=LOVOL&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
 						
 						$.ajax({
 							type: "post", url: url,
 							success: function(response){
 								//$.mobile.hidePageLoadingMsg();
-								hiddenLoading();
+								$.hori.hideLoading();
 								$("#viewValue").html(response);
 								$("#viewValue ul").listview();
 								$("#viewValue ul").listview();    
 							},
 							error:function(response){
 								//$.mobile.hidePageLoadingMsg();
-								hiddenLoading();
+								$.hori.hideLoading();
 								alert("错误:"+response.responseText);
 							}
 						});
 					}
 					]]>
 				</script>
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				
+
 				<script>
 					<![CDATA[
+
 					cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
 						submit();
 					});

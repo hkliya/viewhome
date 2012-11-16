@@ -21,7 +21,7 @@
 	<xsl:template match="viewentry">
 		
 		<li>
-			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA01/LOVOL&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=V7dev/DigiWin&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[2]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[2]/.,'CDATA['), ']]')"/></h3>
 					<p>

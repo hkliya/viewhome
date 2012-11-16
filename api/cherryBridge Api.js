@@ -22,7 +22,7 @@ hiddenLoading
 
 */
 
-changePageWithBridge
+function loadPage(targetUrl,componetXmlUrl)
 /*
 调用native的接口进行页面切换，一般用于从前往后
 @param: targetUrl  要切换目标url，如果手机端一般是相对路径
@@ -32,7 +32,7 @@ changePageWithBridge
 @default: /view/Resources/PureWeb.scene.xml
 */
 
-changePageBackWithBridge
+function backPage (forceRefresh)
 /*
 调用native的接口进行页面切换，一般用于返回
 
@@ -52,5 +52,14 @@ function setHeaderTitle(title){
 	@param:string 
 	@return: 无
 	@example:$.hori.setHeaderTitle("登录")
+	*/
+}
+function hiddeHeaderBack(){
+	/*
+	@description:隐藏手机最上方一栏退回按钮 ios用
+	@param:无
+	@return: 无
+	@example:$.hori.hiddeHeaderBack()
+
 	*/
 }
