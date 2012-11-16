@@ -8,11 +8,12 @@ var cherry = new Object();
 var opts={
 
 	browerDebug:true,
-	mobileDebug:true
+	mobileDebug:false
 }
 //_init()中调用不同平台的function 做相应的初始化_cherryIos和_cherryAndroid
 // var cherry;
 var self=this;
+var uma;			//用户手机浏览器版本
 
 /*
 	_getMobileAgent
@@ -21,6 +22,12 @@ var self=this;
 		mobile:undefined|apple|android|webos
 	}
 	@example:var ua=_getMobileAgent();
+	if[ua["mobile"]]{
+		
+	}
+	
+	判断是否是手机
+
 
 */
 function _getMobileAgent() {
@@ -593,37 +600,39 @@ var horiPub={
 		@default:"0" 如果强制刷新传"1" 即可
 	*/
 	backPage: function(forceRefresh) {
-	if(ua["mobile"]) {
-		if(typeof(forceRefresh) == " undefined " || parseInt(forceRefresh, 10) == 0) {
+		var ua=_getMobileAgent();
+		if(ua["mobile"]) {
+			if(typeof(forceRefresh) == " undefined " || parseInt(forceRefresh, 10) == 0) {
 
-			var refreshFlag = " 0 ";
+				var refreshFlag = " 0 ";
+			} else {
+				var refreshFlag = " 1 ";
+			}
+			var popScene = new cherry.NativeOperation("application", "popScene", [refreshFlag]);
+
+			popScene.dispatch();
+
+			cherry.flushOperations();
+
 		} else {
-			var refreshFlag = " 1 ";
+
+			if(opts.browerDebug) {
+				window.go(-1);
+				return;
+			}
 		}
-		var popScene = new cherry.NativeOperation("application", "popScene", [refreshFlag]);
-
-		popScene.dispatch();
-
-		cherry.flushOperations();
-
-	} else {
-
-		if(opts.browerDebug) {
-			window.go(-1);
-			return;
-		}
-	}
-},
+	},
 	// 调用原生loading页面
 	showLoading:function(){
 		if (opts.browerDebug) {		
 
-		}else{
+		}
+		if(_getMobileAgent()["mobile"]) {
+
 			var loading = new cherry.NativeOperation("application", "showLoadingSheet", []);
 			loading.dispatch();
 			cherry.flushOperations();
-		}	
-			
+		}
 
 	},
 	// 隐藏原生loading页面
@@ -631,11 +640,14 @@ var horiPub={
 
 	hiddeLoading:function(){
 		if (opts.browerDebug) {
-			return;
+			
 		}
-		var hiddenLoading = new cherry.NativeOperation("application", "hideLoadingSheet", []);
-		hiddenLoading.dispatch();
-		cherry.flushOperations();
+		if(_getMobileAgent()["mobile"]) {
+			var hiddenLoading = new cherry.NativeOperation("application", "hideLoadingSheet", []);
+			hiddenLoading.dispatch();
+			cherry.flushOperations();
+			
+		}
 	},
 	/*
 		@description:返回设备的uuid
@@ -669,6 +681,15 @@ var horiPub={
 	*/
 	getMobileType:function(){
 		return _getMobileAgent()["mobile"]
+	},
+	
+	setHeaderTitle:function(title){
+			var headerTitle="";
+			if(title){
+				headerTitle=title;
+			}
+			new cherry.NativeOperation("case","setProperty",["title",headerTitle]).dispatch();
+			cherry.flushOperations();
 	},
 	/*
 		返回cherry对象共外部调用

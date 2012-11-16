@@ -44,7 +44,13 @@
 				}
 				//alert("$.hori.cherry==cherry.bridge"+($.hori.cherry==cherry.bridge));
 				var bridge=$.hori.cherry;
-				new bridge.NativeOperation("case","setProperty",["title","登录11"]).dispatch();
+				try{
+
+					$.hori.setHeaderTitle("登录2");
+				}catch(e){
+					alert(e.message);
+				}
+				
 				var setNavigationBack=new bridge.NativeOperation("case","setProperty",["backButtonHidden","1"]);
 				setNavigationBack.dispatch();
 				bridge.flushOperations();
@@ -62,8 +68,8 @@
 					alert("请输入密码!");
 					return;
 				}
-				//$.mobile.showPageLoadingMsg();
 				$.hori.showLoading();
+
 				try{
 					if(document.getElementById("saveusername").checked){
 						$.cookie("data-saveusername", "true", { expires: 360000 });
@@ -98,15 +104,15 @@
 
 
 						}else{
-							//$.mobile.hidePageLoadingMsg();
-							hiddenLoading();
+							$.hori.hiddeLoading();
 							alert("登录失败,用户名或密码错.");
 						}
 					},
 					error:function(response){
 						$.mobile.hidePageLoadingMsg();
-						hiddenLoading();
+						$.hori.hiddeLoading();
 						alert("登录失败," + response.responseText);
+
 					}
 				});
 			}
