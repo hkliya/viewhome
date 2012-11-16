@@ -23,13 +23,13 @@
 									var domain = "/view/digi/meettingroom/";
 									var url = domain + StMsgDB + "/0/" + StMsgParentId + "?opendocument&amp;login";
 									
-									changePageWithBridge("http://mobile.sugon.com" + url);
+									$.hori.loadPage("http://mobile.sugon.com" + url);
 								</xsl:when>
 								<xsl:when test="contains(//input[@name='StMsgDB']/@value, 'DigiFlowCarMng.nsf')">
 									var domain = "/view/digi/carmanager/";
 									var url = domain + StMsgDB + "/0/" + StMsgParentId + "?opendocument&amp;login";
 									
-									changePageWithBridge("http://mobile.sugon.com" + url);
+									$.hori.loadPage("http://mobile.sugon.com" + url);
 								</xsl:when>
 								<xsl:otherwise>
 									alert('移动办公流程尚未实现！');

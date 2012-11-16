@@ -32,7 +32,7 @@
 					<div data-role="content" align="center">
 						<script type="text/javascript">
 							function viewfile(url){
-								changePageWithBridge(url, "/view/Resources/AttachView.xml");
+								$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 							}
 						</script>
 						<div align="center" style="width:100%"><strong><xsl:value-of select="//title/text()"/></strong></div>

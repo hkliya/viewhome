@@ -29,7 +29,7 @@
 					<div data-role="content" align="center">
 						<script>
 							function changepage(url){
-								changePageWithBridge("http://mobile.sugon.com" + url);
+								$.hori.loadPage("http://mobile.sugon.com" + url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

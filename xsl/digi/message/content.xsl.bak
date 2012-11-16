@@ -46,7 +46,7 @@
 	
 	<xsl:template match="a" mode="file">
 		<li>
-		<a href="javascript:void(0)" onclick="changePageWithBridge('http://mobile.sugon.com/view/digi/file{@href}')"><xsl:value-of select="."/></a>
+		<a href="javascript:void(0)" onclick="$.hori.loadPage('http://mobile.sugon.com/view/digi/file{@href}')"><xsl:value-of select="."/></a>
 		</li>
 	</xsl:template>
 

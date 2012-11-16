@@ -36,7 +36,7 @@
 					<div data-role="content" align="center">
 						<script type="text/javascript">
 							function viewfile(url){
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 						</script>
 						<div align="center" style="width:100%"><strong><xsl:value-of select="//div[@id='docContent']/div[1]/."/></strong></div>

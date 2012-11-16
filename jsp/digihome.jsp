@@ -135,7 +135,7 @@
                         <span style="color:white;"><strong>电话查询</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/newslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
 							<img width="68" height="68" src="/view/png/kgxw.png">
 						</a>
                         <br/>

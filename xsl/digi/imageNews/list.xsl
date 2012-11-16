@@ -37,7 +37,7 @@
 					function goin(user,unid){
 					
 						var url = "/view/digi2/imageNewsContent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=news&amp;appserver=OA/LOVOL&amp;appdbpath=Application/DigiFlowInfoPublish.nsf&amp;appdocunid="+unid;																	
-						changePageWithBridge(url);
+						$.hori.loadPage(url);
 					}
 					new cherry.bridge.NativeOperation("case","setProperty",["title","新闻列表"]).dispatch();
 					cherry.bridge.flushOperations();

@@ -16,14 +16,17 @@
 					}
 				</style>
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+
+				<script src="/view/js/hori.js"></script>
+
 				<script>
-					var _title=new cherry.bridge.NativeOperation("case","setProperty",["title","内容"]);
-					_title.dispatch();
-					cherry.bridge.flushOperations();
+					$(document).ready(function(){
+						var hori=$.hori;
+						/*设置标题*/
+						hori.setHeaderTitle("内容");
+
+					});
 				</script>
 			</head>
 			<body>
@@ -31,7 +34,7 @@
 					<div data-role="content" align="center">
 						<script type="text/javascript">
 							function viewfile(url){
-								changePageWithBridge(url, "/view/Resources/AttachView.xml");
+								$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 							}
 						</script>
 						<div align="center" style="width:100%"><strong><xsl:value-of select="//title/text()"/></strong></div>

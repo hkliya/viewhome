@@ -15,7 +15,7 @@
 					<![CDATA[
 											
 					function viewfile(url){
-						changePageWithBridge(url, "/view/Resources/AttachView.xml");
+						$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 					}
 					new cherry.bridge.NativeOperation("case","setProperty",["title","公文管理"]).dispatch();
 					cherry.bridge.flushOperations();

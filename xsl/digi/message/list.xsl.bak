@@ -28,7 +28,7 @@
 				function changePage(url){
 					
 					window.location.reload();
-					changePageWithBridge(url);
+					$.hori.loadPage(url);
 				}
 				
 				</script>
@@ -40,7 +40,7 @@
 							function goin(user,unid){
 								var url = "/view/digi/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=&amp;appdbpath=DFMessage/dfmsg_"+user+".nsf&amp;appdocunid="+unid;
 								
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

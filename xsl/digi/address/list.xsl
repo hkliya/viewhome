@@ -46,7 +46,7 @@
 						<script>
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 							function getOrg(value){
 								if($("#"+value+"C").html().indexOf("-")!=-1){
@@ -73,7 +73,7 @@
 							function viewPerson(value){
 								var url = "/view/digi/addressperson/Produce/DigiFlowContactsLovol.nsf/GetDeptPsnForAddressAgent?openagent";
 								var data = "&amp;data-method=post&amp;data-xml=deptid~1~"+value+"~22~ComOrg~";
-								changePageWithBridge(url+data);
+								$.hori.loadPage(url+data);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

@@ -29,7 +29,7 @@
 					<div data-role="content" align="center">
 						<script>
 							function changepage(url){
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

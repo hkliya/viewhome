@@ -131,7 +131,7 @@
 								var targetURL = "/view/jsp/digihome.jsp?itcode=" + username;
 								var componentURL = "/view/Resources/digihome.xml";
 								
-								bridge.changePageWithBridge(targetURL, componentURL);
+								bridge.$.hori.loadPage(targetURL, componentURL);
 								new cherry.bridge.NativeOperation("case", "setProperty", ["title", "登录"]).dispatch();
 								var setNavigationBack = new cherry.NativeOperation("case", "setProperty", ["backButtonHidden", "1"]);
 								setNavigationBack.dispatch();

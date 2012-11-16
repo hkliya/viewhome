@@ -60,7 +60,7 @@
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
 								window.location.reload();
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 						</script>
 						<ul data-role="listview" data-inset="true">

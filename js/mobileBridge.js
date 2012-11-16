@@ -29,7 +29,7 @@ function hiddenLoading(){
 	cherry.bridge.flushOperations();
 }
 
-function changePageWithBridge(targetUrl,componetXmlUrl){
+function $.hori.loadPage(targetUrl,componetXmlUrl){
 	if(isdebug){
 		window.location.href = targetUrl;
 		return;

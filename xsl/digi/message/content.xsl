@@ -17,7 +17,7 @@
 					cherry.bridge.flushOperations();
 											
 					function viewfile(url){
-						changePageWithBridge(url, "/view/Resources/AttachView.xml");
+						$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 					}
 				</script>
 			</head>

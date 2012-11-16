@@ -11,7 +11,7 @@
 		require("/view/js/cherryBridge/seed.js",function(){});
 		function test(){
 			alert("a");
-			alert(hori.mobile.changePageWithBridge)
+			alert(hori.mobile.$.hori.loadPage)
 		}		
         </script>
 	

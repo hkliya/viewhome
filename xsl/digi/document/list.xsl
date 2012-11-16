@@ -49,7 +49,7 @@
 						<script>
 							function goin(user,unid){				 							  
 								var url = "/view/digi2/documentcontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA/LOVOL&amp;appdbpath=Application/docindex.nsf&amp;appdocunid="+unid;																	
-								changePageWithBridge(url);
+								$.hori.loadPage(url);
 							}
 							new cherry.bridge.NativeOperation("case","setProperty",["title","公文管理"]).dispatch();
 							cherry.bridge.flushOperations();

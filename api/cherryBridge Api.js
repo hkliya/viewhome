@@ -54,12 +54,12 @@ function setHeaderTitle(title){
 	@example:$.hori.setHeaderTitle("登录")
 	*/
 }
-function hiddeHeaderBack(){
+function hideHeaderBack(){
 	/*
 	@description:隐藏手机最上方一栏退回按钮 ios用
 	@param:无
 	@return: 无
-	@example:$.hori.hiddeHeaderBack()
+	@example:$.hori.hideHeaderBack()
 
 	*/
 }

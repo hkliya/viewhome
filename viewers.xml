@@ -132,22 +132,24 @@
 		</view>
 
 
-		<!-- 图片新闻 == 企业新闻 -->
-		<view id="imageNewsList" template="digi/imageNews/list.xsl" encoding="utf-8"/>
-		<view id="imageNewsSubList" template="digi/imageNews/sublist.xsl" encoding="utf-8"/>
-		<view id="imageNewsContent" template="digi/imageNews/content.xsl">	
-			<rule mode="replace" regex="&amp;amp;#49;" value="1"/>
-			<rule mode="replace" regex="&amp;amp;#55;" value="7"/>
- 			<rule mode="replace" regex="&amp;amp;#8226;" value="*"/>
-			<rule mode="remove" regex="&amp;amp;#65279;"/>	
-			<rule mode="replace" regex="&amp;nbsp;" value=" "/>
-			<rule mode="replace" regex="&amp;nbsp" value=" "/>
-			<rule mode="replace" regex="&amp;amp;nbsp;" value=""/>
+		<!-- 企业新闻 -->
+		<view id="newslist" template="digi/news/list.xsl" encoding="utf-8"/>
+		<view id="newscontent" template="digi/news/content.xsl">
 			<rule mode="replace" regex="&amp;lt;" value="&lt;"/>
 			<rule mode="replace" regex="&amp;gt;" value="&gt;"/>
-			<rule mode="replace" regex="textarea" value="div"/>
-			<rule mode="replace" regex="width" value="width2"/>
-			
+			<rule mode="replace" regex="&amp;quot;" value="&quot;"/>
+			<rule mode="replace" regex="&amp;amp;nbsp;" value=""/>
+			<rule mode="replace" regex="&amp;amp;middot;" value=""/>
+			<rule mode="replace" regex="&amp;amp;ldquo;" value=""/>
+			<rule mode="replace" regex="&amp;amp;rdquo;" value=""/>
+			<rule mode="replace" regex="&amp;amp;apos;" value=""/>
+			<rule mode="replace" regex="&amp;apos;" value=""/>
+			<rule mode="replace" regex="&apos;" value=""/>
+			<rule mode="replace" regex="width=&quot;386&quot;" value="width=&quot;240px&quot;"/>
+			<rule mode="replace" regex="width=&amp;quot;386&amp;quot;" value="width=&quot;300px&quot;"/>
+			<rule mode="remove" regex="height=&quot;179&quot;"/>
+			<rule mode="remove" regex="height=&amp;quot;179&amp;quot;"/>
+			<rule mode="replace" regex="http://www.digiwin.com.cn/" value="/view/diwin/file/"/>
 		</view>
 		<!-- 电话查询 -->
         <view id="phonenumber" template="digi/phonenumber/index.xsl">
