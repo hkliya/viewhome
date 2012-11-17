@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
-
-				<script src="/view/js/hori.js"></script>
+				<xsl:apply-imports/>
 
 				<script>
 					$(document).ready(function(){
@@ -59,7 +55,7 @@
 										success: function(response){
 											var result = response;
 											var soap = '<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:DefaultNamespace"><soapenv:Header/><soapenv:Body><urn:GETUSERSTR soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SERNAME xsi:type="xsd:string">oa.lovol.com.cn</SERNAME><DBPATH xsi:type="xsd:string">'+appdbpath+'</DBPATH><UNID xsi:type="xsd:string">'+appdocunid+'</UNID></urn:GETUSERSTR></soapenv:Body></soapenv:Envelope>';
-											var url = "/view/digi4/wb/Produce/DigiFlowMobileHome.nsf/WebMsg?wsdl";
+											var url = "/view/digi2/wb/Produce/DigiFlowMobileHome.nsf/WebMsg?wsdl";
 											var data = "data-xml="+soap;
 											$.ajax({
 												type: "post", url: url, data:data,

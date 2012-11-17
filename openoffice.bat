@@ -1,1 +1,1 @@
-"C:\Program Files\OpenOffice.org 3\program\soffice" "-accept=socket,port=2002,host=127.0.0.1;urp;StarOffice.ServiceManager" -headless -nofirststartwizard -norestore -display :1.0 &
+"C:\Program Files (x86)\LibreOffice 3.5\program\soffice" "-accept=socket,port=2002,host=127.0.0.1;urp;StarOffice.ServiceManager" -headless -nofirststartwizard -norestore -display :1.0 &

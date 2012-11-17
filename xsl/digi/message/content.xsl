@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				<xsl:apply-imports/>
 				<script>
-					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","单据"]);
-					setNavigationTitle.dispatch();
-					cherry.bridge.flushOperations();
-											
+					
+					$(document).ready(function(){
+						var hori=$.hori;
+						/*设置标题*/
+						hori.setHeaderTitle("单据");
+
+					});		
 					function viewfile(url){
 						$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 					}

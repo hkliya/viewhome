@@ -47,7 +47,7 @@
 									$("#"+value+"C").html("+");
 									return;
 								}
-								var url = "/view/digi2/addresssuborg/Produce/DigiFlowOrgSysMng.nsf/OrgTreeForAddressAgent?openagent";
+								var url = "/view/digi/addresssuborg/Produce/DigiFlowOrgSysMng.nsf/OrgTreeForAddressAgent?openagent";
 								var data = "data-xml="+value+";;;<xsl:value-of select='//userid/text()'/>";
 								$.mobile.showPageLoadingMsg();
 								$.ajax({

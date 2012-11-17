@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=3;"/>
 		<meta name="format-detection" content="telephone=no" />
 		<script src="/cssjs/jquery.js"></script>
-		<script src="/view/js/hori.js?tag=201211136"></script>
+		<script src="/view/js/cherry.js"></script>
+		<script src="/view/js/mobileBridge.js"></script>
 		<style>
 			pre {
 				white-space: pre-wrap;
@@ -60,59 +61,44 @@
 				}
 				%>
 				<script>
-					try{
+					var initwidth = document.body.clientWidth;
+					$(document).ready(function(){
+						cherry.bridge.registerEvent("previousButton", "touchUp", function(oper) {
+							prewpage();
+						});
+						cherry.bridge.registerEvent("nextButton", "touchUp", function(oper) {
+							nextpage();
+						});
+						var path = "<%=path %>";
+						if(path.indexOf("?")!=-1){
+							path = path + "&data-random=" + Math.random();
+						}else{
+							path = path + "?data-random=" + Math.random();
+						}
+						if($("#imgcontent")){
+							$("#imgcontent").attr("src", path);
+							$("#imgcontent").attr("width", initwidth);
+						}
+						showHideButtons();
+					});
 
-						var initwidth = document.body.clientWidth;
-						var loaded = true;
-							var isshowed = true;
-							var currentPage = 1;
-							var total = <%=q.getPageSize() %>;
-							var path = "<%=q.getRequest().getRequestURI() %>";
-						$(document).ready(function(){
-							var hori=$.hori;
-							
-							cherry.bridge.registerEvent("previousButton", "touchUp", function(oper) {
-								prewpage();
-							});
-							
-							cherry.bridge.registerEvent("nextButton", "touchUp", function(oper) {
-								nextpage();
-							});
-							
-							
-							hori.setHeaderTitle("第"+currentPage+"页/共" + total + "页");
-							$("#imgtitle").html("第"+currentPage+"页/共" + total + "页");
-								
-							
-								var path = "<%=path %>";
-								if(path.indexOf("?")!=-1){
-									path = path + "&data-random=" + Math.random();
-								}else{
-									path = path + "?data-random=" + Math.random();
-								}
-								if($("#imgcontent")){
-									$("#imgcontent").attr("src", path);
-									$("#imgcontent").attr("width", initwidth);
-								}
-								showHideButtons();
-							});
-					}catch(e){
-						alert(e.message);
-					}
-					
+					var loaded = true;
+					var isshowed = true;
+					var currentPage = 1;
+					var total = <%=q.getPageSize() %>;
+					var path = "<%=q.getRequest().getRequestURI() %>";
+					new cherry.bridge.NativeOperation("case","setProperty",["title","第"+currentPage+"页/共" + total + "页"]).dispatch();
+					cherry.bridge.flushOperations();
 
-					
+					$("#imgtitle").html("第"+currentPage+"页/共" + total + "页");
 
 					function showHideButtons() {
-						alert("showHideButtons run ")
 						if (currentPage > 1) {
 							showButton("previousButton");
 						} else {
 							hideButton("previousButton");
 						}
 						if (currentPage < total) {
-							
-
 							showButton("nextButton");
 						} else {
 							hideButton("nextButton");
@@ -150,7 +136,7 @@
 						}
 					}
 					function hideButton(xmlButtonName){
-						new cherry.NativeOperation(xmlButtonName,"setProperty",["hidden","1"]).dispatch();
+						new cherry.bridge.NativeOperation(xmlButtonName,"setProperty",["hidden","1"]).dispatch();
 						cherry.bridge.flushOperations();
 					}
 					function showButton(xmlButtonName){

@@ -576,7 +576,7 @@ var horiPub={
 			var serverUrl = document.location.protocol + "//"+ document.location.host;
 
 			if (typeof(componetXmlUrl) == "undefined") {
-				componetXmlUrl = serverUrl + "/view/Resources/PureWeb.scene.xml ";
+				componetXmlUrl = serverUrl + "/view/Resources/PureWeb.scene.xml";
 				
 			} else {
 				componetXmlUrl = serverUrl + componetXmlUrl;

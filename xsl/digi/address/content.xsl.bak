@@ -21,13 +21,10 @@
 					a:hover{text-decoration:none}
 					a:visited{text-decoration:none}
 				</style>
-				<script>					
-					$(document).ready(function(){
-						var hori=$.hori;
-						/*设置标题*/
-						hori.setHeaderTitle("讯录");
-
-					});
+				<script>
+					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","通讯录"]);
+					setNavigationTitle.dispatch();
+					cherry.bridge.flushOperations();
 				</script>
 			</head>
 			<body>

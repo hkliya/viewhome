@@ -64,24 +64,7 @@
 				});
 
 		});
-		function test(){
-			var soap = '<soapenv:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:DefaultNamespace"><soapenv:Header/><soapenv:Body><urn:GETUSERSTR soapenv:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><SERNAME xsi:type="xsd:string">oa.lovol.com.cn</SERNAME><DBPATH xsi:type="xsd:string">lovol/ApplicationFDC/IssuedADocBlackFileOperateFTLW.nsf</DBPATH><UNID xsi:type="xsd:string">09917E14AF15796648257A960025E173</UNID></urn:GETUSERSTR></soapenv:Body></soapenv:Envelope>';
-
-			$.mobile.showPageLoadingMsg();
-			var url = "/view/digi4/wb/Produce/DigiFlowMobileHome.nsf/WebMsg?wsdl";
-			var data = "data-xml="+soap;
-			$.ajax({
-				type: "post", url: url, data:data,
-				success: function(response){
-					$.mobile.hidePageLoadingMsg();
-					alert(response);
-				},
-				error:function(response){
-					$.mobile.hidePageLoadingMsg();
-					alert("错误:"+response.responseText);
-				}
-			});
-		}
+		
 		</script>
 		<style>
 			a{text-decoration:none;}
@@ -141,37 +124,17 @@
                         <br/>
                         <span style="color:white;"><strong>企业新闻</strong></span>    
                     </div>
+                     
 
                    
                 </div>
 				
                 <br/>
-                <div class="ui-grid-b">
-
-					<div class="ui-block-a">					
-						<a href="javascript:void(0);" onclick="$.hori.$.hori.showLoading();$.hori.loadPage('/view/digi2/imagenewslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20&RestrictToCategory=Dir11_02$');">
-							<img width="68" height="68" src="/view/png/icon7.png" />
-						</a>
-						<br/>
-						<span style="color:white;"><strong>企业新闻</strong></span>
-                    </div>
-
-
-					<div class="ui-block-b">					
-						
-                    </div>
-					<div class="ui-block-c">					
-						
-                    </div>
-
-
-                </div>
+               
 				
 			</div>
 		</div>
 
-
-		<iframe src="/view/digi?data-action=createuser" border="0" frameborder="no" framespacing="0" width="0" height="0"></iframe>
 		
 	</body>
 </html>

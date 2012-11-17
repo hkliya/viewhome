@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
 	<xsl:variable name="start"><xsl:value-of select="//input[@name='start']/@value"/></xsl:variable>
 	<xsl:variable name="count"><xsl:value-of select="//input[@name='count']/@value"/></xsl:variable>
 	<xsl:variable name="total"><xsl:value-of select="//input[@name='total']/@value"/></xsl:variable>
@@ -12,26 +11,34 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<xsl:apply-imports/>
+				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
+				<link rel="stylesheet" href="/ios/ios.css" />
+				<script src="/cssjs/jquery.js"></script>
+				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/view/js/hori.js"></script>
+
 				<script>
 					$(document).ready(function(){
 						var hori=$.hori;
 						/*设置标题*/
-						hori.setHeaderTitle("未读消息");
+						hori.setHeaderTitle("已读消息");
 
 					});
 				</script>
-				
+					
 				<script>
 					var npage = 1;
 					var ncount = 20;
 					function fetch(){
-						$.hori.showLoading();
+						$.hori.$.hori.showLoading();
 						
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
-						var url = "/view/digi2/messagesublist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974296&amp;server=V7dev/DigiWin=&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var url = "/view/digi2/messagesubreadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974295&amp;server=V7dev/DigiWin&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgUnRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount+"&amp;pageFrom=homepage"
+
+
 						
+
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
@@ -56,14 +63,11 @@
 						<script>
 							function changepage(url){
 								//$.mobile.changePage(url, {changeHash:true, type: "post"});
-								window.location.reload();
 								$.hori.loadPage(url);
-							}
+							}							
 						</script>
 						<ul data-role="listview" data-inset="true">
-					
-							
-							
+
 							<xsl:apply-templates select="//viewentry" />
 							<xsl:if test="count(//viewentry)=0">
 								<li><a>无内容</a></li>
