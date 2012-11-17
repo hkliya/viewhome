@@ -535,26 +535,31 @@ function _cherryAndroid(){
 */
 (function _initCherry(){
 	var ua=_getMobileAgent();
+	var _bridge;
 	if(ua["mobile"]){
 		if(ua["mobile"]==="apple"){
-			cherry=_cherryIos();
+			_bridge=_cherryIos();
 			// 兼容ios客户端暴露cherry.bridge
-			cherry.bridge=cherry;
+			// cherry.bridge=cherry;
 
-			return 	
+			// return 	
 		}
 		if(ua["mobile"]==="android"){
-			cherry=_cherryAndroid();
+
+			_bridge=_cherryAndroid();
 	
-			return 	
+			// return 	
 		}
 		// $.trigger("horiInit",cherry);
 	}else{
 		// 可能是浏览器模式,按照ios方式 初始化方便调试
 		// cherry={};
-		cherry=_cherryIos();
+		_bridge=_cherryIos();
+		// cherry=_cherryAndroid();
 	}
-	cherry.bridge=cherry;
+
+	cherry=_bridge;
+	cherry.bridge=_bridge;
 
 })();
 //返回给外部调用的对象

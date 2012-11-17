@@ -10,7 +10,7 @@
 		<script src="/cssjs/jquery.js"></script>
 		
 		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
-		<script src="/view/js/hori.js?tag=20121116"></script>
+		<script src="/view/js/hori.js?tag=201211136"></script>
 
 		<script type="text/javascript">
 		  function openmail(){
@@ -55,7 +55,7 @@
 			var hori=$.hori;
 			registdevice();
 			/*设置标题*/
-			hori.setHeaderTitle("首页");
+			hori.setHeaderTitle("首页33");
 			/*隐藏后退按钮*/
 			hori.hideBackBtn();
 			/*注册注销事件*/
