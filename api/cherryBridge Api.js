@@ -15,7 +15,7 @@ showLoading()
 @param:无
 
 */
-hiddenLoading
+hideLoading
 /*
 隐藏native的 loading页面
 @param:无

@@ -104,7 +104,7 @@
 					
 
 					function showHideButtons() {
-						alert("showHideButtons run ")
+						// alert("showHideButtons run ")
 						if (currentPage > 1) {
 							showButton("previousButton");
 						} else {
@@ -121,20 +121,25 @@
 					
 					
 					function changeimg(){
-						$("#imgcontent").attr("width", initwidth);
-						showLoading();
-						//$.mobile.showPageLoadingMsg();
-						loaded = false;
-						//$("#imgtitle").html("第"+currentPage+"页/共" + total + "页");
-						new cherry.bridge.NativeOperation("case","setProperty",["title","第"+currentPage+"页/共" + total + "页"]).dispatch();
-						cherry.bridge.flushOperations();
-						showHideButtons();
-						var random = parseInt(Math.random()*1000+1)
-						if(path.indexOf('?')==-1){
-							$("#imgcontent").attr("src", path + "?data-page=" + currentPage+"&data-cache=false&data-random=" + random).one('load',function(){
-							hiddenLoading();loaded=true;});
-						}else{
-							$("#imgcontent").attr("src", path + "&data-page=" + currentPage+"&data-cache=false&data-random=" + random).one('load',function(){hiddenLoading();loaded=true;});
+						try{
+
+							$("#imgcontent").attr("width", initwidth);
+							$.hori.showLoading();
+							loaded = false;
+							
+							$.hori.setHeaderTitle("第"+currentPage+"页/共" + total + "页");
+
+							
+							showHideButtons();
+							var random = parseInt(Math.random()*1000+1)
+							if(path.indexOf('?')==-1){
+								$("#imgcontent").attr("src", path + "?data-page=" + currentPage+"&data-cache=false&data-random=" + random).one('load',function(){
+								$.hori.hideLoading();loaded=true;});
+							}else{
+								$("#imgcontent").attr("src", path + "&data-page=" + currentPage+"&data-cache=false&data-random=" + random).one('load',function(){$.hori.hideLoading();loaded=true;});
+							}
+						}catch(e){
+							alert(e.message);
 						}
 					}
 					function prewpage(){
@@ -150,8 +155,9 @@
 						}
 					}
 					function hideButton(xmlButtonName){
+						// alert("hide --"+xmlButtonName);
 						new cherry.NativeOperation(xmlButtonName,"setProperty",["hidden","1"]).dispatch();
-						cherry.bridge.flushOperations();
+						cherry.flushOperations();
 					}
 					function showButton(xmlButtonName){
 						new cherry.bridge.NativeOperation(xmlButtonName,"setProperty",["hidden","0"]).dispatch();

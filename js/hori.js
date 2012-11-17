@@ -8,7 +8,7 @@ var cherry = new Object();
 var opts={
 
 	browerDebug:true,
-	mobileDebug:true
+	mobileDebug:false
 }
 //_init()中调用不同平台的function 做相应的初始化_cherryIos和_cherryAndroid
 // var cherry;
