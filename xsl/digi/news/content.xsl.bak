@@ -4,8 +4,8 @@
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
+				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				
 				<style>
 					pre {
 						white-space: pre-wrap;
@@ -16,7 +16,7 @@
 					}
 				</style>
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
 
 				<script src="/view/js/hori.js"></script>
 

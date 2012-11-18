@@ -5,11 +5,11 @@
         <title>移动办公</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-		<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-		<link rel="stylesheet" href="/ios/ios.css" />
+		<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+		
 		<script src="/cssjs/jquery.js"></script>
 		
-		<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+		<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
 		<script src="/view/js/hori.js?tag=201211136"></script>
 
 		<script type="text/javascript">

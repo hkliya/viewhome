@@ -13,7 +13,7 @@
 		<html lang="zh_cn">
 			<head>							
 				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
+				
 				<script src="/cssjs/jquery.js"></script>
 				<script src="/cssjs/jquery.cookie.js"></script>
 				<script src="resource://localhost/cherry.js"></script>

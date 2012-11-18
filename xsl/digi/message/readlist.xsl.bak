@@ -11,10 +11,10 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
+				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				
 				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script>
+				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
 				<script src="/view/js/hori.js"></script>
 
 				<script>

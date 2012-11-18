@@ -4,8 +4,8 @@
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.0.1.css" />
-				<link rel="stylesheet" href="/ios/ios.css" />
+				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				
 				<style>
 					pre {
 						white-space: pre-wrap;
@@ -20,7 +20,7 @@
 				<script src="/cssjs/jquery.cookie.js"></script>
 				
 				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.0.1.js"></script><script src="/view/js/cherry.js"></script>
+				<script src="/cssjs/jquery.mobile-1.2.0.js"></script><script src="/view/js/cherry.js"></script>
 				<script>
 					var title = "<xsl:value-of select='//title/text()'/>";
 					if(title==""){
