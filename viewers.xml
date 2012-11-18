@@ -10,6 +10,8 @@
 		<!-- 代办载入更多 -->
 		<view id="todosmobilesub" template="digi/todosmobilesublist.xsl" encoding="utf-8">
 		</view>
+		<!-- 代办条数，气泡显示 -->
+		<view id="todosnum" template="digi/todosnum.xsl"/>
 		<!-- 代办展示内容 -->
 		<view id="contentmobile" template="digi/mobile/content.xsl">
 			<!-- 源数据是符合标签形式的字符串，转换成真正的字符串（把'<','>' 替换成真正的标签） -->

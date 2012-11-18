@@ -50,24 +50,75 @@
 				}
 			);
 		}
-		
-		$(document).ready(function(){
-			var hori=$.hori;
-			registdevice();
-			/*设置标题*/
-			hori.setHeaderTitle("首页33");
-			/*隐藏后退按钮*/
-			hori.hideBackBtn();
-			/*注册注销事件*/
-			cherry.bridge.registerEvent("case", "navButtonTouchUp", function(oper) {
-					hori.backPage(1);
-				});
 
+		function inittodos(){
+				var url = "/view/digi2/todosnum/Produce/GeneralMessage.nsf/GetAllMsgInfoAgent?openagent";
+				$.ajax({
+					type: "POST", url: url, data:'data-xml=yes^~^app|8|taskByDateDownUnDoneView|taskByDateDownDoneView^~^msg|5|msgByDateDownUnRdView|msgByDateDownRdView^~^flowinfo|5|FlowUndoView|FlowDoneView', dataType: "text", cache:false,
+					success: function(response){
+						$("#spanTodo").html(response);
+					},
+					error:function(response){
+						alert("错误:"+response.responseText);
+					}
+				});
+			}
+			/*
+				调整气泡位置
+			*/
+		function adjustBubble(){
+			var imgOffset=$("#imgToDo").offset();
+			var divOneOffset=$("#divOne").offset();
+			var spanTodo=$("#spanTodo").get(0);
+			spanTodo.style.position="fixed";
+			//68为图片宽度
+			if(window.navigator.userAgent.match(/iPad/i) || window.navigator.userAgent.match(/iPhone/i) || window.navigator.userAgent.match(/iPod/i)) {
+				spanTodo.style.top=divOneOffset.top-25;
+				spanTodo.style.left=imgOffset.left+65;
+				
+	
+			}else if(window.navigator.userAgent.match(/android/i)) {
+				
+				spanTodo.style.top=divOneOffset.top;
+				spanTodo.style.left=imgOffset.left+68+10;
+			}else{
+				//alert('other')
+				spanTodo.style.top=divOneOffset.top;
+				spanTodo.style.left=imgOffset.left+68+10;
+			
+			}	
+		}
+		$(document).ready(function(){
+			try{
+				var hori=$.hori;
+				registdevice();
+				/*设置标题*/
+				hori.setHeaderTitle("首页33");
+				/*隐藏后退按钮*/
+				hori.hideBackBtn();
+				/*注册注销事件*/
+				cherry.bridge.registerEvent("case", "navButtonTouchUp", function() {
+						hori.backPage(1);
+					});
+				//刷新气泡显示代办条数
+				cherry.bridge.registerEvent("case", "casePresented", function() {
+						alert("niubility");
+						// 调用代办条数
+						inittodos();
+				});
+				// 调整气泡位置
+				adjustBubble();
+				
+			}catch(e){
+
+			}
+			
 		});
 		
 		</script>
 		<style>
 			a{text-decoration:none;}
+			.bubble-count { font-size: 11px; font-weight: bold; padding: .2em .5em; margin-left:-.5em;}
 		</style>
     </head>
 	<body >
@@ -82,11 +133,14 @@
 			<div data-role="content" align="center">
 			
 	
-				<div class="ui-grid-b">
+				<div class="ui-grid-b" id="divOne">
                     <div class="ui-block-a">
 						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=V7dev/DigiWin=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
-							<img width="68" height="68" src="/view/png/dbsy.png" />
+							<img id= "imgToDo" width="68" height="68" src="/view/png/dbsy.png" />
 						</a>
+						
+						<span id="spanTodo" class="bubble-count ui-btn-up-c ui-btn-corner-all">0</span>
+
                         <br/>
                         <span style="color:white;"><strong>待办事宜</strong></span>
                     </div>

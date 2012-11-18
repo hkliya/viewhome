@@ -16,10 +16,12 @@
 					});
 				</script>
 	
-
+				<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 			</head>
 			<body>
+
 				<div id="notice" data-role="page">
+					
 					<div data-role="content" align="center">
 						<script>
 							<![CDATA[
@@ -81,21 +83,20 @@
 							}
 						]]>
 						</script>
-						<ul data-role="listview">
-							<li data-role="list-divider">
-								<div data-role="controlgroup" data-type="horizontal" align="right">
-									<xsl:if test="//a[contains(@href, 'submit')]">
-										<button type="button" style="padding:0 30 0 30;" onclick="submit(this.value);" value="submit" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>提交<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button>
-									</xsl:if>
-									<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>
-									<xsl:if test="//a[contains(@href, 'reject')]">
-										<button type="button" data-theme="b" onclick="submit(this.value);" value="reject" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>驳回<xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text></button>
-									</xsl:if>
-								</div>
-							</li>
-						</ul>
-						<br/>
-						<ul data-role="listview" data-inset="true" data-theme="d">
+						
+						
+						<div data-role="controlgroup" data-type="horizontal" align="right" style="position:fixed;top:1em;right:1em;z-index:999">
+							<xsl:if test="//a[contains(@href, 'submit')]">
+								<button type="button" data-theme="b" onclick="submit(this.value);" value="submit" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>提交</button>
+							</xsl:if>
+							
+							<xsl:if test="//a[contains(@href, 'reject')]">
+								<button type="button" data-theme="b" onclick="submit(this.value);" value="reject" data-rel="dialog"><xsl:text disable-output-escaping="yes">&amp;nbsp;&amp;nbsp;&amp;nbsp;</xsl:text>驳回</button>
+							</xsl:if>
+						</div>
+						
+						
+						<ul data-role="listview" data-inset="true" data-theme="d" style="margin-top:70px">
 							<li data-role="list-divider"><xsl:value-of select="//title/text()" /></li>
 							<li>
 								<xsl:if test="not(//div[@name='Fck_HTML']//fieldentry)">

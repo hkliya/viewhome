@@ -10,10 +10,7 @@
 				<script>
 					<![CDATA[
 					
-					$(document).bind("mobileinit", function(){
-						$.mobile.loadingMessage = "载入中...";
-						$.mobile.page.prototype.options.backBtnText = "后退";
-					});
+					
 					function submit(){
 						var username = $("#phonenumber").val();
 						if($.trim(username)==""){
@@ -23,7 +20,7 @@
 						username = encodeURI(escape(username));
 						//$.mobile.showPageLoadingMsg();
 						$.hori.showLoading();
-						var url = "/view/digi2/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName=CN=OA01/O=LOVOL&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
+						var url = "/view/digi2/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName=CN=V7dev/O=DigiWin&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
 						
 						$.ajax({
 							type: "post", url: url,
