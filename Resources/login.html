@@ -104,9 +104,16 @@
 						}
 					},
 					error:function(response){
+						var rtext="";
+						if(response.statusText=="timeout"){
+							rtext="请求超时，请检查下网络";
+						}else{
+							rtext=response.responseText
+						}
 						$.mobile.hidePageLoadingMsg();
 						$.hori.hideLoading();
-						alert("登录失败," + response.responseText);
+						alert("登录失败," + rtext);
+						
 
 					}
 				});

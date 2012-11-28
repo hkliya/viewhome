@@ -560,6 +560,10 @@ function _cherryAndroid(){
 
 	cherry=_bridge;
 	cherry.bridge=_bridge;
+	//增加ajax 默认超时 20000ms
+	$.ajaxSetup({
+  		timeout:20000
+	});
 
 })();
 //返回给外部调用的对象
