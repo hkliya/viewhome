@@ -52,6 +52,11 @@
 		}
 
 		function inittodos(){
+			// var icount=0;
+			
+			if (icount!=gcount){
+			
+
 				var url = "/view/digi2/todosnum/Produce/GeneralMessage.nsf/GetAllMsgInfoAgent?openagent";
 				$.ajax({
 					type: "POST", url: url, data:'data-xml=yes^~^app|8|taskByDateDownUnDoneView|taskByDateDownDoneView^~^msg|5|msgByDateDownUnRdView|msgByDateDownRdView^~^flowinfo|5|FlowUndoView|FlowDoneView', dataType: "text", cache:false,
@@ -62,7 +67,9 @@
 						alert("错误:"+response.responseText);
 					}
 				});
+				icount=gcount;
 			}
+		}
 			/*
 				调整气泡位置
 			*/
@@ -88,12 +95,14 @@
 			
 			}	
 		}
+		var gcount=1;
+		var icount=0;
 		$(document).ready(function(){
 			try{
 				var hori=$.hori;
 				registdevice();
 				/*设置标题*/
-				hori.setHeaderTitle("首页33");
+				hori.setHeaderTitle("首页");
 				/*隐藏后退按钮*/
 				hori.hideBackBtn();
 				/*注册注销事件*/
@@ -102,7 +111,7 @@
 					});
 				//刷新气泡显示代办条数
 				cherry.bridge.registerEvent("case", "casePresented", function() {
-						alert("niubility");
+						// alert("niubility");
 						// 调用代办条数
 						inittodos();
 				});
@@ -135,7 +144,7 @@
 	
 				<div class="ui-grid-b" id="divOne">
                     <div class="ui-block-a">
-						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=V7dev/DigiWin=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
+						<a href="javascript:void(0);" onclick="gcount+=1;$.hori.showLoading();$.hori.loadPage('/view/digi2/todosmobile/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.47540903102505816&server=V7dev/DigiWin=&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode")%>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20')">
 							<img id= "imgToDo" width="68" height="68" src="/view/png/dbsy.png" />
 						</a>
 						
@@ -145,7 +154,7 @@
                         <span style="color:white;"><strong>待办事宜</strong></span>
                     </div>
                     <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=V7dev/DigiWin&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode") %>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage')">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/digi2/messagelist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&login&0.6922244625974295&server=V7dev/DigiWin&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode")%>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage')">
 							<img width="68" height="68" src="/view/png/gwyl.png" />
 						</a>
                         <br/>

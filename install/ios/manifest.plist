@@ -26,7 +26,7 @@
                <key>bundle-identifier</key>
                <string>cn.com.horitech.HoriMobile</string>
                <key>bundle-version</key>
-               <string>1.0</string>
+               <string>1.005</string>
                <key>kind</key>
                <string>software</string>
                <key>HoriMobileSubTitle</key>
