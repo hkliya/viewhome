@@ -8,7 +8,10 @@ var cherry = new Object();
 var opts={
 
 	browerDebug:true,
-	mobileDebug:false
+	mobileDebug:false,
+	timeOutAlertStr:"请求服务器超时，请检查网络",
+	//默认ajax超时时间，单位毫秒
+	timeout:20000
 }
 //_init()中调用不同平台的function 做相应的初始化_cherryIos和_cherryAndroid
 // var cherry;
@@ -562,7 +565,7 @@ function _cherryAndroid(){
 	cherry.bridge=_bridge;
 	//增加ajax 默认超时 20000ms
 	$.ajaxSetup({
-  		timeout:20000
+  		timeout:timeout
 	});
 
 })();
@@ -626,7 +629,7 @@ var horiPub={
 		} else {
 
 			if(opts.browerDebug) {
-				window.go(-1);
+				window.history.go(-1);
 				return;
 			}
 		}

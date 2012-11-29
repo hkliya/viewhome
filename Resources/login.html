@@ -106,7 +106,7 @@
 					error:function(response){
 						var rtext="";
 						if(response.statusText=="timeout"){
-							rtext="请求超时，请检查下网络";
+							rtext=$.hori.timeOutAlertStr;
 						}else{
 							rtext=response.responseText
 						}
