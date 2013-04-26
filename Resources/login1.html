@@ -125,11 +125,11 @@
 						$.cookie("password", "", { expires: -1 });
 					}
 				}catch(e){}
-				var url = "http://1.202.226.107:8082"+"/view/oa/loginvalidate/names.nsf?Login";
+				var url = $.cookie("serverBaseUrl")+"/view/oa/loginvalidate/names.nsf?Login";
 				try{
 					var random = new Date().getTime();
 					url = url + "&data-random=" + random;
-					alert(url);
+					
 				}catch(e){}
 				var data = 'Username='+username+'&Password='+password+'&$PublicAccess=1&ReasonType=0&data-userid=Username&data-password=Password&data-login=true';
 				$.ajax({
@@ -181,7 +181,7 @@
 					缓存关键字:oaServerName
 				*/
 			function getOAServerNameFromCookie(){
-					alert($.cookie("oaServerName"));
+					
 				if(!$.cookie("oaServerName")){
 
 					var url="http://1.202.226.107:8082"+"/view/config/web/server.json";

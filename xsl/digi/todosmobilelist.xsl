@@ -15,7 +15,7 @@
 		<html>
 			<head>
 				<xsl:apply-imports/>
-				<script src="/view/jqueryMobile/jquery.cookie.js"></script>	
+				
 				<script>
 					$(document).ready(function(){
 						var hori=$.hori;
@@ -31,7 +31,7 @@
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
 						var oaServerName=$.cookie("oaServerName");
-						var url = "/view/oa/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.47540903102505816&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var url = $.cookie("serverBaseUrl")+"/view/oa/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.47540903102505816&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
@@ -94,7 +94,7 @@
 		</xsl:variable>
 		
 		<li>
-			<a href="javascript:void(0)" onclick="changepage(encodeURI('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver={$oaServerName}&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}'))" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0)" onclick="$.hori.loadPage(encodeURI('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver={$oaServerName}&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}'))" data-icon="arrow-r" data-iconpos="right">
 				<h3><xsl:value-of select="substring-after(substring-before(entrydata[2]/., ']]'), 'CDATA[')"/></h3>
 				<p>
 					时间:<font color="#0080FF"><xsl:value-of select="substring-after(substring-before(entrydata[1]/., ']]'), 'CDATA[')"/></font>
