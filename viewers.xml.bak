@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <viewers>
-	<viewer id="oa" type="remote" source="http://10.1.3.65:808/" encoding="gb2312">
+	<viewer id="oa" type="remote" source="http://mobile2.sugon.com" encoding="gb2312">
 		<!-- 登陆验证 -->
 		<view id="loginvalidate" template="digi/loginvalidate.xsl" encoding="gb18030"/>
 		<!-- 手机待办列表 -->
