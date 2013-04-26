@@ -99,7 +99,25 @@ function _getMobileAgent() {
 
     } else {
 
+		 // Apple Mobile
+		if (/ Mobile\//.test(ua)) {
+			o[MOBILE] = 'apple'; // iPad, iPhone or iPod Touch
+		}
+		// Android mobile
+		if ((m = ua.match(/ Android /gi))) {
+			o[MOBILE] = 'android'; // 
+		}
+		// webos mobile
+		if ((m = ua.match(/webOS \d\.\d/))) {
+			o[MOBILE] = 'webos'; // Nokia N-series, Android, webOS, ex: NokiaN95
+		}
+		 // Other WebKit Mobile Browsers
+		else if ((m = ua.match(/NokiaN[^\/]*|webOS\/\d\.\d/))) {
+			o[MOBILE] = m[0].toLowerCase(); // Nokia N-series, Android, webOS, ex: NokiaN95
+		}
+
         // WebKit
+		//alert(ua);
         if ((m = ua.match(/AppleWebKit\/([\d.]*)/)) && m[1]) {
             o[core = 'webkit'] = numberify(m[1]);
 
@@ -112,24 +130,10 @@ function _getMobileAgent() {
                 o[shell = 'safari'] = numberify(m[1]);
             }
 
-            // Apple Mobile
-            if (/ Mobile\//.test(ua)) {
-                o[MOBILE] = 'apple'; // iPad, iPhone or iPod Touch
-            }
-            // Android mobile
-            if ((m = ua.match(/Android \d\.\d/))) {
-                o[MOBILE] = 'android'; // Nokia N-series, Android, webOS, ex: NokiaN95
-            }
-            // webos mobile
-            if ((m = ua.match(/webOS \d\.\d/))) {
-                o[MOBILE] = 'webos'; // Nokia N-series, Android, webOS, ex: NokiaN95
-            }
-			 // Other WebKit Mobile Browsers
-            else if ((m = ua.match(/NokiaN[^\/]*|webOS\/\d\.\d/))) {
-                o[MOBILE] = m[0].toLowerCase(); // Nokia N-series, Android, webOS, ex: NokiaN95
-            }
+           
         }
-        // NOT WebKit
+      
+			  // NOT WebKit
         else {
             // Presto
             // ref: http://www.useragentstring.com/pages/useragentstring.php
@@ -539,6 +543,8 @@ function _cherryAndroid(){
 (function _initCherry(){
 	var ua=_getMobileAgent();
 	var _bridge;
+	
+	
 	if(ua["mobile"]){
 		if(ua["mobile"]==="apple"){
 			_bridge=_cherryIos();
@@ -557,15 +563,17 @@ function _cherryAndroid(){
 	}else{
 		// 可能是浏览器模式,按照ios方式 初始化方便调试
 		// cherry={};
-		_bridge=_cherryIos();
+		if(opts.browerDebug){
+			_bridge=_cherryIos();
+		}	
 		// cherry=_cherryAndroid();
 	}
 
 	cherry=_bridge;
 	cherry.bridge=_bridge;
-	//增加ajax 默认超时 20000ms
+	//增加ajax 默认超时
 	$.ajaxSetup({
-  		timeout:timeout
+  		timeout:opts.timeout
 	});
 
 })();
@@ -580,8 +588,8 @@ var horiPub={
 		var ua=_getMobileAgent();
 		if(ua["mobile"]){
 
-			var serverUrl = document.location.protocol + "//"+ document.location.host;
-
+			//var serverUrl = document.location.protocol + "//"+ document.location.host;
+			var serverUrl=$.cookie("serverBaseUrl");
 			if (typeof(componetXmlUrl) == "undefined") {
 				componetXmlUrl = serverUrl + "/view/Resources/PureWeb.scene.xml";
 				
@@ -592,6 +600,8 @@ var horiPub={
 				alert("targetUrl参数不能为空 ");
 			}
 			targetUrl = serverUrl + targetUrl;
+		
+			componetXmlUrl=encodeURI(componetXmlUrl);
 			if (opts.mobileDebug) {
 				alert("targetUrl = "+ targetUrl);
 				alert("componetXmlUrl = "+ componetXmlUrl);
@@ -641,7 +651,7 @@ var horiPub={
 		}
 		if(_getMobileAgent()["mobile"]) {
 
-			var loading = new cherry.NativeOperation("application", "showLoadingSheet", []);
+			var loading = new cherry.NativeOperation("application", "showLoadingSheet", ["20"]);
 			loading.dispatch();
 			cherry.flushOperations();
 		}
@@ -689,7 +699,7 @@ var horiPub={
 	},
 	/*
 		@description:得到手机类型
-		@return undefined 表示是浏览器 |apple|android|webos|nonia
+		@return undefined 表示是浏览器 |apple|android|webos|nokia
 	*/
 	getMobileType:function(){
 		return _getMobileAgent()["mobile"]
@@ -713,9 +723,118 @@ var horiPub={
 		setNavigationBack.dispatch();
 		cherry.flushOperations();
 
+	},
+	/*
+	getDeviceToken()
+		
+		@description:返回 设备64 位tokenapns 发消息用
+		@return :64位token 或空串
+		@type:string	
+		@param:callback 回调函数
+	*/
+	getDeviceToken:function(callback){
+		if($.isFunction(callback)){
+			
+			var getdeviceTokeyNative = new cherry.NativeOperation("application", "getDeviceToken", []).dispatch();			
+			
+			var cherryScript = new cherry.ScriptOperation(function(){
+				var deveiceToken="";
+				deveiceToken=getdeviceTokeyNative.returnValue;	
+						
+				callback.apply(this,[deveiceToken]);
+					
+			})
+		
+			cherryScript.addDependency(getdeviceTokeyNative);		
+			cherryScript.dispatch();
+			cherry.flushOperations();
+			
+		}else{
+			alert("请传入正确的回调函数");
+		}
+	},
+	/*
+		getClientVersion
+		@description:返回 设备版本号
+		@return :客户端版本号 或空串
+		@type:string	
+	*/
+	getClientVersion:function(callback){
+		if($.isFunction(callback)){
+			
+			if(_getMobileAgent()["mobile"]) {
+				var getClientVersionNative = new cherry.NativeOperation("application", "getClientVersion", []).dispatch();			
+			
+				var cherryScript = new cherry.ScriptOperation(function(){
+					var clientVersion="";
+					clientVersion=getClientVersionNative.returnValue;	
+						
+					callback.apply(this,[clientVersion]);
+					
+				})
+		
+				cherryScript.addDependency(getClientVersionNative);		
+				cherryScript.dispatch();
+				cherry.flushOperations();
+				return
+			}
+			if (opts.browerDebug) {
+				callback.apply(this,["0.0"]);
+			}
+			
+		}else{
+			alert("请传入正确的回调函数");
+		}
+	},
+	/*
+		getServerUrl 得到当前请求url
+	*/
+	getServerUrl:function(){
+		return	document.location.protocol + "//"+ document.location.host;
+	},
+	/*
+		upadateClient
+	*/
+	updateClient:function(){
+		var ua=_getMobileAgent();
+		var url=this.getServerUrl()+"/view/config/web/server.json";
+		var self=this;
+		$.ajax({
+				type: "get", url: url, dataType: "text",
+				success: function(data){
+					//alert(data);
+					try{
+						var conf=$.parseJSON(data);
+						if(ua["mobile"]=="apple"){
+							
+							window.location.href="itms-services://?action=download-manifest&url="+self.getServerUrl()+conf[ua["mobile"]].url;
+							
+						}
+						if(ua["mobile"]=="android"){
+							var updateClientNative = new cherry.NativeOperation("application", "updateClient", [self.getServerUrl()+conf[ua["mobile"]].url,"移动办公客户端更新", "Version:1.0 Size:100KB", "立即更新", "下次再说"]).dispatch();		
+							cherry.flushOperations();			
+						}	
+						
+					}catch(e){
+						alert("解析JSON数据报错，请检查"+"\n"+data);
+						alert(e.message);
+					}
+				},
+				error:function(response){
+					var rtext="";
+					if(response.statusText=="timeout"){
+						rtext=opts.timeOutAlertStr;
+					}else{
+						rtext=response.responseText
+					}
+					
+					alert("error" + rtext);
+					
+
+				}
+		});
+		
 	}
-
-
 }
 //rend hori
 $(document).ready(function(){

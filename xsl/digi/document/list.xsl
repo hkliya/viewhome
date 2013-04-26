@@ -11,10 +11,10 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 				<script src="/view/js/hori.js"></script>
 				<script>
 				
@@ -24,7 +24,7 @@
 						$.hori.showLoading();
 						
 						npage = npage+1;
-						var url = "/view/digi2/documentsublist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.9080177032267795&amp;server=oa.lovol.com.cn&amp;dbpath=Application/docindex.nsf&amp;view=vwInfoByDateForMobile&amp;thclass=gwgl$&amp;page="+npage+"&amp;count="+ncount;
+						var url = "/view/oa/documentsublist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.9080177032267795&amp;server=oa.lovol.com.cn&amp;dbpath=Application/docindex.nsf&amp;view=vwInfoByDateForMobile&amp;thclass=gwgl$&amp;page="+npage+"&amp;count="+ncount;
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
@@ -48,7 +48,7 @@
 					<div data-role="content" align="center">
 						<script>
 							function goin(user,unid){				 							  
-								var url = "/view/digi2/documentcontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA/LOVOL&amp;appdbpath=Application/docindex.nsf&amp;appdocunid="+unid;																	
+								var url = "/view/oa/documentcontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=OA/LOVOL&amp;appdbpath=Application/docindex.nsf&amp;appdocunid="+unid;																	
 								$.hori.loadPage(url);
 							}
 							new cherry.bridge.NativeOperation("case","setProperty",["title","公文管理"]).dispatch();

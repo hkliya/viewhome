@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 
 	<xsl:variable name="start"><xsl:value-of select="//input[@name='start']/@value"/></xsl:variable>
 	<xsl:variable name="count"><xsl:value-of select="//input[@name='count']/@value"/></xsl:variable>
@@ -9,28 +9,29 @@
 	<xsl:variable name="totalPage"><xsl:value-of select="floor(($total - 1) div $count)+1"/></xsl:variable>
 	<xsl:variable name="nextStart"><xsl:value-of select="($currentPage * $count) + 1"/></xsl:variable>
 	<xsl:variable name="preStart"><xsl:value-of select="$nextStart - $count - $count"/></xsl:variable>
-
+	<xsl:variable name="oaServerName"><xsl:value-of select="//param[@name='server']/@value"/></xsl:variable>
+		
 	<xsl:template match="/">
 		<html>
 			<head>
 				<xsl:apply-imports/>
-			
+				<script src="/view/jqueryMobile/jquery.cookie.js"></script>	
 				<script>
 					$(document).ready(function(){
 						var hori=$.hori;
 						/*设置标题*/
 						hori.setHeaderTitle("代办");
-
 					});
 				</script>
 				<script>
 					var npage = 1;
 					var ncount = 20;
 					function fetch(){
-						$.hori.$.hori.showLoading();						
+						$.hori.showLoading();
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
-						var url = "/view/digi2/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.47540903102505816&amp;server=V7dev/DigiWin=&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var oaServerName=$.cookie("oaServerName");
+						var url = "/view/oa/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.47540903102505816&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
@@ -74,15 +75,26 @@
 						<br/>
 						<br/>
 						<br/>
-					</div><!-- /content -->
+					</div>
 				</div>
 			</body>
 		</html>
 	</xsl:template>
 	
 	<xsl:template match="viewentry">
+		<xsl:variable name="appdbsvr"><xsl:value-of select="substring-after(substring-before(entrydata[4]/., ']]'), 'CDATA[')"/></xsl:variable>
+		<xsl:variable name="appdbpath"><xsl:value-of select="substring-after(substring-before(entrydata[5]/., ']]'), 'CDATA[')"/></xsl:variable>
+		<xsl:variable name="appformname"><xsl:value-of select="substring-after(substring-before(entrydata[6]/., ']]'), 'CDATA[')"/></xsl:variable>
+		
+		<xsl:variable name="specialxslid">
+			<xsl:choose>
+				<xsl:when test="($appdbpath='ancsoa\oajf.nsf') and ($appformname='fmmain')">ncsoaoajf</xsl:when>
+				<xsl:otherwise>contentmobile</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
 		<li>
-			<a  href="javascript:void(0)" onclick="changepage('/view/digi2/contentmobile/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=V7dev/DigiWin&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0)" onclick="changepage(encodeURI('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver={$oaServerName}&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}'))" data-icon="arrow-r" data-iconpos="right">
 				<h3><xsl:value-of select="substring-after(substring-before(entrydata[2]/., ']]'), 'CDATA[')"/></h3>
 				<p>
 					时间:<font color="#0080FF"><xsl:value-of select="substring-after(substring-before(entrydata[1]/., ']]'), 'CDATA[')"/></font>

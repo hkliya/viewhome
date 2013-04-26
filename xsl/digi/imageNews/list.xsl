@@ -3,10 +3,10 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 				<script src="/view/js/hori.js"></script>
 				<script>
 				
@@ -16,7 +16,7 @@
 						$.hori.showLoading();
 						
 						npage = npage+1;
-						var url = "/view/digi2/imageNewsSubList/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.7714136636026634&amp;server=OA/LOVOL&amp;dbpath=Application/DigiFlowInfoPublish.nsf&amp;view=vwInfoByDateForMobile_new&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var url = "/view/oa/imageNewsSubList/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.7714136636026634&amp;server=OA/LOVOL&amp;dbpath=Application/DigiFlowInfoPublish.nsf&amp;view=vwInfoByDateForMobile_new&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
@@ -36,7 +36,7 @@
 
 					function goin(user,unid){
 					
-						var url = "/view/digi2/imageNewsContent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=news&amp;appserver=OA/LOVOL&amp;appdbpath=Application/DigiFlowInfoPublish.nsf&amp;appdocunid="+unid;																	
+						var url = "/view/oa/imageNewsContent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=news&amp;appserver=OA/LOVOL&amp;appdbpath=Application/DigiFlowInfoPublish.nsf&amp;appdocunid="+unid;																	
 						$.hori.loadPage(url);
 					}
 					new cherry.bridge.NativeOperation("case","setProperty",["title","新闻列表"]).dispatch();

@@ -11,10 +11,10 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 				<script src="/view/js/hori.js"></script>
 
 				<script>
@@ -48,7 +48,7 @@
 	
 	<xsl:template match="viewentry">
 		<li>
-			<a href="javascript:void(0)" onclick="changepage('/view/digi2/newscontent/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2/{@unid}?OpenDocument&amp;login');" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0)" onclick="changepage('/view/oa/newscontent/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2/{@unid}?OpenDocument&amp;login');" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[5]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[5]/.,'CDATA['), ']]')"/></h3>
 					<p>

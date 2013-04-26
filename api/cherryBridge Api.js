@@ -63,3 +63,40 @@ function hideHeaderBack(){
 
 	*/
 }
+function getServerUrl(){
+	/*
+	@description:返回 当前页面的url,包括协议
+	@param:无
+	@return: http://aa.**.com
+	@example:$.hori.getServerUrl() 
+	*/
+}
+function getDeviceToken (){
+	/*
+	@param:function 返回后的回调函数
+	@description:返回设备的64位token苹果推送消息用，安卓返回手机的序列号
+@return :string
+@example:$.hori.getDeviceToken (function( deviceTokey ){alert( deviceTokey )})
+	
+	*/
+}
+function getClientVersion (function(){}){
+	/*
+
+	@param:function 返回后的回调函数
+	@description:返回设备当前版本号
+	@return :string
+	@example:$.hori.getClientVersion (function( clientVserson ){alert( clientVserson )})
+	
+	*/
+	
+}
+
+function updateClient(){
+	/*
+	@param:无
+	@description:读取服务器viewhome/config/web/server.json,自动更新客户端程序,android和ios的下载路径在server.json中指定
+	@return :无
+	@example :$.hori.updateClient();
+	*/
+}

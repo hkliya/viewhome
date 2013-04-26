@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 	<xsl:variable name="start"><xsl:value-of select="//input[@name='start']/@value"/></xsl:variable>
 	<xsl:variable name="count"><xsl:value-of select="//input[@name='count']/@value"/></xsl:variable>
 	<xsl:variable name="total"><xsl:value-of select="//input[@name='total']/@value"/></xsl:variable>
@@ -47,7 +47,7 @@
 									$("#"+value+"C").html("+");
 									return;
 								}
-								var url = "/view/digi2/addresssuborg/Produce/DigiFlowOrgSysMng.nsf/OrgTreeForAddressAgent?openagent";
+								var url = "/view/oa/addresssuborg/Produce/DigiFlowOrgSysMng.nsf/OrgTreeForAddressAgent?openagent";
 								var data = "data-xml="+value+";;;<xsl:value-of select='//userid/text()'/>";
 								$.mobile.showPageLoadingMsg();
 								$.ajax({

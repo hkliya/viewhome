@@ -12,6 +12,9 @@
 					<property name="navButtonText">
 						<string>搜索</string>
 					</property>
+					<property name="navBarColor">
+						<string>#FF940b09</string>
+					</property>
 				</properties>
 			</component>
             <component name="main" type="builtin:webView">

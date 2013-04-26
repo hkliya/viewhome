@@ -4,7 +4,7 @@
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
 				<style>
 					pre {
@@ -14,9 +14,13 @@
 						white-space: -o-pre-wrap;
 						word-wrap: break-word;
 					}
+					
+					.ui-li-desc{
+						white-space:normal;;
+					}
 				</style>
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 
 				<script src="/view/js/hori.js"></script>
 
@@ -34,6 +38,7 @@
 					<div data-role="content" align="center">
 						<script type="text/javascript">
 							function viewfile(url){
+								//alert(url);
 								$.hori.loadPage(url, "/view/Resources/AttachView.xml");
 							}
 						</script>
@@ -41,8 +46,11 @@
 						<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
 							<ul data-role="listview" data-inset="true">
 								<li>
-									<div style="width:100%;word-break:break-all;text-align:left;" align="left">
+									<div style="width:100%;word-wrap:word;text-align:left;" align="left">
 										<pre>
+											<xsl:copy-of select="//textarea[@id='FCK_EditorValue']//p" />
+											
+											
 											<xsl:if test="//textarea[@id='FCK_EditorValue']/p[1]/@style">
 												<xsl:copy-of select="//textarea[@id='FCK_EditorValue']//p" />
 											</xsl:if>
@@ -50,10 +58,12 @@
 											<xsl:if test="not(//textarea[@id='FCK_EditorValue']/p[1]/@style)">
 												<xsl:value-of select="//textarea[@id='FCK_EditorValue']//p" />
 											</xsl:if>
+											
 										</pre>
 									</div>
+									
 									<div>
-									<xsl:apply-templates select="//img[@src='/icons/fileatt.gif']/.." mode="file"/>
+										<xsl:apply-templates select="//img[@src='/icons/fileatt.gif']/.." mode="file"/>
 									</div>
 								</li>
 							</ul>
@@ -66,7 +76,7 @@
 	
 	<xsl:template match="a" mode="file">
 		<xsl:if test="@href='#'">
-			<a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/{substring(substring-before(substring-after(@onclick,'('),')'), 2)}');"  data-role="button"><xsl:value-of select="."/></a>
+			<a href="javascript:void(0)" onclick="viewfile('/view/oa/file/{substring(substring-before(substring-after(@onclick,'('),')'), 2)}');"  data-role="button"><xsl:value-of select="."/></a>
 		</xsl:if>
 	</xsl:template>
 

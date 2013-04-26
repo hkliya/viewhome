@@ -12,7 +12,11 @@
 					<property name="navBarHidden">
 						<string>0</string>
 					</property>
+					<property name="navBarColor">
+						<string>#FF940b09</string>
+					</property>
 				</properties>
+				
 			</component>
             <component name="main" type="builtin:webView">
                 <frame x="0" y="0" width="320" height="450"/>

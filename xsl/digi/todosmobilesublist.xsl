@@ -19,8 +19,19 @@
 	</xsl:template>
 
 	<xsl:template match="viewentry">
+		<xsl:variable name="appdbsvr"><xsl:value-of select="substring-after(substring-before(entrydata[4]/., ']]'), 'CDATA[')"/></xsl:variable>
+		<xsl:variable name="appdbpath"><xsl:value-of select="substring-after(substring-before(entrydata[5]/., ']]'), 'CDATA[')"/></xsl:variable>
+		<xsl:variable name="appformname"><xsl:value-of select="substring-after(substring-before(entrydata[6]/., ']]'), 'CDATA[')"/></xsl:variable>
+		
+		<xsl:variable name="specialxslid">
+			<xsl:choose>
+				<xsl:when test="($appdbpath='ancsoa\oajf.nsf') and ($appformname='fmmain')">ncsoaoajf</xsl:when>
+				<xsl:otherwise>contentmobile</xsl:otherwise>
+			</xsl:choose>
+		</xsl:variable>
+		
 		<li>
-			<a  href="javascript:void(0)" onclick="changepage('/view/digi2/contentmobile/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=V7dev/DigiWin&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a  href="javascript:void(0)" onclick="changepage('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=oadev/Dawning&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
 				<h3><xsl:value-of select="substring-after(substring-before(entrydata[2]/., ']]'), 'CDATA[')"/></h3>
 				<p>
 					时间:<font color="#0080FF"><xsl:value-of select="substring-after(substring-before(entrydata[1]/., ']]'), 'CDATA[')"/></font>

@@ -4,13 +4,13 @@
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.cookie.js"></script>
 				<script src="/view/js/cherry.js"></script>
 				<script src="http://mobile.sugon.com/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 				<script>
 					var setNavigationTitle=new cherry.bridge.NativeOperation("case","setProperty",["title","<xsl:value-of select='//title/text()'/>"]);
 					setNavigationTitle.dispatch();

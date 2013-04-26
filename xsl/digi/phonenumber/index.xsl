@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
 				<xsl:apply-imports/>
-			
+				<script src="/view/jqueryMobile/jquery.cookie.js"></script>	
 				<script>
 					<![CDATA[
 					
@@ -17,10 +17,12 @@
 							alert('请输入关键字 ');
 							return ;
 						}
+						var oaServerName=$.cookie("oaServerName");
+						
 						username = encodeURI(escape(username));
 						//$.mobile.showPageLoadingMsg();
 						$.hori.showLoading();
-						var url = "/view/digi2/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName=CN=V7dev/O=DigiWin&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
+						var url = "/view/oa/phonenumberrequest/Produce/WeboaConfig.nsf/telSearchForm?openform&svrName="+oaServerName+"&queryStr="+username+"&dbFile=Produce/DigiFlowOrgPsnMng.nsf&showField=UserDeptPhone";
 						
 						$.ajax({
 							type: "post", url: url,
@@ -54,13 +56,13 @@
 			<body>
 				<div id="list" data-role="page" class="type-home">
 					<div data-role="content" align="center">
-
+						<button name="aa" onclick="submit()">aa</button>
 						<div align="center" >
 							<input type="text" id="phonenumber" name="phonenumber" value="" />
 						</div>
 						<div id="viewValue" >
-							<ul data-role="listview" data-inset="true">
-								<li data-role="list-divider"></li>
+							<ul data-role="listview" data-inset="true" >
+								<li data-role="list-divider" data-theme="f"></li>
 								<li>无数据</li>
 							</ul>
 						</div>

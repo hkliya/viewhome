@@ -4,7 +4,7 @@
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
+				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
 				
 				<style>
 					pre {
@@ -16,11 +16,11 @@
 						width:100%;
 					}
 				</style>
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
+				<script src="/view/jqueryMobile/jquery.js"></script>
+				<script src="/view/jqueryMobile/jquery.cookie.js"></script>
 				<script src="/view/js/cherry.js"></script>
 				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script>
+				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
 				<script>
 					var _title=new cherry.bridge.NativeOperation("case","setProperty",["title","内容"]);
 						_title.dispatch();
@@ -90,7 +90,7 @@
 		<xsl:param name="names"/>
 		<xsl:if test="contains($names,';')">
 			<xsl:if test="not(contains(substring-before($names, ';'),'OaSystem.jpg'))">
-				<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{substring-before($names, ';')}');" data-role="button"><xsl:value-of select="substring-before($names, ';')"/></a></li>
+				<li><a href="javascript:void(0)" onclick="viewfile('/view/oa/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{substring-before($names, ';')}');" data-role="button"><xsl:value-of select="substring-before($names, ';')"/></a></li>
 			</xsl:if>
 			<xsl:call-template name="files">
 				<xsl:with-param name="names" select="translate(substring-after($names, ';'), ' ', '')"/>
@@ -98,7 +98,7 @@
 		</xsl:if>
 		<xsl:if test="not(contains($names, ';'))">
 			<xsl:if test="not(contains($names,'OaSystem.jpg'))">
-				<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{$names}');" data-role="button"><xsl:value-of select="$names"/></a></li>
+				<li><a href="javascript:void(0)" onclick="viewfile('/view/oa/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{$names}');" data-role="button"><xsl:value-of select="$names"/></a></li>
 			</xsl:if>
 		</xsl:if>	
 		

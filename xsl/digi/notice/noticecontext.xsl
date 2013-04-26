@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
@@ -34,7 +34,9 @@
 								$.hori.loadPage(url, "http://localhost:8080/view/Resources/AttachView.xml");
 							}
 						</script>
-						<div align="center" style="width:100%"><strong><xsl:value-of select="//title/text()"/></strong></div>
+						<div align="center" style="width:100%">
+							<strong><xsl:value-of select="//title/text()"/></strong>
+						</div>
 						<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
 							<ul data-role="listview" data-inset="true">
 								<li>

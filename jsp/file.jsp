@@ -4,20 +4,12 @@
 <html lang="zh_cn">
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=3;"/>
+		
+
 		<meta name="format-detection" content="telephone=no" />
-		<script src="/cssjs/jquery.js"></script>
+		<script src="/view/jqueryMobile/jquery.js"></script>
 		<script src="/view/js/hori.js?tag=201211136"></script>
-		<style>
-			pre {
-				white-space: pre-wrap;
-				white-space: -moz-pre-wrap;
-				white-space: -pre-wrap;
-				white-space: -o-pre-wrap;
-				word-wrap: break-word;
-			}
-			img{
-			}
-		</style>
+		
 	</head>
 	<body style="margin:0px;padding:0px;">
 		<div data-role="page" style="margin:0px;padding:0px;">
@@ -43,9 +35,16 @@
 					</div>
 					<%
 				}else if(type.indexOf("text/")!=-1){
+					
 					%>
 					<div align="left" style="margin:0;padding:0;">
-						<pre><%=path%></pre>
+						<pre><%
+						if(path.indexOf("<data-params>")==-1){
+							out.println(path);
+						}else{
+							out.println(path.substring(0, path.indexOf("<data-params>")));
+						}
+						%></pre>
 					</div>
 					<%
 				}else if(type.indexOf("application/vnd")!=-1 || type.indexOf("application/pdf")!=-1 || type.indexOf("application/msword")!=-1 || type.indexOf("application/octet-stream")!=-1 || type.indexOf("application/vnd.ms-powerpoint")!=-1){
@@ -54,7 +53,7 @@
 					%>
 					<div align="center">
 						<div id="imgtitle" align="center" style="background-color:#FFFFFF;display:none;"></div>
-						<img id="imgcontent"/>
+						<img id="imgcontent" />
 					</div>
 					<%
 				}

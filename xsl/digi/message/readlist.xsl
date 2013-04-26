@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
-	<xsl:import href="D:/viewhome/xsl/pub/scriptCss.xsl" />	
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 	<xsl:variable name="start"><xsl:value-of select="//input[@name='start']/@value"/></xsl:variable>
 	<xsl:variable name="count"><xsl:value-of select="//input[@name='count']/@value"/></xsl:variable>
 	<xsl:variable name="total"><xsl:value-of select="//input[@name='total']/@value"/></xsl:variable>
@@ -32,7 +32,7 @@
 						
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
-						var url = "/view/digi2/messagesubreadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974295&amp;server=V7dev/DigiWin&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgUnRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount+"&amp;pageFrom=homepage"
+						var url = "/view/oa/messagesubreadlist/Produce/DigiFlowMobile.nsf/agGetViewData?openagent&amp;login&amp;0.6922244625974295&amp;server=oadev/Dawning&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgUnRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount+"&amp;pageFrom=homepage"
 
 
 						
@@ -89,7 +89,7 @@
 	
 	<xsl:template match="viewentry">
 		<li>
-			<a href="javascript:void(0);" onclick="changepage('/view/digi2/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=V7dev/DigiWin&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0);" onclick="changepage('/view/oa/messagecontent/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=oadev/Dawning&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[2]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[2]/.,'CDATA['), ']]')"/></h3>
 					<p>

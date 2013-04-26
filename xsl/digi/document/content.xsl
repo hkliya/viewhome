@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+	<xsl:import href="/xsl/pub/scriptCss.xsl" />	
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/cssjs/jquery.mobile-1.2.0.css" />
-				
-				<script src="/cssjs/jquery.js"></script>
-				<script src="/cssjs/jquery.cookie.js"></script>
-				
-				<script src="/view/mobileBridge.js"></script>
-				<script src="/cssjs/jquery.mobile-1.2.0.js"></script><script src="/view/js/cherry.js"></script>
+				<xsl:apply-imports/>
 				<script>
 					<![CDATA[
 											
@@ -99,13 +94,13 @@
 		<xsl:param name="names"/>
 
 		<xsl:if test="contains($names,';')">	
-			<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{substring-before($names, ';')}');" data-role="button"><xsl:value-of select="substring-before($names, ';')"/></a></li>
+			<li><a href="javascript:void(0)" onclick="viewfile('/view/oa/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{substring-before($names, ';')}');" data-role="button"><xsl:value-of select="substring-before($names, ';')"/></a></li>
 			<xsl:call-template name="files">
 				<xsl:with-param name="names" select="translate(substring-after($names, ';'), ' ', '')"/>
 			</xsl:call-template>
 		</xsl:if>
 		<xsl:if test="not(contains($names, ';'))">
-			<li><a href="javascript:void(0)" onclick="viewfile('/view/digi2/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{$names}');" data-role="button"><xsl:value-of select="$names"/></a></li>
+			<li><a href="javascript:void(0)" onclick="viewfile('/view/oa/file/Produce/DigiFlowMobile.nsf/0/{//input[@name='AttachDocUnid']/@value}/$file/{$names}');" data-role="button"><xsl:value-of select="$names"/></a></li>
 		</xsl:if>		
 	</xsl:template>
 
