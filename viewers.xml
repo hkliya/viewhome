@@ -12,7 +12,6 @@
 		<!-- 代办条数，气泡显示 -->
 		<view id="todosnum" template="digi/todosnum.xsl" encoding="utf-8"/>
 		
-		
 		<!-- 高级流程操作 -->
 		<view id="operationjq" template="oa/flow/operationjq.xsl">
 		</view>
