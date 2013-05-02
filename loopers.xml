@@ -3,5 +3,6 @@
 	<looper>
 	<!--三小时推送轮询一次10800000-->
 		<loop template="/jsp/loop.jsp" time="10800000"/>
+		
 	</looper>
 </loopers>
