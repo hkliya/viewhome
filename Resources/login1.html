@@ -5,14 +5,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1.0"/>
 
-		<link rel="stylesheet" href="resource://localhost/www/jquery.mobile-1.2.0.css" /> 
-		<link rel="stylesheet" href="resource://localhost/www/jquery.mobile-1.2.0-sugon.css" /> 
-		<script src="resource://localhost/www/jquery.js"></script>
+		<link rel="stylesheet" href="file:///android_asset/www/jquery.mobile-1.2.0.css" /> 
+		<link rel="stylesheet" href="file:///android_asset/www/jquery.mobile-1.2.0-sugon.css" /> 
+		<script src="file:///android_asset/www/jquery.js"></script>
 		
 		
-		<script src="resource://localhost/www/jquery.mobile-1.2.0.js"></script>	
-		<script src="resource://localhost/www/jquery.cookie.js"></script>	
-		<script src="resource://localhost/www/hori.js"></script>
+		<script src="file:///android_asset/www/jquery.mobile-1.2.0.js"></script>	
+		<script src="file:///android_asset/www/jquery.cookie.js"></script>	
+		<script src="file:///android_asset/www/hori.js"></script>
 				
 		<style>
 			a{text-decoration:none;}
@@ -125,7 +125,8 @@
 						$.cookie("password", "", { expires: -1 });
 					}
 				}catch(e){}
-				var url = $.cookie("serverBaseUrl")+"/view/oa/loginvalidate/names.nsf?Login";
+				var url = "http://1.202.226.107:8082/view/oa/loginvalidate/names.nsf?Login";//$.cookie("serverBaseUrl")+"/view/oa/loginvalidate/names.nsf?Login";
+				//alert("loginUrl="+url);
 				try{
 					var random = new Date().getTime();
 					url = url + "&data-random=" + random;
@@ -136,9 +137,9 @@
 					type: "post", url: url, data:data, dataType: "text",
 					success: function(response){
 						
-						var json = $.parseJSON(response);
+						var json = $.parseJSON(response);1
 						if(json.success){
-							var targetURL= "/view/jsp/digihome.jsp?itcode="+username+"&oaServerName="+$.cookie("oaServerName");
+							var targetURL= "/view/jsp/digihome.jsp?itcode="+username+"&oaServerName="+"V7dev/DigiWin";
 
 							targetURL=encodeURI(targetURL);
 							var componentURL = "/view/Resources/digihome.xml";
@@ -156,7 +157,8 @@
 						if(response.statusText=="timeout"){
 							rtext=$.hori.timeOutAlertStr;
 						}else{
-							rtext="登录失败," +response.responseText
+							rtext="登录失败11," +response.responseText
+							alert
 						}
 						
 						$.hori.hideLoading();
@@ -185,7 +187,7 @@
 				if(!$.cookie("oaServerName")){
 
 					var url="http://1.202.226.107:8082"+"/view/config/web/server.json";
-				
+					alert(url);
 					$.ajax({
 						type: "get", url: url, dataType: "text",
 						success: function(data){

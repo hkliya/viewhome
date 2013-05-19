@@ -588,8 +588,8 @@ var horiPub={
 		var ua=_getMobileAgent();
 		if(ua["mobile"]){
 
-			//var serverUrl = document.location.protocol + "//"+ document.location.host;
-			var serverUrl=$.cookie("serverBaseUrl");
+			var serverUrl = document.location.protocol + "//"+ document.location.host;
+			//var serverUrl=$.cookie("serverBaseUrl");
 			if (typeof(componetXmlUrl) == "undefined") {
 				componetXmlUrl = serverUrl + "/view/Resources/PureWeb.scene.xml";
 				

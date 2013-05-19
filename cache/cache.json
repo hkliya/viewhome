@@ -1,10 +1,12 @@
 {"cache":[
-     {"url":"http://localhost:8080/js/jquery.js",
+     {"url":"http://1.202.226.107:8082/view/jqueryMobile/jquery.js",
       "timestamp":"2012-04-15 13.14.15"},
-     {"url":"http://localhost:8080/css/jquery.css",
+     {"url":"http://1.202.226.107:8082/view/jqueryMobile/jquery.mobile-1.2.0.css",
       "timestamp":"2012-04-15 13.14.15"},
-     {"url":"http://localhost:8080/img/logo.png",
+	  {"url":"http://1.202.226.107:8082/view/jqueryMobile/jquery.mobile-1.2.0.min.js",
       "timestamp":"2012-04-15 13.14.15"},
-     {"url":"http://localhost:8080/vew/Resources/login.html",
+     {"url":"http://1.202.226.107:8082/view/jqueryMobile/img/logo.png",
+      "timestamp":"2012-04-15 13.14.15"},
+     {"url":"http://1.202.226.107:8082/view/Resources/login.html",
       "timestamp":"2012-04-15 13.14.15"}
 ]}

@@ -12,9 +12,8 @@
 		<script src="/view/jqueryMobile/jquery.js"></script>
 		
 		
-		<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>	
-		<script src="/view/jqueryMobile/jquery.cookie.js"></script>	
-		<script src="/view/js/hori.js?tag=21369"></script>
+		
+	
 				
 		<style>
 			a{text-decoration:none;}
@@ -228,7 +227,7 @@
 					<li data-role="fieldcontain" data-type="horizontal" >
 						<table style="width:100%" cellspaceing="0" cellpadding="0" border="0">
 							<tr><td>
-							<strong>帐&#160;&#160;号:</strong>
+							<strong>帐&#160;&#160;号1:</strong>
 							</td><td>
 							<input type="text" name="username" style="outline:none;width:100%;border:0;background:transparent;" id="username" value="" onfocus ="clearData()" onblur="showTips()"/>
 							</td></tr>
