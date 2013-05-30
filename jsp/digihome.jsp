@@ -7,7 +7,7 @@
 	
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1"/>
 		<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
-		
+		<link rel="stylesheet" href="/view/jqueryMobile/jquery.mobile-1.2.0-sugon.css" /> 
 		<script src="/view/jqueryMobile/jquery.js"></script>
 		
 		<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
@@ -182,12 +182,12 @@
                         <br/>
                         <span style="color:#434343"><strong>未读消息</strong></span>
                     </div>
-					 <div class="ui-block-c">									
-						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage(encodeURI('/view/oa/orderdelivery/Application/OrderDelivery.nsf/m_mobileNewAgent?openagent&login&itcode=<%=request.getParameter("itcode") %>'))">
-							<img width="68" height="68" src="/view/png/sugon/fhsq.png" />
+					<div class="ui-block-c" id="divMail" >
+						<a href="javascript:void(0);" onclick="openmail()">
+							<img width="68" height="68" src="/view/png/sugon/gryj.png">
 						</a>
                         <br/>
-                        <span style="color:#434343"><strong>66666</strong></span>
+                        <span style="color:#434343"><strong>个人邮件</strong></span>    
                     </div>
                 </div>
                 <br/>
@@ -210,13 +210,7 @@
                         <span style="color:#434343"><strong>企业新闻</strong></span>    
                     </div>
                      
-					<div class="ui-block-c" id="divMail" >
-						<a href="javascript:void(0);" onclick="openmail()">
-							<img width="68" height="68" src="/view/png/sugon/gryj.png">
-						</a>
-                        <br/>
-                        <span style="color:#434343"><strong>个人邮件</strong></span>    
-                    </div>
+					
                    
                 </div>
 				<br/>

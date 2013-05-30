@@ -139,6 +139,7 @@
 
 							targetURL=encodeURI(targetURL);
 							var componentURL = "/view/Resources/digihome.xml";
+							alert(targetURL);
 							$.hori.loadPage(targetURL, componentURL);
 
 						}else{

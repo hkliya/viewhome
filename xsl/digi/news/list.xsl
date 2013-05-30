@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="/xsl/pub/scriptCss.xsl" />
 	<xsl:variable name="start"><xsl:value-of select="//input[@name='start']/@value"/></xsl:variable>
 	<xsl:variable name="count"><xsl:value-of select="//input[@name='count']/@value"/></xsl:variable>
 	<xsl:variable name="total"><xsl:value-of select="//input[@name='total']/@value"/></xsl:variable>
@@ -11,11 +12,7 @@
 	<xsl:template match="/">
 		<html>
 			<head>							
-				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
-				
-				<script src="/view/jqueryMobile/jquery.js"></script>
-				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
-				<script src="/view/js/hori.js"></script>
+				<xsl:apply-imports/>
 
 				<script>
 					$(document).ready(function(){

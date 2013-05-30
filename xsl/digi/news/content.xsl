@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
+<xsl:import href="/xsl/pub/scriptCss.xsl" />
 	<xsl:output method="html" indent="yes"/>
 	<xsl:template match="/">
 		<html lang="zh_cn">
 			<head>							
-				<link rel="stylesheet"  href="/view/jqueryMobile/jquery.mobile-1.2.0.css" />
+				<xsl:apply-imports/>
 				
 				<style>
 					pre {
@@ -19,10 +20,7 @@
 						white-space:normal;;
 					}
 				</style>
-				<script src="/view/jqueryMobile/jquery.js"></script>
-				<script src="/view/jqueryMobile/jquery.mobile-1.2.0.js"></script>
-
-				<script src="/view/js/hori.js"></script>
+				
 
 				<script>
 					$(document).ready(function(){
