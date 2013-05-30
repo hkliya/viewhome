@@ -30,7 +30,9 @@
 						
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
-						var url = "/view/oa/messagesublist/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.6922244625974296&amp;server=oadev/Dawning=&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var oaServerName=$.cookie("oaServerName");
+						alert(oaServerName);
+						var url = "/view/oa/messagesublist/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.6922244625974296&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						
 						$.ajax({
 							type: "get", url: url,
@@ -90,7 +92,7 @@
 		<xsl:variable name="specialxslid">messagecontent</xsl:variable>
 		
 		<li>
-			<a href="javascript:void(0);" onclick="changepage('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=oadev/Dawning&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}')" data-icon="arrow-r" data-iconpos="right">
+			<a href="javascript:void(0);" onclick="changepage(encodeURI('/view/oa/{$specialxslid}/Produce/DigiFlowMobile.nsf/showform?openform&amp;login&amp;apptype=msg&amp;appserver=oadev/Dawning&amp;appdbpath=DFMessage/dfmsg_{substring-before(substring-after(//param[@key='dbpath']/@value, 'dfmsg_'), '.nsf')}.nsf&amp;appdocunid={@unid}'))" data-icon="arrow-r" data-iconpos="right">
 				<xsl:if test="contains(entrydata[2]/.,'CDATA[')">
 					<h3><xsl:value-of select="substring-before(substring-after(entrydata[2]/.,'CDATA['), ']]')"/></h3>
 					<p>
