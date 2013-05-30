@@ -32,7 +32,7 @@
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
 						var oaServerName=$.cookie("oaServerName");
-						alert(oaServerName);
+						
 						var url = "/view/oa/messagesublist/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.6922244625974296&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwMsgRdForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						
 						$.ajax({

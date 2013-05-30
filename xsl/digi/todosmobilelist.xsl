@@ -31,15 +31,15 @@
 						npage = npage+1;
 						var itcode = "<xsl:value-of select='substring-before(substring-after(//url/text(), "dfmsg_"), ".nsf")'/>";
 						var oaServerName=$.cookie("oaServerName");
-						var url = $.cookie("serverBaseUrl")+"/view/oa/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.47540903102505816&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
+						var url = "/view/oa/todosmobilesub/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&amp;login&amp;0.47540903102505816&amp;server="+oaServerName+"&amp;dbpath=DFMessage/dfmsg_"+itcode+".nsf&amp;view=vwTaskUnDoneForMobile&amp;thclass=&amp;page="+npage+"&amp;count="+ncount;
 						$.ajax({
 							type: "get", url: url,
 							success: function(response){
-								//$.mobile.hidePageLoadingMsg();
 								$("#more").remove();
 								$("ul").append(response);
 								$("ul").listview('refresh');
 								$.hori.hideLoading();
+								
 							},
 							error:function(response){
 								//$.mobile.hidePageLoadingMsg();
