@@ -11,7 +11,7 @@
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string>http://1.202.226.107:8082/view/install/ios/mobile.ipa</string>
+					<string>http://1.202.226.107/view/install/ios/DigiMobile.ipa</string>
 				</dict>
 			</array>
 			<key>metadata</key>
@@ -19,15 +19,15 @@
 				
 
 				<key>bundle-identifier</key>
-				<string>com.lovol.HoriMobile</string>
+				<string>com.demo.HoriMobile</string>
 				<key>bundle-version</key>
 				<string>1.006</string>
 				<key>kind</key>
 				<string>software</string>
 				<key>subtitle</key>
-				<string>掌上雷沃</string>
+				<string>移动办公</string>
 				<key>title</key>
-				<string>掌上雷沃</string>
+				<string>移动办公</string>
 			</dict>
 		</dict>
 	</array>
