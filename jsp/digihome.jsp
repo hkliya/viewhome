@@ -182,13 +182,14 @@
                         <br/>
                         <span style="color:#434343"><strong>未读消息</strong></span>
                     </div>
-					<div class="ui-block-c" id="divMail" >
-						<a href="javascript:void(0);" onclick="openmail()">
-							<img width="68" height="68" src="/view/png/hori/mail.png">
+					 <div class="ui-block-c">
+						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/oa/newslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
+							<img width="68" height="68" src="/view/png/hori/news.png">
 						</a>
                         <br/>
-                        <span style="color:#434343"><strong>个人邮件</strong></span>    
+                        <span style="color:#434343"><strong>企业新闻</strong></span>    
                     </div>
+					
                 </div>
                 <br/>
 
@@ -202,14 +203,14 @@
                         <br/>
                         <span style="color:#434343"><strong>电话查询</strong></span>
                     </div>
-                    <div class="ui-block-b">
-						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/oa/newslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
-							<img width="68" height="68" src="/view/png/hori/news.png">
+                   
+                     <div class="ui-block-b" id="divMail" >
+						<a href="javascript:void(0);" onclick="openmail()">
+							<img width="68" height="68" src="/view/png/hori/mail.png">
 						</a>
                         <br/>
-                        <span style="color:#434343"><strong>企业新闻</strong></span>    
+                        <span style="color:#434343"><strong>个人邮件</strong></span>    
                     </div>
-                     
 					
                    
                 </div>
