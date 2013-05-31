@@ -153,7 +153,7 @@
 		</style>
     </head>
 	<body >
-		<div data-role="page" id="home" style="background:url(/view/png/sugon/bg_empty.jpg);-moz-background-size:cover;background-repeat:repeat;" >
+		<div data-role="page" id="home" style="background:url(/view/png/hori/bg_empty.jpg);-moz-background-size:cover;background-repeat:repeat;" >
 		<!--
 			<div data-role="header">
 				<a data-icon="home" data-role="button" data-rel="back">返回</a>
@@ -167,7 +167,7 @@
 				<div class="ui-grid-b" id="divOne">
                     <div class="ui-block-a">
 						<a href="javascript:void(0);" onclick="gcount=gcount+1;$.hori.showLoading();$.hori.loadPage(encodeURI('/view/oa/todosmobile/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&login&0.47540903102505816&server=<%=request.getParameter("oaServerName")%>&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode")%>.nsf&view=vwTaskUnDoneForMobile&thclass=&page=1&count=20'))">
-							<img id= "imgToDo" width="68" height="68" src="/view/png/sugon/dbsy.png" />
+							<img id= "imgToDo" width="68" height="68" src="/view/png/hori/task.png" />
 						</a>
 						
 						<span id="spanTodo" class="bubble-count ui-btn-up-c ui-btn-corner-all">0</span>
@@ -177,14 +177,14 @@
                     </div>
                     <div class="ui-block-b">
 						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage(encodeURI('/view/oa/messagelist/Produce/DigiFlowMobile.nsf/agGetMsgViewData?openagent&login&0.6922244625974295&server=<%=request.getParameter("oaServerName")%>&dbpath=DFMessage/dfmsg_<%=request.getParameter("itcode")%>.nsf&view=vwMsgUnRdForMobile&thclass=&page=1&count=20&pageFrom=homepage'))">
-							<img width="68" height="68" src="/view/png/sugon/wdxx.png" />
+							<img width="68" height="68" src="/view/png/hori/msg.png" />
 						</a>
                         <br/>
                         <span style="color:#434343"><strong>未读消息</strong></span>
                     </div>
 					<div class="ui-block-c" id="divMail" >
 						<a href="javascript:void(0);" onclick="openmail()">
-							<img width="68" height="68" src="/view/png/sugon/gryj.png">
+							<img width="68" height="68" src="/view/png/hori/mail.png">
 						</a>
                         <br/>
                         <span style="color:#434343"><strong>个人邮件</strong></span>    
@@ -197,14 +197,14 @@
                     
                     <div class="ui-block-a">
 						<a href="javascript:void(0)" onclick="$.hori.showLoading();$.hori.loadPage('/view/oa/phonenumber/Produce/WeboaConfig.nsf/telSearchForm?openform','/view/Resources/searchContact.xml')">
-                        <img width="68" height="68" src="/view/png/sugon/dhcx.png">
+                        <img width="68" height="68" src="/view/png/hori/tel.png">
 						</a>
                         <br/>
                         <span style="color:#434343"><strong>电话查询</strong></span>
                     </div>
                     <div class="ui-block-b">
 						<a href="javascript:void(0);" onclick="$.hori.showLoading();$.hori.loadPage('/view/oa/newslist/Application/DigiFlowInfoPublish.nsf/InfoByDateView_2?readviewentries?login&start=1&count=20')">
-							<img width="68" height="68" src="/view/png/sugon/qyxw.png">
+							<img width="68" height="68" src="/view/png/hori/news.png">
 						</a>
                         <br/>
                         <span style="color:#434343"><strong>企业新闻</strong></span>    
