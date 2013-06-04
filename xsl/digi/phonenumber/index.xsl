@@ -56,7 +56,7 @@
 			<body>
 				<div id="list" data-role="page" class="type-home">
 					<div data-role="content" align="center">
-						<button name="aa" onclick="submit()">aa</button>
+						
 						<div align="center" >
 							<input type="text" id="phonenumber" name="phonenumber" value="" />
 						</div>

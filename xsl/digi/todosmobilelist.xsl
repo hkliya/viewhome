@@ -20,7 +20,7 @@
 					$(document).ready(function(){
 						var hori=$.hori;
 						/*设置标题*/
-						hori.setHeaderTitle("代办");
+						hori.setHeaderTitle("待办");
 					});
 				</script>
 				<script>
